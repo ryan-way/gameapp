@@ -10,7 +10,8 @@
     "make": "electron-forge make",
     "publish": "electron-forge publish",
     "lint": "eslint --ext .ts,.tsx .",
-    "fix": "eslint --ext .ts,tsx --fix"
+    "prettier": "prettier --check .",
+    "fix": "eslint --ext .ts,tsx --fix && prettier --write ."
   },
   "keywords": [],
   "author": {
@@ -81,9 +82,11 @@
     "eslint": "^8.3.0",
     "eslint-config-google": "^0.14.0",
     "eslint-plugin-import": "^2.20.0",
+    "eslint-plugin-prettier": "^4.0.0",
     "fork-ts-checker-webpack-plugin": "^6.0.1",
     "mini-css-extract-plugin": "^1.3.4",
     "node-loader": "^2.0.0",
+    "prettier": "^2.5.0",
     "style-loader": "^3.0.0",
     "svelte": "^3.31.2",
     "svelte-check": "^1.0.46",
