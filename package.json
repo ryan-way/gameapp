@@ -1,0 +1,101 @@
+{
+  "name": "electron-svelte-webpack-typescript",
+  "productName": "electron-svelte-webpack-typescript",
+  "version": "0.4.0",
+  "description": "template for projects using electron, svelte, webpack, and typescript",
+  "main": ".webpack/main",
+  "scripts": {
+    "start": "electron-forge start",
+    "package": "electron-forge package",
+    "make": "electron-forge make",
+    "publish": "electron-forge publish",
+    "lint": "eslint --ext .ts,.tsx ."
+  },
+  "keywords": [],
+  "author": {
+    "name": "ryan-way",
+    "email": "ryan.keith.way@gmail.com"
+  },
+  "license": "MIT",
+  "config": {
+    "forge": {
+      "packagerConfig": {},
+      "makers": [
+        {
+          "name": "@electron-forge/maker-squirrel",
+          "config": {
+            "name": "electron_webpack_typescript"
+          }
+        },
+        {
+          "name": "@electron-forge/maker-zip",
+          "platforms": [
+            "darwin"
+          ]
+        },
+        {
+          "name": "@electron-forge/maker-deb",
+          "config": {}
+        },
+        {
+          "name": "@electron-forge/maker-rpm",
+          "config": {}
+        }
+      ],
+      "plugins": [
+        [
+          "@electron-forge/plugin-webpack",
+          {
+            "mainConfig": "./webpack.main.config.js",
+            "renderer": {
+              "config": "./webpack.renderer.config.js",
+              "entryPoints": [
+                {
+                  "html": "./src/index.html",
+                  "js": "./src/renderer.ts",
+                  "name": "renderer"
+                }
+              ]
+            }
+          }
+        ]
+      ]
+    }
+  },
+  "devDependencies": {
+    "cross-env": "^7.0.3",
+    "mini-css-extract-plugin": "^1.3.4",
+    "svelte": "^3.31.2",
+    "svelte-loader": "^3.0.0",
+    "webpack": "^5.16.0",
+    "webpack-cli": "^4.4.0",
+    "webpack-dev-server": "^3.11.2",
+    "ts-loader": "^8.0.4",
+    "@tsconfig/svelte": "^1.0.10",
+    "@types/node": "^14.11.1",
+    "svelte-check": "^1.0.46",
+    "svelte-preprocess": "^4.3.0",
+    "tslib": "^2.0.1",
+    "@electron-forge/cli": "^6.0.0-beta.61",
+    "@electron-forge/maker-deb": "^6.0.0-beta.61",
+    "@electron-forge/maker-rpm": "^6.0.0-beta.61",
+    "@electron-forge/maker-squirrel": "^6.0.0-beta.61",
+    "@electron-forge/maker-zip": "^6.0.0-beta.61",
+    "@electron-forge/plugin-webpack": "6.0.0-beta.61",
+    "@typescript-eslint/eslint-plugin": "^4.0.1",
+    "@typescript-eslint/parser": "^4.0.1",
+    "@vercel/webpack-asset-relocator-loader": "1.7.0",
+    "css-loader": "^6.0.0",
+    "electron": "16.0.2",
+    "eslint": "^7.6.0",
+    "eslint-plugin-import": "^2.20.0",
+    "fork-ts-checker-webpack-plugin": "^6.0.1",
+    "node-loader": "^2.0.0",
+    "style-loader": "^3.0.0",
+    "ts-loader": "^9.2.2",
+    "typescript": "^4.0.2"
+  },
+  "dependencies": {
+    "electron-squirrel-startup": "^1.0.0"
+  }
+}
