@@ -10,7 +10,8 @@
     "make": "electron-forge make",
     "publish": "electron-forge publish",
     "lint": "eslint --ext .ts,.tsx .",
-    "fix": "eslint --ext .ts,tsx --fix"
+    "prettier": "prettier --check .",
+    "fix": "eslint --ext .ts,tsx --fix && prettier --write ."
   },
   "keywords": [],
   "author": {
