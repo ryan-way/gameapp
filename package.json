@@ -13,6 +13,7 @@
     "prettier": "prettier --check .",
     "fix": "eslint --ext .ts,.tsx,.svelte --fix && prettier --write .",
     "test": "jest",
+    "coverage": "jest --coverage",
     "test:watch": "yarn run test -- --watch"
   },
   "keywords": [],
