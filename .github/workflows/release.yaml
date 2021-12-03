@@ -4,7 +4,7 @@ on: push
 
 jobs:
   check:
-    uses: "${{GITHUB_REPOSITORY}}/.github/workflows/check-code.yaml@${{GITHUB_REF}}"
+    uses: "$GITHUB_REPOSITORY/.github/workflows/check-code.yaml@$GITHUB_REF"
   release:
     runs-on: ubuntu-latest
     needs: check
