@@ -3,7 +3,7 @@ name: Full Check on Code
 on: [push, pull_request]
 
 jobs:
-  Check Code:
+  check-code:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
