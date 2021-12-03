@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: ./.github/actions/check-code
+      - uses: ./.github/workflow/checkout-code.yaml@main
       - run: yarn make
       - uses: actions/upload-artifact@v2
         with:
