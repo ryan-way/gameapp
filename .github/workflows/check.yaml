@@ -11,7 +11,7 @@ jobs:
         with:
           node-version: '16'
       - run: yarn install
-      - run: yarn package
       - run: yarn lint
+      - run: yarn package
       - run: yarn test
       - run: yarn coverage
