@@ -1,5 +1,4 @@
 <script lang="ts">
-  import { readFileSync } from 'fs';
   export let name: string;
 </script>
 
