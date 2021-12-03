@@ -1,6 +1,12 @@
 name: Full Check on Code
 
-on: [push, pull_request]
+on: 
+  push:
+    branches-ignore:
+      - '*'
+  pull-request:
+    branches-ignore:
+      - '*'
 
 jobs:
   check-code:
