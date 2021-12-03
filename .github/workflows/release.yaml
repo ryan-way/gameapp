@@ -12,9 +12,9 @@ jobs:
       - uses: actions/upload-artifact@v2
         with:
           name: deb
-          path: **/*.deb
+          path: '**/*.deb'
       - uses: actions/upload-artifact@v2
         with:
           name: rpm
-          path: **/*.rpm
+          path: '**/*.rpm'
       
