@@ -1,3 +1,5 @@
+name: Release
+
 on:
   push:
     branches:
@@ -12,9 +14,9 @@ jobs:
       - uses: actions/upload-artifact@v2
         with:
           name: deb
-          path: '**/*.deb'
+          path: out/make/deb/x64/gameapp*.deb
       - uses: actions/upload-artifact@v2
         with:
           name: rpm
-          path: '**/*.rpm'
+          path: out/make/rpm/x64/gameapp*.rpm
       
