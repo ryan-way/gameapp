@@ -4,7 +4,7 @@ on: push
 
 jobs:
   check:
-    uses: "ryan-way/gameapp/.github/workflows/check-code.yaml@feature/githubActions"
+    uses: "ryan-way/gameapp/.github/workflows/check-code.yaml@d2d2bfa3d06f719637019e42d12a3f8bda20cb68"
   release:
     runs-on: ubuntu-latest
     needs: check
