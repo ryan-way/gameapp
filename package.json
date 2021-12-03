@@ -1,6 +1,6 @@
 {
-  "name": "electron-svelte-webpack-typescript",
-  "productName": "electron-svelte-webpack-typescript",
+  "name": "gameapp",
+  "productName": "gameapp",
   "version": "0.4.0",
   "description": "template for projects using electron, svelte, webpack, and typescript",
   "main": ".webpack/main",
