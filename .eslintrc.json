@@ -1,20 +1,26 @@
 {
-    "env": {
-        "browser": true,
-        "es2021": true
-    },
-    "extends": [
-        "google"
-    ],
-    "parser": "@typescript-eslint/parser",
-    "parserOptions": {
-        "ecmaVersion": 13,
-        "sourceType": "module"
-    },
-    "plugins": [
-        "@typescript-eslint"
-    ],
-    "rules": {
-      "object-curly-spacing": [ "error", "always" ]
+  "env": {
+    "browser": true,
+    "es2021": true
+  },
+  "extends": ["google"],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaVersion": 13,
+    "sourceType": "module"
+  },
+  "plugins": ["@typescript-eslint", "prettier", "svelte3"],
+  "overrides": [
+    {
+      "files": ["*.svelte"],
+      "processor": "svelte3/svelte3"
     }
+  ],
+  "rules": {
+    "object-curly-spacing": ["error", "always"],
+    "prettier/prettier": "error"
+  },
+  "settings": {
+    "svelte3/typescript": true
+  }
 }
