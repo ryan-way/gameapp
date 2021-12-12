@@ -1,6 +1,6 @@
 {
-  "name": "electron-svelte-webpack-typescript",
-  "productName": "electron-svelte-webpack-typescript",
+  "name": "gameapp",
+  "productName": "gameapp",
   "version": "0.4.0",
   "description": "template for projects using electron, svelte, webpack, and typescript",
   "main": ".webpack/main",
@@ -9,9 +9,9 @@
     "package": "electron-forge package",
     "make": "electron-forge make",
     "publish": "electron-forge publish",
-    "lint": "eslint --ext .ts,.tsx,.svelte .",
+    "lint": "eslint --ext .ts,.tsx . && yarn prettier",
     "prettier": "prettier --check .",
-    "fix": "eslint --ext .ts,.tsx,.svelte --fix && prettier --write .",
+    "fix": "eslint --ext .ts,.tsx --fix . && prettier --write .",
     "test": "jest",
     "coverage": "jest --coverage",
     "test:watch": "yarn run test -- --watch"
