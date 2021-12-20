@@ -17,6 +17,7 @@
     }
   ],
   "rules": {
+    "indent": ["error", 2],
     "object-curly-spacing": ["error", "always"],
     "prettier/prettier": "error"
   },

@@ -1,4 +1,6 @@
 import { app, BrowserWindow } from 'electron';
+import { createConnection } from 'typeorm';
+import { TicTacToe } from './entity/TicTacToe';
 // This allows TypeScript to pick up the magic constant that's auto-generated
 // by Forge's Webpack plugin that tells the Electron app where to look for the
 // Webpack-bundled app code (depending on whether you're running in development
@@ -47,5 +49,40 @@ app.on('activate', () => {
   }
 });
 
-// In this file you can include the rest of your app's specific main process
-// code. You can also put them in separate files and import them here.
+createConnection({
+  type: 'better-sqlite3',
+  database: 'database.sqlite',
+  synchronize: true,
+  logging: true,
+  entities: [TicTacToe],
+  migrations: [],
+  subscribers: [],
+}).then((connection) => {
+  const game: TicTacToe = new TicTacToe();
+  return connection.manager.save(game).then((game) => {
+    console.log('Game has been saved. Game id is', game.id);
+  });
+});
+
+// // In this file you can include the rest of your app's specific main process
+// // code. You can also put them in separate files and import them here.
+// {
+//    "type": "better-sqlite3",
+//    "database": "database.sqlite",
+//    "synchronize": true,
+//    "logging": false,
+//    "entities": [
+//       "src/entity/**/*.ts"
+//    ],
+//    "migrations": [
+//       "src/migration/**/*.ts"
+//    ],
+//    "subscribers": [
+//       "src/subscriber/**/*.ts"
+//    ],
+//    "cli": {
+//       "entitiesDir": "src/entity",
+//       "migrationsDir": "src/migration",
+//       "subscribersDir": "src/subscriber"
+//    }
+// }

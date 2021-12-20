@@ -3,6 +3,8 @@
   "include": ["src/**/*", "src/node_modules/**/*"],
   "exclude": ["node_modules/*"],
   "compilerOptions": {
-    "types": ["jest"]
+    "types": ["jest"],
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true
   }
 }
