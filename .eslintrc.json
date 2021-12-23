@@ -19,6 +19,7 @@
   "rules": {
     "indent": ["error", 2],
     "object-curly-spacing": ["error", "always"],
+    "arrow-parens": "as-needed",
     "prettier/prettier": "error"
   },
   "settings": {
