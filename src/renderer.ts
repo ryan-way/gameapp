@@ -1,6 +1,6 @@
 import './global.css';
-
 import App from './App.svelte';
+import type { Window } from './window';
 
 const app = new App({
   target: document.body,
@@ -9,4 +9,7 @@ const app = new App({
   },
 });
 
+const win: Window = window as unknown as Window;
+
+win.electron.doThing();
 export default app;
