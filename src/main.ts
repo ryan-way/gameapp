@@ -53,7 +53,7 @@ app.on('activate', () => {
     createWindow();
   }
 });
-let m_game: TestEntity;
+let games: TestEntity[];
 createConnection({
   type: 'better-sqlite3',
   database: 'database.sqlite',
@@ -89,13 +89,15 @@ createConnection({
         }
       }
       return connection.manager.save(game).then(game => {
-        m_game = game;
         console.log('Game has been saved. Game id is', game.id);
       });
     }
   });
+  testRepo.find().then((entities: TestEntity[]) => {
+    games = entities;
+  });
 });
 
-ipcMain.on('do-a-thing', (event, arg) => {
-  event.returnValue = m_game;
+ipcMain.on('getTestEntities', (event, arg) => {
+  event.returnValue = games;
 });

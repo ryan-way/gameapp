@@ -1,7 +1,8 @@
 import { contextBridge, ipcRenderer } from 'electron';
+import type { ITestEntity } from './ipc/entity/ITestEntity';
 
-contextBridge.exposeInMainWorld('electron', {
-  doThing: () => {
-    return ipcRenderer.sendSync('do-a-thing');
+contextBridge.exposeInMainWorld('db', {
+  getTestEntities: (): ITestEntity[] => {
+    return ipcRenderer.sendSync('getTestEntities');
   },
 });

@@ -1,7 +1,8 @@
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import type { ITestEntity } from '../ipc/entity/ITestEntity';
 
 @Entity()
-export class TestEntity {
+export class TestEntity implements ITestEntity {
   @PrimaryGeneratedColumn()
   id: number;
 

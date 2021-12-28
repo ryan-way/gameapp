@@ -11,5 +11,5 @@ const app = new App({
 
 const win: Window = window as unknown as Window;
 
-console.log('id: ', win.electron.doThing());
+console.log('Entities', win.db.getTestEntities());
 export default app;
