@@ -1,4 +1,4 @@
-import { app, BrowserWindow } from 'electron';
+import { app, BrowserWindow, ipcMain } from 'electron';
 import { createConnection } from 'typeorm';
 import { TicTacToe } from './entity/TicTacToe';
 import fs from 'fs';
@@ -53,7 +53,7 @@ app.on('activate', () => {
     createWindow();
   }
 });
-
+let m_game: TicTacToe;
 createConnection({
   type: 'better-sqlite3',
   database: 'database.sqlite',
@@ -65,6 +65,13 @@ createConnection({
 }).then(async connection => {
   const game: TicTacToe = new TicTacToe();
   return connection.manager.save(game).then(game => {
+    m_game = game;
     console.log('Game has been saved. Game id is', game.id);
   });
+});
+
+ipcMain.on('do-a-thing', (event, arg) => {
+  console.log('thing is doing');
+  console.log(m_game);
+  event.returnValue = m_game;
 });

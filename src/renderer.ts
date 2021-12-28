@@ -11,5 +11,5 @@ const app = new App({
 
 const win: Window = window as unknown as Window;
 
-win.electron.doThing();
+console.log('id: ', win.electron.doThing());
 export default app;
