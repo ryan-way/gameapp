@@ -1,8 +1,8 @@
 import { app, BrowserWindow, ipcMain } from 'electron';
 import { createConnection } from 'typeorm';
-import { TicTacToe } from './entity/TicTacToe';
 import fs from 'fs';
 import path from 'path';
+import { TestEntity } from './entity/TestEntity';
 // This allows TypeScript to pick up the magic constant that's auto-generated
 // by Forge's Webpack plugin that tells the Electron app where to look for the
 // Webpack-bundled app code (depending on whether you're running in development
@@ -53,17 +53,17 @@ app.on('activate', () => {
     createWindow();
   }
 });
-let m_game: TicTacToe;
+let m_game: TestEntity;
 createConnection({
   type: 'better-sqlite3',
   database: 'database.sqlite',
   synchronize: true,
   logging: true,
-  entities: [TicTacToe],
+  entities: [TestEntity],
   migrations: [],
   subscribers: [],
 }).then(async connection => {
-  const game: TicTacToe = new TicTacToe();
+  const game: TestEntity = new TestEntity();
   game.board = [
     [' ', ' ', ' '],
     [' ', ' ', ' '],

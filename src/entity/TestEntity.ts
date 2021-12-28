@@ -1,7 +1,7 @@
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
-export class TicTacToe {
+export class TestEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
