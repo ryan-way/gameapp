@@ -64,6 +64,30 @@ createConnection({
   subscribers: [],
 }).then(async connection => {
   const game: TicTacToe = new TicTacToe();
+  game.board = [
+    [' ', ' ', ' '],
+    [' ', ' ', ' '],
+    [' ', ' ', ' '],
+  ];
+  console.log(game.board.length);
+  for (var row: number = 0; row < game.board.length; row++) {
+    console.log(game.board[row].length);
+    for (var col: number = 0; col < game.board[row].length; col++) {
+      var rand: number = Math.floor(Math.random() * 3);
+      console.log(rand);
+      switch (rand) {
+        case 0:
+          game.board[row][col] = ' ';
+          break;
+        case 1:
+          game.board[row][col] = 'X';
+          break;
+        case 2:
+          game.board[row][col] = 'O';
+          break;
+      }
+    }
+  }
   return connection.manager.save(game).then(game => {
     m_game = game;
     console.log('Game has been saved. Game id is', game.id);
