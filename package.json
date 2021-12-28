@@ -74,7 +74,7 @@
                 {
                   "html": "./src/index.html",
                   "js": "./src/renderer.ts",
-                  "name": "renderer"
+                  "name": "main_window"
                 }
               ]
             }
