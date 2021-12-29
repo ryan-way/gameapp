@@ -1,9 +1,9 @@
 import type { ITestEntity } from './ipc/entity/ITestEntity';
 
-export type DB = {
+export interface DB {
   getTestEntities(): ITestEntity;
-};
+}
 
-export type Window = {
+export interface Window {
   db: DB;
-};
+}
