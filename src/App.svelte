@@ -3,10 +3,6 @@
 
   export let name: string;
   export let promise: Promise<ITestEntity[]>;
-
-  $: promise.then(async (entities: ITestEntity[]) => {
-    console.log(entities);
-  });
 </script>
 
 <main>
