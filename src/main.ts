@@ -65,7 +65,8 @@ createConnection({
 }).then(async connection => {
   const testRepo = connection.getRepository(TestEntity);
   testRepo.count().then(count => {
-    if (count < 5) {
+    const min: number = 5;
+    for (var curr: number = count; curr < min; curr++) {
       const game: TestEntity = new TestEntity();
       game.board = [
         [' ', ' ', ' '],
@@ -98,6 +99,6 @@ createConnection({
   });
 });
 
-ipcMain.on('getTestEntities', (event, arg) => {
-  event.returnValue = games;
+ipcMain.handle('getTestEntities', async (event, arg) => {
+  return games;
 });
