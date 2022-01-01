@@ -17,7 +17,7 @@
     }
   ],
   "rules": {
-    "indent": ["error", 2, { "SwitchCase": 1}],
+    "indent": ["error", 2, { "SwitchCase": 1 }],
     "new-cap": ["off"],
     "object-curly-spacing": ["error", "always"],
     "arrow-parens": ["error", "as-needed"],
