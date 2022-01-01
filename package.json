@@ -23,7 +23,11 @@
   },
   "license": "MIT",
   "jest": {
+    "transformIgnorePatterns": [
+      "node_modules/(?!svelte-routing)"
+    ],
     "transform": {
+      "^.+\\.js$": "babel-jest",
       "^.+\\.svelte$": [
         "svelte-jester",
         {
@@ -84,6 +88,7 @@
     }
   },
   "devDependencies": {
+    "@babel/core": "^7.16.5",
     "@electron-forge/cli": "^6.0.0-beta.61",
     "@electron-forge/maker-deb": "^6.0.0-beta.61",
     "@electron-forge/maker-rpm": "^6.0.0-beta.61",
@@ -98,6 +103,8 @@
     "@typescript-eslint/eslint-plugin": "^5.5.0",
     "@typescript-eslint/parser": "^5.5.0",
     "@vercel/webpack-asset-relocator-loader": "1.7.0",
+    "babel-cli": "^6.26.0",
+    "babel-jest": "^27.4.5",
     "cross-env": "^7.0.3",
     "css-loader": "^6.0.0",
     "electron": "16.0.2",
@@ -115,9 +122,11 @@
     "style-loader": "^3.0.0",
     "svelte": "^3.31.2",
     "svelte-check": "^1.0.46",
+    "svelte-hash-router": "^1.0.1",
     "svelte-jester": "^2.1.5",
     "svelte-loader": "^3.0.0",
     "svelte-preprocess": "^4.3.0",
+    "svelte-routing": "^1.6.0",
     "ts-jest": "^27.0.7",
     "ts-loader": "^9.2.2",
     "tslib": "^2.0.1",
@@ -127,6 +136,7 @@
     "webpack-dev-server": "^3.11.2"
   },
   "dependencies": {
+    "@babel/preset-env": "^7.16.5",
     "electron-squirrel-startup": "^1.0.0"
   }
 }
