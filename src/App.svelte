@@ -2,7 +2,6 @@
   import { Router, Link, Route } from 'svelte-routing';
   import type { ITestEntity } from './ipc/entity/ITestEntity';
 
-  export let name: string;
   export let promise: Promise<ITestEntity[]>;
 
   import Home from './Home.svelte';
@@ -25,11 +24,6 @@
       <Route path="/"><Home /></Route>
     </div>
   </Router>
-  <h1>Hello {name}!</h1>
-  <p>
-    Visit the <a href="https://svelte.dev/tutorial">Svelte tutorial</a> to learn
-    how to build Svelte apps.
-  </p>
   {#await promise}
     <p>...waiting</p>
   {:then entities}

@@ -6,7 +6,6 @@ const win: Window = window as unknown as Window;
 const app = new App({
   target: document.body,
   props: {
-    name: 'world',
     promise: win.db.getTestEntities(),
   },
 });
