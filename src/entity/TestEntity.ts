@@ -9,8 +9,13 @@ type TestBoard = [
   [Value, Value, Value]
 ];
 
-function from(data): any {
-  var ret: TestBoard = [
+/**
+ * Converts data from databse to TestBoard
+ * @param {string[]} data - data from databse
+ * @return {TestBoard} - resulting test board object
+ */
+function from(data: string[]): TestBoard {
+  const ret: TestBoard = [
     [' ', ' ', ' '],
     [' ', ' ', ' '],
     [' ', ' ', ' '],
@@ -21,14 +26,20 @@ function from(data): any {
   return ret;
 }
 
-function to(data): any {
+/**
+ * Converts Testboard for insertion into database
+ * TypeOrm converts it properly automatically. Do nothing here
+ * @param {TestBoard} data - data from databse
+ * @return {TestBoard} - resulting test board object
+ */
+function to(data: TestBoard): TestBoard {
   return data;
 }
 
 @Entity()
 export class TestEntity implements ITestEntity {
   @PrimaryGeneratedColumn()
-  id: number;
+  public id: number;
 
   @Column({
     type: 'simple-array',
@@ -37,5 +48,5 @@ export class TestEntity implements ITestEntity {
       to: to,
     },
   })
-  board: TestBoard;
+  public board: TestBoard;
 }

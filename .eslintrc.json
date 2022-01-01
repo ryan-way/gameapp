@@ -17,10 +17,12 @@
     }
   ],
   "rules": {
-    "indent": ["error", 2],
+    "indent": ["error", 2, { "SwitchCase": 1}],
+    "new-cap": ["off"],
     "object-curly-spacing": ["error", "always"],
-    "arrow-parens": "as-needed",
-    "prettier/prettier": "error"
+    "arrow-parens": ["error", "as-needed"],
+    "prettier/prettier": "error",
+    "require-jsdoc": ["off"]
   },
   "settings": {
     "svelte3/typescript": true

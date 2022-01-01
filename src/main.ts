@@ -1,6 +1,5 @@
 import { app, BrowserWindow, ipcMain } from 'electron';
 import { createConnection } from 'typeorm';
-import fs from 'fs';
 import path from 'path';
 import { TestEntity } from './entity/TestEntity';
 // This allows TypeScript to pick up the magic constant that's auto-generated
@@ -64,18 +63,18 @@ createConnection({
   subscribers: [],
 }).then(async connection => {
   const testRepo = connection.getRepository(TestEntity);
-  testRepo.count().then(count => {
+  testRepo.count().then(async count => {
     const min: number = 5;
-    for (var curr: number = count; curr < min; curr++) {
+    for (let curr: number = count; curr < min; curr++) {
       const game: TestEntity = new TestEntity();
       game.board = [
         [' ', ' ', ' '],
         [' ', ' ', ' '],
         [' ', ' ', ' '],
       ];
-      for (var row: number = 0; row < game.board.length; row++) {
-        for (var col: number = 0; col < game.board[row].length; col++) {
-          var rand: number = Math.floor(Math.random() * 3);
+      for (let row: number = 0; row < game.board.length; row++) {
+        for (let col: number = 0; col < game.board[row].length; col++) {
+          const rand: number = Math.floor(Math.random() * 3);
           switch (rand) {
             case 0:
               game.board[row][col] = ' ';
@@ -99,6 +98,6 @@ createConnection({
   });
 });
 
-ipcMain.handle('getTestEntities', async (event, arg) => {
+ipcMain.handle('getTestEntities', async () => {
   return games;
 });
