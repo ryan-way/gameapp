@@ -78,7 +78,7 @@
                 {
                   "html": "./src/index.html",
                   "js": "./src/renderer.ts",
-                  "name": "renderer"
+                  "name": "main_window"
                 }
               ]
             }
@@ -99,7 +99,7 @@
     "@testing-library/svelte": "^3.0.3",
     "@tsconfig/svelte": "^1.0.10",
     "@types/jest": "^27.0.3",
-    "@types/node": "^14.11.1",
+    "@types/node": "^17.0.0",
     "@typescript-eslint/eslint-plugin": "^5.5.0",
     "@typescript-eslint/parser": "^5.5.0",
     "@vercel/webpack-asset-relocator-loader": "1.7.0",
@@ -136,6 +136,10 @@
     "webpack-dev-server": "^3.11.2"
   },
   "dependencies": {
+    "better-sqlite3": "^7.4.5",
+    "electron-squirrel-startup": "^1.0.0",
+    "reflect-metadata": "^0.1.13",
+    "typeorm": "^0.2.41",
     "@babel/preset-env": "^7.16.5",
     "electron-squirrel-startup": "^1.0.0"
   }

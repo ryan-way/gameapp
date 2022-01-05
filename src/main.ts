@@ -1,9 +1,12 @@
-import { app, BrowserWindow } from 'electron';
+import { app, BrowserWindow, ipcMain } from 'electron';
+import { createConnection } from 'typeorm';
+import path from 'path';
+import { TestEntity } from './entity/TestEntity';
 // This allows TypeScript to pick up the magic constant that's auto-generated
 // by Forge's Webpack plugin that tells the Electron app where to look for the
 // Webpack-bundled app code (depending on whether you're running in development
 // or production).
-declare const RENDERER_WEBPACK_ENTRY: string;
+declare const MAIN_WINDOW_WEBPACK_ENTRY: string;
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (require('electron-squirrel-startup')) {
@@ -16,10 +19,13 @@ const createWindow = (): void => {
   const mainWindow = new BrowserWindow({
     height: 600,
     width: 800,
+    webPreferences: {
+      preload: path.join(__dirname, 'preload.js'),
+    },
   });
 
   // and load the index.html of the app.
-  mainWindow.loadURL(RENDERER_WEBPACK_ENTRY);
+  mainWindow.loadURL(MAIN_WINDOW_WEBPACK_ENTRY);
 
   // Open the DevTools.
   mainWindow.webContents.openDevTools();
@@ -46,6 +52,52 @@ app.on('activate', () => {
     createWindow();
   }
 });
+let games: TestEntity[];
+createConnection({
+  type: 'better-sqlite3',
+  database: 'database.sqlite',
+  synchronize: true,
+  logging: true,
+  entities: [TestEntity],
+  migrations: [],
+  subscribers: [],
+}).then(async connection => {
+  const testRepo = connection.getRepository(TestEntity);
+  testRepo.count().then(async count => {
+    const min: number = 5;
+    for (let curr: number = count; curr < min; curr++) {
+      const game: TestEntity = new TestEntity();
+      game.board = [
+        [' ', ' ', ' '],
+        [' ', ' ', ' '],
+        [' ', ' ', ' '],
+      ];
+      for (let row: number = 0; row < game.board.length; row++) {
+        for (let col: number = 0; col < game.board[row].length; col++) {
+          const rand: number = Math.floor(Math.random() * 3);
+          switch (rand) {
+            case 0:
+              game.board[row][col] = ' ';
+              break;
+            case 1:
+              game.board[row][col] = 'X';
+              break;
+            case 2:
+              game.board[row][col] = 'O';
+              break;
+          }
+        }
+      }
+      return connection.manager.save(game).then(game => {
+        console.log('Game has been saved. Game id is', game.id);
+      });
+    }
+  });
+  testRepo.find().then((entities: TestEntity[]) => {
+    games = entities;
+  });
+});
 
-// In this file you can include the rest of your app's specific main process
-// code. You can also put them in separate files and import them here.
+ipcMain.handle('getTestEntities', async () => {
+  return games;
+});
