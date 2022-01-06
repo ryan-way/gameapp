@@ -136,11 +136,11 @@
     "webpack-dev-server": "^3.11.2"
   },
   "dependencies": {
+    "@babel/preset-env": "^7.16.5",
     "better-sqlite3": "^7.4.5",
     "electron-squirrel-startup": "^1.0.0",
     "reflect-metadata": "^0.1.13",
     "typeorm": "^0.2.41",
-    "@babel/preset-env": "^7.16.5",
-    "electron-squirrel-startup": "^1.0.0"
+    "zoya": "^1.0.2"
   }
 }
