@@ -1,12 +1,14 @@
 import { app, BrowserWindow, ipcMain } from 'electron';
 import { createConnection } from 'typeorm';
 import path from 'path';
+import zoya from 'zoya';
 import { TestEntity } from './entity/TestEntity';
 // This allows TypeScript to pick up the magic constant that's auto-generated
 // by Forge's Webpack plugin that tells the Electron app where to look for the
 // Webpack-bundled app code (depending on whether you're running in development
 // or production).
 declare const MAIN_WINDOW_WEBPACK_ENTRY: string;
+zoya.success(MAIN_WINDOW_WEBPACK_ENTRY);
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (require('electron-squirrel-startup')) {
