@@ -1,12 +1,12 @@
-import { app, BrowserWindow, ipcMain } from 'electron';
-import { createConnection } from 'typeorm';
+import { app, BrowserWindow } from 'electron';
 import path from 'path';
 import zoya from 'zoya';
-import { TestEntity } from './entity/TestEntity';
+import { InitializeDatabase } from './database';
 // This allows TypeScript to pick up the magic constant that's auto-generated
 // by Forge's Webpack plugin that tells the Electron app where to look for the
 // Webpack-bundled app code (depending on whether you're running in development
 // or production).
+InitializeDatabase();
 declare const MAIN_WINDOW_WEBPACK_ENTRY: string;
 zoya.success(MAIN_WINDOW_WEBPACK_ENTRY);
 
@@ -16,7 +16,7 @@ if (require('electron-squirrel-startup')) {
   app.quit();
 }
 
-const createWindow = (): void => {
+function createWindow(): void {
   // Create the browser window.
   const mainWindow = new BrowserWindow({
     height: 600,
@@ -31,7 +31,7 @@ const createWindow = (): void => {
 
   // Open the DevTools.
   mainWindow.webContents.openDevTools();
-};
+}
 
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
@@ -53,53 +53,4 @@ app.on('activate', () => {
   if (BrowserWindow.getAllWindows().length === 0) {
     createWindow();
   }
-});
-let games: TestEntity[];
-createConnection({
-  type: 'better-sqlite3',
-  database: 'database.sqlite',
-  synchronize: true,
-  logging: true,
-  entities: [TestEntity],
-  migrations: [],
-  subscribers: [],
-}).then(async connection => {
-  const testRepo = connection.getRepository(TestEntity);
-  testRepo.count().then(async count => {
-    const min: number = 5;
-    for (let curr: number = count; curr < min; curr++) {
-      const game: TestEntity = new TestEntity();
-      game.board = [
-        [' ', ' ', ' '],
-        [' ', ' ', ' '],
-        [' ', ' ', ' '],
-      ];
-      for (let row: number = 0; row < game.board.length; row++) {
-        for (let col: number = 0; col < game.board[row].length; col++) {
-          const rand: number = Math.floor(Math.random() * 3);
-          switch (rand) {
-            case 0:
-              game.board[row][col] = ' ';
-              break;
-            case 1:
-              game.board[row][col] = 'X';
-              break;
-            case 2:
-              game.board[row][col] = 'O';
-              break;
-          }
-        }
-      }
-      return connection.manager.save(game).then(game => {
-        console.log('Game has been saved. Game id is', game.id);
-      });
-    }
-  });
-  testRepo.find().then((entities: TestEntity[]) => {
-    games = entities;
-  });
-});
-
-ipcMain.handle('getTestEntities', async () => {
-  return games;
 });
