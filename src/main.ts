@@ -1,15 +1,17 @@
 import { app, BrowserWindow } from 'electron';
 import path from 'path';
-import zoya from 'zoya';
 import { InitializeDatabase } from './database';
+import logger from './logging';
+
+InitializeDatabase();
+
 // This allows TypeScript to pick up the magic constant that's auto-generated
 // by Forge's Webpack plugin that tells the Electron app where to look for the
 // Webpack-bundled app code (depending on whether you're running in development
 // or production).
-InitializeDatabase();
 declare const MAIN_WINDOW_WEBPACK_ENTRY: string;
-zoya.success(MAIN_WINDOW_WEBPACK_ENTRY);
-
+console.log('Logger: ', logger);
+logger.Info(MAIN_WINDOW_WEBPACK_ENTRY);
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (require('electron-squirrel-startup')) {
   // eslint-disable-line global-require
