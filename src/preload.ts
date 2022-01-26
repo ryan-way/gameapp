@@ -1,8 +1,5 @@
-import { contextBridge, ipcRenderer } from 'electron';
-import type { ITestEntity } from './ipc/entity/ITestEntity';
+import { InitializeDatabase } from './renderer/database';
+import { InitializeLogger } from './renderer/logging';
 
-contextBridge.exposeInMainWorld('db', {
-  getTestEntities: (): Promise<ITestEntity[]> => {
-    return ipcRenderer.invoke('getTestEntities');
-  },
-});
+InitializeDatabase();
+InitializeLogger();

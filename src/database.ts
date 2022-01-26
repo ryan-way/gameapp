@@ -3,14 +3,10 @@ import { ipcMain } from 'electron';
 import { TestEntity } from './entity/TestEntity';
 import type { ITestEntity } from './ipc/entity/ITestEntity';
 
-export interface IDatabaseConnection {
-  getTestEntities(): Promise<ITestEntity[]>;
-}
-
-export class DatabaseConnection implements IDatabaseConnection {
+export class DatabaseConnection {
   private connection: Promise<Connection>;
 
-  private static db: IDatabaseConnection;
+  private static db: DatabaseConnection;
   public static InitializeDatabase(): void {
     DatabaseConnection.db = new DatabaseConnection();
   }

@@ -1,9 +1,7 @@
-import type { ITestEntity } from './ipc/entity/ITestEntity';
-
-export interface DB {
-  getTestEntities(): ITestEntity;
-}
+import type { IDatabase } from './ipc/service/database';
+import type { ILogger } from './ipc/service/logger';
 
 export interface Window {
-  db: DB;
+  db: IDatabase;
+  log: ILogger;
 }
