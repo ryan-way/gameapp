@@ -5,3 +5,5 @@ export interface Window {
   db: IDatabase;
   log: ILogger;
 }
+
+export const key: string = 'window';
