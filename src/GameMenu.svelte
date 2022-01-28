@@ -5,7 +5,7 @@
     link: string;
   }
 
-  let games: IGame[] = [{ name: 'Test Game', link: '/TestGame' }];
+  let games: IGame[] = [{ name: 'Test Game', link: '/testgames' }];
 </script>
 
 <ul>
