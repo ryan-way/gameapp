@@ -26,12 +26,20 @@ export class DatabaseConnection {
 
   private InitializeIpc(): void {
     ipcMain.handle('getTestEntities', this.getTestEntities.bind(this));
+    ipcMain.handle('getTestEntity', this.getTestEntity.bind(this));
   }
 
   public async getTestEntities(): Promise<ITestEntity[]> {
     const connection: Connection = await this.connection;
     const testRepo = connection.getRepository(TestEntity);
     return await testRepo.find();
+  }
+
+  public async getTestEntity({ id }: { id: number }): Promise<ITestEntity> {
+    const connection: Connection = await this.connection;
+    const testRepo = connection.getRepository(TestEntity);
+    console.log('id:' + id);
+    return await testRepo.findOne(id);
   }
 }
 

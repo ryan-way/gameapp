@@ -16,11 +16,11 @@
   {#each entities as entity}
     <Link to={gameLink + entity.id}>
       <p style="text-align: center;">{entity.id}</p>
-      <table class="center">
+      <table>
         {#each entity.board as row}
           <tr>
             {#each row as cell}
-              <td class="border">{cell}</td>
+              <td>{cell}</td>
             {/each}
           </tr>
         {/each}
@@ -32,12 +32,15 @@
 {/await}
 
 <style>
-  table.center {
+  table {
     margin-left: auto;
     margin-right: auto;
+    text-align: center;
   }
 
-  td.border {
-    border: 1px solid black;
+  table,
+  td {
+    border: 1px solid;
+    border-collapse: collapse;
   }
 </style>

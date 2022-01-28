@@ -22,3 +22,17 @@
     </div>
   </Router>
 </main>
+
+<style>
+  main {
+    width: 100%;
+    height: 100%;
+  }
+  * {
+    background-color: #282828;
+    color: white;
+    border-color: white;
+    padding: 10px;
+    text-decoration: none;
+  }
+</style>

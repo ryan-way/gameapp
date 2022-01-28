@@ -32,6 +32,7 @@ function createWindow(): void {
   mainWindow.loadURL(MAIN_WINDOW_WEBPACK_ENTRY);
 
   // Open the DevTools.
+  mainWindow.menuBarVisible = false;
   mainWindow.webContents.openDevTools();
 }
 
