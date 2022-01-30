@@ -13,10 +13,11 @@
   let name: string = 'Ryan';
 
   function onClick(x: number, y: number) {
+    console.log('Test Game', x, y)
     game = game.then(entity => {
-      if (entity.board[x][y] != ' ') return entity;
+      if (entity.board[y][x] != ' ') return entity;
 
-      entity.board[x][y] = turn;
+      entity.board[y][x] = turn;
       turn = turn == 'X' ? 'O' : 'X';
       return entity;
     });
@@ -27,6 +28,7 @@
   <p>...loading game</p>
 {:then entity}
   <Board 
+    on:cellClick={(event) => onClick(event.detail.x, event.detail.y)}
     fontSize="120px" heigh="500px" width="500px"
     data={entity.board}
   />
