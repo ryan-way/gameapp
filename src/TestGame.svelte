@@ -1,5 +1,6 @@
 <script lang="ts">
   import { getContext } from 'svelte';
+  import Board from './Board.svelte';
   import type { ITestEntity } from './ipc/entity/ITestEntity';
   import { Window, key } from './window';
 
@@ -25,30 +26,11 @@
 {#await game}
   <p>...loading game</p>
 {:then entity}
-  <table class="center">
-    {#each entity.board as row, x}
-      <tr>
-        {#each row as cell, y}
-          <td on:click={() => onClick(x, y)}>{cell}</td>
-        {/each}
-      </tr>
-    {/each}
-  </table>
+  <Board 
+    fontSize="120px" heigh="500px" width="500px"
+    data={entity.board}
+  />
 {/await}
 
 <style>
-  table {
-    width: 500px;
-    height: 500px;
-    margin-left: auto;
-    margin-right: auto;
-    font-size: 120px;
-    text-align: center;
-  }
-
-  table,
-  td {
-    border: 1px solid;
-    border-collapse: collapse;
-  }
 </style>
