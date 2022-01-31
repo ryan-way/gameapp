@@ -29,7 +29,7 @@
 {:then entity}
   <Board 
     on:cellClick={(event) => onClick(event.detail.x, event.detail.y)}
-    fontSize="120px" heigh="500px" width="500px"
+    fontSize="120px" height="500px" width="500px"
     data={entity.board}
   />
 {/await}
