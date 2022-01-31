@@ -1,9 +1,9 @@
 <script lang="ts">
   import { getContext } from 'svelte';
-  import Board from './Board.svelte';
-  import type { ICell } from './ICell';
-  import type { ITestEntity } from './ipc/entity/ITestEntity';
-  import { Window, key } from './window';
+  import Board from '../Board.svelte';
+  import type { ICell } from '../ICell';
+  import type { ITestEntity } from '../ipc/entity/ITestEntity';
+  import { Window, key } from '../window';
 
   export let id: number;
 

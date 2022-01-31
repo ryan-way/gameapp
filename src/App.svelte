@@ -3,8 +3,8 @@
   import { setContext } from 'svelte';
   import { Window, key as windowKey } from './window';
   import GameMenu from './GameMenu.svelte';
-  import TestGames from './TestGames.svelte';
-  import TestGame from './TestGame.svelte';
+  import TestGames from './testgame/TestGames.svelte';
+  import TestGame from './testgame/TestGame.svelte';
 
   export let window: Window;
   export let url: string = '/';
