@@ -1,7 +1,7 @@
 import { Connection, createConnection } from 'typeorm';
 import { ipcMain } from 'electron';
 import { TestEntity } from './entity/TestEntity';
-import type { ITestEntity } from './ipc/entity/ITestEntity';
+import type { ITestEntity, TBValue } from './ipc/entity/ITestEntity';
 
 export class DatabaseConnection {
   private connection: Promise<Connection>;
@@ -22,6 +22,30 @@ export class DatabaseConnection {
       subscribers: [],
     });
     this.InitializeIpc();
+    this.InitializeTestData();
+  }
+
+  private InitializeTestData(): void {
+    this.connection.then(async connection => {
+      const testRepo = connection.getRepository(TestEntity);
+      const count = await testRepo.count();
+      if (count < 5) {
+        const remaining: number = 5 - count;
+        for (let i = 0; i < remaining; i++) {
+          const entity: TestEntity = new TestEntity();
+          for (let j = 0; j < entity.board.length; j++) {
+            for (let k = 0; k < entity.board[j].length; k++) {
+              entity.board[j][k].Value = this.getRandomTBValue();
+            }
+          }
+        }
+      }
+    });
+  }
+
+  private getRandomTBValue(): TBValue {
+    const values: TBValue[] = [' ', 'X', 'O'];
+    return values[Math.floor(Math.random() * values.length)];
   }
 
   private InitializeIpc(): void {
