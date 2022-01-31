@@ -11,8 +11,7 @@
   let game: Promise<ITestEntity> = data.db.getTestEntity(id);
 
   let turn: 'X' | 'O' = 'X';
-  let name: string = 'Ryan';
-
+  
   function onClick(cell: ICell) {
     console.log('Test Game', cell)
     game = game.then(entity => {
