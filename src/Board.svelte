@@ -1,27 +1,27 @@
 <script lang="ts">
   import { createEventDispatcher } from 'svelte';
+  import type { ICell } from './ICell';
 
-  export let data: any[][];
+  export let data: ICell[][];
   export let fontSize: string;
   export let height: string;
   export let width: string;
 
   const dispatch = createEventDispatcher();
 
-  function onCellClick(x:number, y:number) {
-    console.log('Board', x, y);
+  function onCellClick(cell: ICell) {
+    console.log('Board', cell);
     dispatch('cellClick', {
-      x: x,
-      y: y
+      cell: cell
     })
   }
 </script>
 
 <table style="font-size: {fontSize}; height: {height}; width: {width};">
-  {#each data as row, y}
+  {#each data as row}
     <tr>
-      {#each row as cell, x}
-        <td on:click={() => onCellClick(x, y)}>{cell}</td>
+      {#each row as cell}
+        <td on:click={() => onCellClick(cell)}>{cell.Value}</td>
       {/each}
     </tr>
   {/each}

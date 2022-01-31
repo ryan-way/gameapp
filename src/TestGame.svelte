@@ -1,6 +1,7 @@
 <script lang="ts">
   import { getContext } from 'svelte';
   import Board from './Board.svelte';
+  import type { ICell } from './ICell';
   import type { ITestEntity } from './ipc/entity/ITestEntity';
   import { Window, key } from './window';
 
@@ -12,12 +13,12 @@
   let turn: 'X' | 'O' = 'X';
   let name: string = 'Ryan';
 
-  function onClick(x: number, y: number) {
-    console.log('Test Game', x, y)
+  function onClick(cell: ICell) {
+    console.log('Test Game', cell)
     game = game.then(entity => {
-      if (entity.board[y][x] != ' ') return entity;
+      if (cell.Value != ' ') return entity;
 
-      entity.board[y][x] = turn;
+      cell.Value = turn;
       turn = turn == 'X' ? 'O' : 'X';
       return entity;
     });
@@ -28,7 +29,7 @@
   <p>...loading game</p>
 {:then entity}
   <Board 
-    on:cellClick={(event) => onClick(event.detail.x, event.detail.y)}
+    on:cellClick={(event) => onClick(event.detail.cell)}
     fontSize="120px" height="500px" width="500px"
     data={entity.board}
   />

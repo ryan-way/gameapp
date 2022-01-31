@@ -1,13 +1,9 @@
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
-import type { ITestEntity } from '../ipc/entity/ITestEntity';
-
-type Value = ' ' | 'X' | 'O';
-
-type TestBoard = [
-  [Value, Value, Value],
-  [Value, Value, Value],
-  [Value, Value, Value]
-];
+import type {
+  ITestEntity,
+  TestBoard,
+  TBValue,
+} from '../ipc/entity/ITestEntity';
 
 /**
  * Converts data from databse to TestBoard
@@ -16,12 +12,12 @@ type TestBoard = [
  */
 function from(data: string[]): TestBoard {
   const ret: TestBoard = [
-    [' ', ' ', ' '],
-    [' ', ' ', ' '],
-    [' ', ' ', ' '],
+    [{ Value: ' ' }, { Value: ' ' }, { Value: ' ' }],
+    [{ Value: ' ' }, { Value: ' ' }, { Value: ' ' }],
+    [{ Value: ' ' }, { Value: ' ' }, { Value: ' ' }],
   ];
   data.forEach((item: string, index: number) => {
-    ret[Math.floor(index / 3)][index % 3] = item as Value;
+    ret[Math.floor(index / 3)][index % 3].Value = item as TBValue;
   });
   return ret;
 }
