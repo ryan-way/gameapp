@@ -38,6 +38,7 @@ export class DatabaseConnection {
               entity.board[j][k].Value = this.getRandomTBValue();
             }
           }
+          await testRepo.save(entity);
         }
       }
     });
