@@ -71,8 +71,8 @@ function from(data: string[]): SudokuBoard {
  * @return {TestBoard} - resulting test board object
  */
 
-function to(data: SudokuBoard): SudokuBoard {
-  return data;
+function to(data: SudokuBoard): string[] {
+  return data.flat().map(obj => obj.Value.toString());
 }
 
 @Entity()

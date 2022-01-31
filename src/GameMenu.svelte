@@ -5,12 +5,14 @@
     link: string;
   }
 
-  let games: IGame[] = [{ name: 'Test Game', link: '/testgames' }];
+  let games: IGame[] = [
+    { name: 'Test Game', link: '/testgames' },
+    { name: 'Sudoku', link: '/sudokus'}];
 </script>
 
 <ul>
   {#each games as { name, link }}
-    <li><Link to={link}>Test Game</Link></li>
+    <li><Link to={link}>{name}</Link></li>
   {/each}
 </ul>
 

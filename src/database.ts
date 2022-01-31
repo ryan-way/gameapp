@@ -77,6 +77,8 @@ export class DatabaseConnection {
   private InitializeIpc(): void {
     ipcMain.handle('getTestEntities', this.getTestEntities.bind(this));
     ipcMain.handle('getTestEntity', this.getTestEntity.bind(this));
+    ipcMain.handle('getSudokuEntities', this.getSudokuEntities.bind(this));
+    ipcMain.handle('getSudokuEntity', this.getSudokuEntity.bind(this));
   }
 
   public async getTestEntities(): Promise<ITestEntity[]> {

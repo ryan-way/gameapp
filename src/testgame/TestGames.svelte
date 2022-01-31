@@ -1,11 +1,11 @@
 <script lang="ts">
   import { getContext } from 'svelte';
   import { Link } from 'svelte-routing';
-  import { Window, key as windowKey } from '../window';
+  import { Window, key } from '../window';
   import type { ITestEntity } from '../ipc/entity/ITestEntity';
   import Board from '../Board.svelte';
 
-  const data: Window = getContext(windowKey);
+  const data: Window = getContext(key);
 
   let games: Promise<ITestEntity[]> = data.db.getTestEntities();
   const gameLink: string = '/testgame/';
