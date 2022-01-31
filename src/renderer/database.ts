@@ -1,4 +1,5 @@
 import { ipcRenderer, contextBridge } from 'electron';
+import type { ISudokuEntity } from '../ipc/entity/ISudokuEntity';
 import type { ITestEntity } from '../ipc/entity/ITestEntity';
 import type { IDatabase } from '../ipc/service/database';
 
@@ -11,6 +12,14 @@ export class Database implements IDatabase {
   getTestEntity(id: number): Promise<ITestEntity> {
     return ipcRenderer.invoke('getTestEntity', id);
   }
+
+  getSudokuEntities(): Promise<ISudokuEntity[]> {
+    return ipcRenderer.invoke('getSudokuEntities');
+  }
+
+  getSudokuEntity(id: number): Promise<ISudokuEntity> {
+    return ipcRenderer.invoke('getSudokuEntity', id);
+  }
 }
 
 export function InitializeDatabase() {
@@ -18,5 +27,7 @@ export function InitializeDatabase() {
   contextBridge.exposeInMainWorld('db', {
     getTestEntities: Database.db.getTestEntities.bind(this),
     getTestEntity: Database.db.getTestEntity.bind(this),
+    getSudokuEntities: Database.db.getSudokuEntities.bind(this),
+    getSudokuEntity: Database.db.getSudokuEntity.bind(this),
   });
 }

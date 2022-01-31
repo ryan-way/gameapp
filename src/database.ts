@@ -2,6 +2,8 @@ import { Connection, createConnection } from 'typeorm';
 import { ipcMain } from 'electron';
 import { TestEntity } from './entity/TestEntity';
 import type { ITestEntity, TBValue } from './ipc/entity/ITestEntity';
+import { SudokuEntity } from './entity/SudokuEntity';
+import type { ISudokuEntity } from './ipc/entity/ISudokuEntity';
 
 export class DatabaseConnection {
   private connection: Promise<Connection>;
@@ -41,6 +43,26 @@ export class DatabaseConnection {
           await testRepo.save(entity);
         }
       }
+
+      return connection;
+    }).then(async connection => {
+      const sudokuRepo = connection.getRepository(SudokuEntity);
+      const count = await sudokuRepo.count();
+      if (count < 1) {
+        const entity: SudokuEntity = new SudokuEntity();
+        entity.board = [
+          [ {Value: ' '}, {Value: 5},   {Value: ' '}, {Value: 4},   {Value: ' '}, {Value: ' '}, {Value: 1},   {Value: 7},   {Value: ' '}],
+          [ {Value: 9},   {Value: 4},   {Value: 8},   {Value: ' '}, {Value: ' '}, {Value: ' '}, {Value: ' '}, {Value: ' '}, {Value: ' '}],
+          [ {Value:' '},  {Value: 7},   {Value: ' '}, {Value: ' '}, {Value: ' '}, {Value: 8},   {Value: 6},   {Value: 4},   {Value: ' '}],
+          [ {Value:' '},  {Value: ' '}, {Value: 4},   {Value: ' '}, {Value: 2},   {Value: 3},   {Value: 9},   {Value: ' '}, {Value: ' '}],
+          [ {Value:' '},  {Value: 8},   {Value: ' '}, {Value: ' '}, {Value: 4},   {Value: ' '}, {Value: ' '}, {Value: 6},   {Value: ' '}],
+          [ {Value:' '},  {Value: ' '}, {Value: 2},   {Value: 8},   {Value: 7},   {Value: ' '}, {Value: 3},   {Value: ' '}, {Value: ' '}],
+          [ {Value:' '},  {Value: 2},   {Value: 5},   {Value: 9},   {Value: ' '}, {Value: ' '}, {Value: ' '}, {Value: 1},   {Value: ' '}],
+          [ {Value:' '},  {Value: ' '}, {Value: ' '}, {Value: ' '}, {Value: ' '}, {Value: ' '}, {Value: 8},   {Value: 2},   {Value: 7}],
+          [ {Value:' '},  {Value: 3},   {Value: 7},   {Value: ' '}, {Value: ' '}, {Value: 4},   {Value: ' '}, {Value: 9},   {Value: ' '}],
+          ]
+        ];
+      }
     });
   }
 
@@ -65,6 +87,19 @@ export class DatabaseConnection {
     const testRepo = connection.getRepository(TestEntity);
     console.log('id:' + id);
     return await testRepo.findOne(id);
+  }
+
+  public async getSudokuEntities(): Promise<ISudokuEntity[]> {
+    const connection: Connection = await this.connection;
+    const SudokuRepo = connection.getRepository(SudokuEntity);
+    return await SudokuRepo.find();
+  }
+
+  public async getSudokuEntity({ id }: { id: number }): Promise<ISudokuEntity> {
+    const connection: Connection = await this.connection;
+    const SudokuRepo = connection.getRepository(SudokuEntity);
+    console.log('id:' + id);
+    return await SudokuRepo.findOne(id);
   }
 }
 
