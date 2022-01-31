@@ -3,7 +3,7 @@
   import { Link } from 'svelte-routing';
   import { Window, key as windowKey } from '../window';
   import type { ITestEntity } from '../ipc/entity/ITestEntity';
-  import Board from './Board.svelte';
+  import Board from '../Board.svelte';
 
   const data: Window = getContext(windowKey);
 
