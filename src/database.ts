@@ -19,7 +19,7 @@ export class DatabaseConnection {
       database: 'database.sqlite',
       synchronize: true,
       logging: true,
-      entities: [TestEntity],
+      entities: [TestEntity, SudokuEntity],
       migrations: [],
       subscribers: [],
     });
@@ -51,18 +51,21 @@ export class DatabaseConnection {
       if (count < 1) {
         const entity: SudokuEntity = new SudokuEntity();
         entity.board = [
-          [ {Value: ' '}, {Value: 5},   {Value: ' '}, {Value: 4},   {Value: ' '}, {Value: ' '}, {Value: 1},   {Value: 7},   {Value: ' '}],
-          [ {Value: 9},   {Value: 4},   {Value: 8},   {Value: ' '}, {Value: ' '}, {Value: ' '}, {Value: ' '}, {Value: ' '}, {Value: ' '}],
-          [ {Value:' '},  {Value: 7},   {Value: ' '}, {Value: ' '}, {Value: ' '}, {Value: 8},   {Value: 6},   {Value: 4},   {Value: ' '}],
-          [ {Value:' '},  {Value: ' '}, {Value: 4},   {Value: ' '}, {Value: 2},   {Value: 3},   {Value: 9},   {Value: ' '}, {Value: ' '}],
-          [ {Value:' '},  {Value: 8},   {Value: ' '}, {Value: ' '}, {Value: 4},   {Value: ' '}, {Value: ' '}, {Value: 6},   {Value: ' '}],
-          [ {Value:' '},  {Value: ' '}, {Value: 2},   {Value: 8},   {Value: 7},   {Value: ' '}, {Value: 3},   {Value: ' '}, {Value: ' '}],
-          [ {Value:' '},  {Value: 2},   {Value: 5},   {Value: 9},   {Value: ' '}, {Value: ' '}, {Value: ' '}, {Value: 1},   {Value: ' '}],
-          [ {Value:' '},  {Value: ' '}, {Value: ' '}, {Value: ' '}, {Value: ' '}, {Value: ' '}, {Value: 8},   {Value: 2},   {Value: 7}],
-          [ {Value:' '},  {Value: 3},   {Value: 7},   {Value: ' '}, {Value: ' '}, {Value: 4},   {Value: ' '}, {Value: 9},   {Value: ' '}],
-          ]
+          [ { Value: ' '}, { Value: 5},   { Value: ' '}, { Value: 4},   { Value: ' '}, { Value: ' '}, { Value: 1},   { Value: 7 },  { Value: ' ' }],
+          [ { Value: 9},   { Value: 4},   { Value: 8},   { Value: ' '}, { Value: ' '}, { Value: ' '}, { Value: ' '}, { Value: ' '}, { Value: ' '}],
+          [ { Value:' '},  { Value: 7},   { Value: ' '}, { Value: ' '}, { Value: ' '}, { Value: 8},   { Value: 6},   { Value: 4},   { Value: ' '}],
+          [ { Value:' '},  { Value: ' '}, { Value: 4},   { Value: ' '}, { Value: 2},   { Value: 3},   { Value: 9},   { Value: ' '}, { Value: ' ' }],
+          [ { Value:' '},  { Value: 8},   { Value: ' '}, { Value: ' '}, { Value: 4},   { Value: ' '}, { Value: ' '}, { Value: 6},   { Value: ' '}],
+          [ { Value:' '},  { Value: ' '}, { Value: 2},   { Value: 8},   { Value: 7},   { Value: ' '}, { Value: 3},   { Value: ' '}, { Value: ' '}],
+          [ { Value:' '},  { Value: 2},   { Value: 5},   { Value: 9},   { Value: ' '}, { Value: ' '}, { Value: ' '}, { Value: 1},   { Value: ' '}],
+          [ { Value:' '},  { Value: ' '}, { Value: ' '}, { Value: ' '}, { Value: ' '}, { Value: ' '}, { Value: 8},   { Value: 2},   { Value: 7}],
+          [ { Value:' '},  { Value: 3},   { Value: 7},   { Value: ' '}, { Value: ' '}, { Value: 4},   { Value: ' '}, { Value: 9},   { Value: ' '}],
         ];
+        await sudokuRepo.save(entity);
+        console.log('id: ', entity.id);
       }
+
+      return connection;
     });
   }
 
