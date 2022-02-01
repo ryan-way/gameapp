@@ -1,9 +1,9 @@
 import { Connection, createConnection } from 'typeorm';
 import { ipcMain } from 'electron';
-import { TestEntity } from './entity/TestEntity';
-import type { ITestEntity, TBValue } from './ipc/entity/ITestEntity';
-import { SudokuEntity } from './entity/SudokuEntity';
-import type { ISudokuEntity } from './ipc/entity/ISudokuEntity';
+import { TestEntity } from '../entity/TestEntity';
+import type { ITestEntity, TBValue } from '../ipc/entity/ITestEntity';
+import { SudokuEntity } from '../entity/SudokuEntity';
+import type { ISudokuEntity } from '../ipc/entity/ISudokuEntity';
 
 export class DatabaseConnection {
   private connection: Promise<Connection>;
