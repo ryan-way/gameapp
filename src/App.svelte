@@ -6,6 +6,7 @@
   import TestGames from './testgame/TestGames.svelte';
   import TestGame from './testgame/TestGame.svelte';
   import Sudokus from './sudoku/Sudokus.svelte';
+  import Sudoku from './sudoku/Sudoku.svelte';
 
   export let window: Window;
   export let url: string = '/';
@@ -21,6 +22,7 @@
       <Route path="/testgames"><TestGames /></Route>
       <Route path="/testgame/:id" let:params><TestGame {...params} /></Route>
       <Route path="/sudokus"><Sudokus /></Route>
+      <Route path="/sudoku/:id" let:params><Sudoku {...params} /></Route>
     </div>
   </Router>
 </main>
