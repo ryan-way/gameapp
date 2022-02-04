@@ -59,7 +59,9 @@ function from(data: string[]): SudokuBoard {
     ],
   ];
   data.forEach((item: string, index: number) => {
-    ret[Math.floor(index / 9)][index % 9].Value = item as SValue;
+    ret[Math.floor(index / 9)][index % 9].Value = (
+      item == ' ' ? item : +item
+    ) as SValue;
   });
   return ret;
 }
