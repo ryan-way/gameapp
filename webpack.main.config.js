@@ -5,7 +5,7 @@ module.exports = {
    */
   entry: {
     index: './src/main/main.ts',
-    preload: './src/main/preload.ts',
+    preload: './src/renderer/preload.ts',
   },
   // Put your normal webpack config below here
   module: {

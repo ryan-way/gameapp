@@ -24,6 +24,7 @@ function createWindow(): void {
     height: 600,
     width: 800,
     webPreferences: {
+      // path is based on webpack output not file structure
       preload: path.join(__dirname, 'preload.js'),
     },
   });
