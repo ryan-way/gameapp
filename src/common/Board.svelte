@@ -1,15 +1,15 @@
 <script lang="ts">
   import { createEventDispatcher } from 'svelte';
-  import type { ICell } from '../ipc/Cell';
+  import type { Cell } from '../ipc/Cell';
 
-  export let data: ICell[][];
+  export let data: Cell[][];
   export let fontSize: string;
   export let height: string;
   export let width: string;
 
   const dispatch = createEventDispatcher();
 
-  function onCellClick(cell: ICell) {
+  function onCellClick(cell: Cell) {
     console.log('Board', cell);
     dispatch('cellClick', {
       cell: cell
