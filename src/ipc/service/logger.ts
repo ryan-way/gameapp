@@ -7,3 +7,5 @@ export interface ILogger {
   Failed(): Promise<void>;
   Fatal(): Promise<void>;
 }
+
+export const key: string = 'log';

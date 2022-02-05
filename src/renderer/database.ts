@@ -6,19 +6,19 @@ import type { IDatabase } from '../ipc/service/database';
 export class Database implements IDatabase {
   public static db: IDatabase;
   getTestEntities(): Promise<ITestEntity[]> {
-    return ipcRenderer.invoke('getTestEntities');
+    return ipcRenderer.invoke('getAllTestEntity');
   }
 
   getTestEntity(id: number): Promise<ITestEntity> {
-    return ipcRenderer.invoke('getTestEntity', id);
+    return ipcRenderer.invoke('getOneTestEntity', id);
   }
 
   getSudokuEntities(): Promise<ISudokuEntity[]> {
-    return ipcRenderer.invoke('getSudokuEntities');
+    return ipcRenderer.invoke('getAllSudokuEntity');
   }
 
   getSudokuEntity(id: number): Promise<ISudokuEntity> {
-    return ipcRenderer.invoke('getSudokuEntity', id);
+    return ipcRenderer.invoke('getOneSudokuEntity', id);
   }
 }
 

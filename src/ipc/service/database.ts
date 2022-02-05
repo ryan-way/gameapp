@@ -7,3 +7,5 @@ export interface IDatabase {
   getSudokuEntities(): Promise<ISudokuEntity[]>;
   getSudokuEntity(id: number): Promise<ISudokuEntity>;
 }
+
+export const key: string = 'db';
