@@ -3,12 +3,12 @@
   import { SudokuSolver } from '../ai/SudokuSolver';
   import Board from '../Board.svelte';
   import type { ISudokuEntity } from '../ipc/entity/ISudokuEntity';
-  import { Window, key } from '../window';
+  import { IDatabase, key as dbKey } from "../ipc/service/database";
 
   export let id: number;
 
-  const data: Window = getContext(key);
-  let game: Promise<ISudokuEntity> = data.db.getSudokuEntity(id);
+  const db: IDatabase = getContext(dbKey);
+  let game: Promise<ISudokuEntity> = db.getSudokuEntity(id);
   
 
   let solver: SudokuSolver;

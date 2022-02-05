@@ -1,13 +1,13 @@
 <script lang='ts'>
   import { getContext } from "svelte";
-  import { Window, key } from "../window";
   import type { ISudokuEntity } from '../ipc/entity/ISudokuEntity';
   import { Link } from "svelte-routing";
   import Board from "../Board.svelte";
+  import { IDatabase, key as dbKey } from "../ipc/service/database";
 
-  const data: Window = getContext(key);
+  const db: IDatabase = getContext(dbKey);
 
-  let games: Promise<ISudokuEntity[]> = data.db.getSudokuEntities();
+  let games: Promise<ISudokuEntity[]> = db.getSudokuEntities();
   const gameLink: string = '/sudoku/';
 
   games.then(game => {

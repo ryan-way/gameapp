@@ -4,11 +4,12 @@
   import type { ICell } from '../ICell';
   import type { ITestEntity } from '../ipc/entity/ITestEntity';
   import { Window, key } from '../window';
+  import { IDatabase, key as dbKey } from "../ipc/service/database";
 
   export let id: number;
 
-  const data: Window = getContext(key);
-  let game: Promise<ITestEntity> = data.db.getTestEntity(id);
+  const db: IDatabase = getContext(dbKey);
+  let game: Promise<ITestEntity> = db.getTestEntity(id);
 
   let turn: 'X' | 'O' = 'X';
   

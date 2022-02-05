@@ -7,11 +7,14 @@
   import TestGame from './testgame/TestGame.svelte';
   import Sudokus from './sudoku/Sudokus.svelte';
   import Sudoku from './sudoku/Sudoku.svelte';
+  import { key as logKey } from './ipc/service/logger';
+  import { key as dbKey } from './ipc/service/database';
 
   export let window: Window;
   export let url: string = '/';
 
-  setContext(windowKey, window);
+  setContext(dbKey, window.db);
+  setContext(logKey, window.log);
 </script>
 
 <main>

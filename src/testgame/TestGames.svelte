@@ -4,10 +4,11 @@
   import { Window, key } from '../window';
   import type { ITestEntity } from '../ipc/entity/ITestEntity';
   import Board from '../Board.svelte';
+  import { IDatabase, key as dbKey } from "../ipc/service/database";
 
-  const data: Window = getContext(key);
-
-  let games: Promise<ITestEntity[]> = data.db.getTestEntities();
+  const db: IDatabase = getContext(dbKey);
+  let games: Promise<ITestEntity[]> = db.getTestEntities();
+  
   const gameLink: string = '/testgame/';
 </script>
 
