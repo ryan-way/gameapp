@@ -1,7 +1,6 @@
 <script lang="ts">
   import { getContext } from 'svelte';
   import { Link } from 'svelte-routing';
-  import { Window, key } from '../window';
   import type { ITestEntity } from '../ipc/entity/ITestEntity';
   import Board from '../Board.svelte';
   import { IDatabase, key as dbKey } from "../ipc/service/database";
