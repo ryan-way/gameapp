@@ -1,4 +1,4 @@
-import type { ICell } from '../ICell';
+import type { ICell } from '../common/ICell';
 
 export class DomainedCell {
   public get Value(): any {

@@ -1,4 +1,4 @@
-import type { ICell } from '../ICell';
+import type { ICell } from '../common/ICell';
 import { UniqueConstraint } from './Constraint';
 import { DomainedCell } from './DomainedCell';
 

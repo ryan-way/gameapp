@@ -2,7 +2,7 @@
   import { getContext } from "svelte";
   import type { ISudokuEntity } from '../ipc/entity/ISudokuEntity';
   import { Link } from "svelte-routing";
-  import Board from "../Board.svelte";
+  import Board from "../common/Board.svelte";
   import { IDatabase, key as dbKey } from "../ipc/service/database";
 
   const db: IDatabase = getContext(dbKey);

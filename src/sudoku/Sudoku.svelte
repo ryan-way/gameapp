@@ -1,7 +1,7 @@
 <script lang='ts'>
   import { getContext } from 'svelte';
   import { SudokuSolver } from '../ai/SudokuSolver';
-  import Board from '../Board.svelte';
+  import Board from '../common/Board.svelte';
   import type { ISudokuEntity } from '../ipc/entity/ISudokuEntity';
   import { IDatabase, key as dbKey } from "../ipc/service/database";
 

@@ -1,7 +1,7 @@
 <script lang="ts">
   import { getContext } from 'svelte';
-  import Board from '../Board.svelte';
-  import type { ICell } from '../ICell';
+  import Board from '../common/Board.svelte';
+  import type { ICell } from '../common/ICell';
   import type { ITestEntity } from '../ipc/entity/ITestEntity';
   import { IDatabase, key as dbKey } from "../ipc/service/database";
 
