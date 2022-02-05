@@ -1,12 +1,12 @@
-import { Connection, createConnection } from 'typeorm';
+import { Connection, createConnection, EntityTarget } from 'typeorm';
 import { ipcMain } from 'electron';
 import { TestEntity } from '../entity/TestEntity';
-import type { ITestEntity, TBValue } from '../ipc/entity/ITestEntity';
+import type { TBValue } from '../ipc/entity/ITestEntity';
 import { SudokuEntity } from '../entity/SudokuEntity';
-import type { ISudokuEntity } from '../ipc/entity/ISudokuEntity';
 
 export class DatabaseConnection {
   private connection: Promise<Connection>;
+  private entities: Function[];
 
   private static db: DatabaseConnection;
   public static InitializeDatabase(): void {
@@ -14,12 +14,13 @@ export class DatabaseConnection {
   }
 
   constructor() {
+    this.entities = [TestEntity, SudokuEntity];
     this.connection = createConnection({
       type: 'better-sqlite3',
       database: 'database.sqlite',
       synchronize: true,
       logging: true,
-      entities: [TestEntity, SudokuEntity],
+      entities: this.entities,
       migrations: [],
       subscribers: [],
     });
@@ -75,36 +76,24 @@ export class DatabaseConnection {
   }
 
   private InitializeIpc(): void {
-    ipcMain.handle('getTestEntities', this.getTestEntities.bind(this));
-    ipcMain.handle('getTestEntity', this.getTestEntity.bind(this));
-    ipcMain.handle('getSudokuEntities', this.getSudokuEntities.bind(this));
-    ipcMain.handle('getSudokuEntity', this.getSudokuEntity.bind(this));
+    for (const entity of this.entities) {
+      ipcMain.handle('getAll' + entity.name, this.GetAll.bind(this, entity));
+      ipcMain.handle('getOne' + entity.name, (event, id) => {
+        return this.GetOne(entity, id);
+      });
+    }
   }
 
-  public async getTestEntities(): Promise<ITestEntity[]> {
+  private async GetAll<T>(target: EntityTarget<T>): Promise<T[]> {
     const connection: Connection = await this.connection;
-    const testRepo = connection.getRepository(TestEntity);
-    return await testRepo.find();
+    const repo = connection.getRepository(target);
+    return await repo.find();
   }
 
-  public async getTestEntity({ id }: { id: number }): Promise<ITestEntity> {
+  private async GetOne<T>(target: EntityTarget<T>, id: number): Promise<T> {
     const connection: Connection = await this.connection;
-    const testRepo = connection.getRepository(TestEntity);
-    console.log('id:' + id);
-    return await testRepo.findOne(id);
-  }
-
-  public async getSudokuEntities(): Promise<ISudokuEntity[]> {
-    const connection: Connection = await this.connection;
-    const SudokuRepo = connection.getRepository(SudokuEntity);
-    return await SudokuRepo.find();
-  }
-
-  public async getSudokuEntity({ id }: { id: number }): Promise<ISudokuEntity> {
-    const connection: Connection = await this.connection;
-    const SudokuRepo = connection.getRepository(SudokuEntity);
-    console.log('id:' + id);
-    return await SudokuRepo.findOne(id);
+    const repo = connection.getRepository(target);
+    return await repo.findOne(id);
   }
 }
 
