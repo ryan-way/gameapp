@@ -1,7 +1,7 @@
 <script lang="ts">
   import { Router, Route, Link } from 'svelte-routing';
   import { setContext } from 'svelte';
-  import { Window, key as windowKey } from './window';
+  import type { Window, key as windowKey } from './renderer/window';
   import GameMenu from './GameMenu.svelte';
   import TestGames from './testgame/TestGames.svelte';
   import TestGame from './testgame/TestGame.svelte';

@@ -1,5 +1,5 @@
 import './global.css';
-import App from './App.svelte';
+import App from '../App.svelte';
 import type { Window } from './window';
 
 const win: Window = window as unknown as Window;
