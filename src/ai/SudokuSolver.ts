@@ -1,4 +1,4 @@
-import type { ICell } from '../common/ICell';
+import type { Cell } from '../ipc/Cell';
 import { UniqueConstraint } from './Constraint';
 import { DomainedCell } from './DomainedCell';
 
@@ -8,7 +8,7 @@ export class SudokuSolver {
   domain: Set<any>;
   blank: any;
 
-  constructor(board: ICell[][]) {
+  constructor(board: Cell[][]) {
     this.domain = new Set([1, 2, 3, 4, 5, 6, 7, 8, 9]);
     this.board = board.map(row =>
       row.map(cell => new DomainedCell(cell, this.domain, ' '))

@@ -1,6 +1,6 @@
 <script lang="ts">
   import { createEventDispatcher } from 'svelte';
-  import type { ICell } from '.../ICell';
+  import type { ICell } from '../ipc/Cell';
 
   export let data: ICell[][];
   export let fontSize: string;

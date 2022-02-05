@@ -3,7 +3,7 @@ import type {
   ISudokuEntity,
   SudokuBoard,
   SValue,
-} from '../ipc/entity/ISudokuEntity';
+} from '../../ipc/entity/ISudokuEntity';
 
 /**
  * Converts data from databse to TestBoard
@@ -76,18 +76,19 @@ function from(data: string[]): SudokuBoard {
 function to(data: SudokuBoard): string[] {
   return data.flat().map(obj => obj.Value.toString());
 }
-
-@Entity()
-export class SudokuEntity implements ISudokuEntity {
-  @PrimaryGeneratedColumn()
-  public id: number;
-
-  @Column({
-    type: 'simple-array',
-    transformer: {
-      from: from,
-      to: to,
-    },
-  })
-  public board: SudokuBoard;
+export namespace Db {
+  @Entity()
+  export class SudokuEntity implements ISudokuEntity {
+    @PrimaryGeneratedColumn()
+    public id: number;
+  
+    @Column({
+      type: 'simple-array',
+      transformer: {
+        from: from,
+        to: to,
+      },
+    })
+    public board: SudokuBoard;
+  }
 }

@@ -1,4 +1,4 @@
-import type { ICell } from '../common/ICell';
+import type { Cell } from '../ipc/Cell';
 
 export class DomainedCell {
   public get Value(): any {
@@ -9,7 +9,7 @@ export class DomainedCell {
     return [...this.domain];
   }
 
-  private cell: ICell;
+  private cell: Cell;
   private domain: Set<any>;
   private blank: any;
 
@@ -17,7 +17,7 @@ export class DomainedCell {
     return this.domain.size == 1;
   }
 
-  constructor(cell: ICell, domain: Set<any>, blank: any) {
+  constructor(cell: Cell, domain: Set<any>, blank: any) {
     this.cell = cell;
     this.domain = new Set<any>([...domain]);
     this.blank = blank;

@@ -1,8 +1,8 @@
 import { Connection, createConnection, EntityTarget } from 'typeorm';
 import { ipcMain } from 'electron';
-import { TestEntity } from '../entity/TestEntity';
+import { TestEntity } from './entity/TestEntity';
 import type { TBValue } from '../ipc/entity/ITestEntity';
-import { SudokuEntity } from '../entity/SudokuEntity';
+import { Db } from './entity/SudokuEntity';
 
 export class DatabaseConnection {
   private connection: Promise<Connection>;
@@ -14,7 +14,7 @@ export class DatabaseConnection {
   }
 
   constructor() {
-    this.entities = [TestEntity, SudokuEntity];
+    this.entities = [TestEntity, Db.SudokuEntity];
     this.connection = createConnection({
       type: 'better-sqlite3',
       database: 'database.sqlite',
@@ -47,10 +47,10 @@ export class DatabaseConnection {
 
       return connection;
     }).then(async connection => {
-      const sudokuRepo = connection.getRepository(SudokuEntity);
+      const sudokuRepo = connection.getRepository(Db.SudokuEntity);
       const count = await sudokuRepo.count();
       if (count < 1) {
-        const entity: SudokuEntity = new SudokuEntity();
+        const entity: Db.SudokuEntity = new Db.SudokuEntity();
         entity.board = [
           [ { Value: ' '}, { Value: 5},   { Value: ' '}, { Value: 4},   { Value: ' '}, { Value: ' '}, { Value: 1},   { Value: 7 },  { Value: ' ' }],
           [ { Value: 9},   { Value: 4},   { Value: 8},   { Value: ' '}, { Value: ' '}, { Value: ' '}, { Value: ' '}, { Value: ' '}, { Value: ' '}],
