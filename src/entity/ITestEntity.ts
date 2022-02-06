@@ -1,10 +1,10 @@
+import type { Cell } from './Cell';
+
 export type TBValue = ' ' | 'X' | 'O';
 
-export type TestBoard = [
-  [{ Value: TBValue }, { Value: TBValue }, { Value: TBValue }],
-  [{ Value: TBValue }, { Value: TBValue }, { Value: TBValue }],
-  [{ Value: TBValue }, { Value: TBValue }, { Value: TBValue }]
-];
+export type TBRow = [Cell<TBValue>, Cell<TBValue>, Cell<TBValue>];
+
+export type TestBoard = [TBRow, TBRow, TBRow];
 
 export interface ITestEntity {
   id: number;
