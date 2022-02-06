@@ -28,8 +28,8 @@ function from(data: string[]): TestBoard {
  * @param {TestBoard} data - data from databse
  * @return {TestBoard} - resulting test board object
  */
-function to(data: TestBoard): TestBoard {
-  return data;
+function to(data: TestBoard): string[] {
+  return data.flat().map(obj => obj.Value.toString());
 }
 
 @Entity()

@@ -1,12 +1,13 @@
-import { Connection, createConnection, EntityTarget } from 'typeorm';
+import { Connection, createConnection, EntityMetadata, EntityTarget } from 'typeorm';
 import { ipcMain } from 'electron';
 import { TestEntity } from './entity/TestEntity';
-import type { TBValue } from '../entity/ITestEntity';
 import { Db } from './entity/SudokuEntity';
+import data from './testdata';
 
 export class DatabaseConnection {
   private connection: Promise<Connection>;
   private entities: Function[];
+  private clones: Map<string, any>;
 
   private static db: DatabaseConnection;
   public static InitializeDatabase(): void {
@@ -15,6 +16,10 @@ export class DatabaseConnection {
 
   constructor() {
     this.entities = [TestEntity, Db.SudokuEntity];
+    this.clones = new Map<string, any>([
+      [TestEntity.name, new TestEntity()],
+      [Db.SudokuEntity.name, new Db.SudokuEntity()],
+    ]);
     this.connection = createConnection({
       type: 'better-sqlite3',
       database: 'database.sqlite',
@@ -29,53 +34,29 @@ export class DatabaseConnection {
   }
 
   private InitializeTestData(): void {
-    this.connection
-      .then(async connection => {
-        // TODO: put test data into separate file, instead of this mess
-        const testRepo = connection.getRepository(TestEntity);
-        const count = await testRepo.count();
-        if (count < 5) {
-          const remaining: number = 5 - count;
-          for (let i = 0; i < remaining; i++) {
-            const entity: TestEntity = new TestEntity();
-            for (let j = 0; j < entity.board.length; j++) {
-              for (let k = 0; k < entity.board[j].length; k++) {
-                entity.board[j][k].Value = this.getRandomTBValue();
-              }
-            }
-            await testRepo.save(entity);
-          }
+    this.connection.then(async connection => {
+      console.log('Initializing Test Data');
+      for (const entity of this.entities) {
+        console.log('Checking', entity.name, 'repo count');
+        const repo = connection.getRepository(entity);
+        const count = await repo.count();
+        if (count != 0) {
+          console.log('Continuing...');
+          continue;
         }
-
-        return connection;
-      })
-      .then(async connection => {
-        const sudokuRepo = connection.getRepository(Db.SudokuEntity);
-      const count = await sudokuRepo.count();
-      if (count < 1) {
-        const entity: Db.SudokuEntity = new Db.SudokuEntity();
-        entity.board = [
-          [ { Value: ' '}, { Value: 5},   { Value: ' '}, { Value: 4},   { Value: ' '}, { Value: ' '}, { Value: 1},   { Value: 7 },  { Value: ' ' }],
-          [ { Value: 9},   { Value: 4},   { Value: 8},   { Value: ' '}, { Value: ' '}, { Value: ' '}, { Value: ' '}, { Value: ' '}, { Value: ' '}],
-          [ { Value:' '},  { Value: 7},   { Value: ' '}, { Value: ' '}, { Value: ' '}, { Value: 8},   { Value: 6},   { Value: 4},   { Value: ' '}],
-          [ { Value:' '},  { Value: ' '}, { Value: 4},   { Value: ' '}, { Value: 2},   { Value: 3},   { Value: 9},   { Value: ' '}, { Value: ' ' }],
-          [ { Value:' '},  { Value: 8},   { Value: ' '}, { Value: ' '}, { Value: 4},   { Value: ' '}, { Value: ' '}, { Value: 6},   { Value: ' '}],
-          [ { Value:' '},  { Value: ' '}, { Value: 2},   { Value: 8},   { Value: 7},   { Value: ' '}, { Value: 3},   { Value: ' '}, { Value: ' '}],
-          [ { Value:' '},  { Value: 2},   { Value: 5},   { Value: 9},   { Value: ' '}, { Value: ' '}, { Value: ' '}, { Value: 1},   { Value: ' '}],
-          [ { Value:' '},  { Value: ' '}, { Value: ' '}, { Value: ' '}, { Value: ' '}, { Value: ' '}, { Value: 8},   { Value: 2},   { Value: 7}],
-          [ { Value:' '},  { Value: 3},   { Value: 7},   { Value: ' '}, { Value: ' '}, { Value: 4},   { Value: ' '}, { Value: 9},   { Value: ' '}],
-        ];
-        await sudokuRepo.save(entity);
-        console.log('id: ', entity.id);
+        console.log('Checking for test data');
+        let num: number = 1;
+        for (const d of data.get(entity.name)) {
+          console.log(this.clones[entity.name]);
+          const instance = { ...this.clones[entity.name] };
+          instance['board'] = d;
+          await repo.save(instance);
+          console.log('Saved instance number:', num++);
+        }
       }
-
+      console.log('Done Initializing Test Data');
       return connection;
     });
-  }
-
-  private getRandomTBValue(): TBValue {
-    const values: TBValue[] = [' ', 'X', 'O'];
-    return values[Math.floor(Math.random() * values.length)];
   }
 
   private InitializeIpc(): void {
