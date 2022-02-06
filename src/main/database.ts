@@ -29,25 +29,28 @@ export class DatabaseConnection {
   }
 
   private InitializeTestData(): void {
-    this.connection.then(async connection => {
-      const testRepo = connection.getRepository(TestEntity);
-      const count = await testRepo.count();
-      if (count < 5) {
-        const remaining: number = 5 - count;
-        for (let i = 0; i < remaining; i++) {
-          const entity: TestEntity = new TestEntity();
-          for (let j = 0; j < entity.board.length; j++) {
-            for (let k = 0; k < entity.board[j].length; k++) {
-              entity.board[j][k].Value = this.getRandomTBValue();
+    this.connection
+      .then(async connection => {
+        // TODO: put test data into separate file, instead of this mess
+        const testRepo = connection.getRepository(TestEntity);
+        const count = await testRepo.count();
+        if (count < 5) {
+          const remaining: number = 5 - count;
+          for (let i = 0; i < remaining; i++) {
+            const entity: TestEntity = new TestEntity();
+            for (let j = 0; j < entity.board.length; j++) {
+              for (let k = 0; k < entity.board[j].length; k++) {
+                entity.board[j][k].Value = this.getRandomTBValue();
+              }
             }
+            await testRepo.save(entity);
           }
-          await testRepo.save(entity);
         }
-      }
 
-      return connection;
-    }).then(async connection => {
-      const sudokuRepo = connection.getRepository(Db.SudokuEntity);
+        return connection;
+      })
+      .then(async connection => {
+        const sudokuRepo = connection.getRepository(Db.SudokuEntity);
       const count = await sudokuRepo.count();
       if (count < 1) {
         const entity: Db.SudokuEntity = new Db.SudokuEntity();

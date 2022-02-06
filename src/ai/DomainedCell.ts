@@ -9,7 +9,7 @@ export class DomainedCell {
     return [...this.domain];
   }
 
-  private cell: Cell;
+  private cell: Cell<any>;
   private domain: Set<any>;
   private blank: any;
 
@@ -17,7 +17,7 @@ export class DomainedCell {
     return this.domain.size == 1;
   }
 
-  constructor(cell: Cell, domain: Set<any>, blank: any) {
+  constructor(cell: Cell<any>, domain: Set<any>, blank: any) {
     this.cell = cell;
     this.domain = new Set<any>([...domain]);
     this.blank = blank;

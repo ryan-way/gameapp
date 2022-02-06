@@ -1,3 +1,3 @@
-export interface Cell {
-  Value: any;
+export interface Cell<T> {
+  Value: T;
 }

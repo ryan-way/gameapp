@@ -8,7 +8,7 @@ export class SudokuSolver {
   domain: Set<any>;
   blank: any;
 
-  constructor(board: Cell[][]) {
+  constructor(board: Cell<any>[][]) {
     this.domain = new Set([1, 2, 3, 4, 5, 6, 7, 8, 9]);
     this.board = board.map(row =>
       row.map(cell => new DomainedCell(cell, this.domain, ' '))
