@@ -1,4 +1,4 @@
-import type { Cell } from '../ipc/Cell';
+import type { Cell } from '../entity/Cell';
 import { UniqueConstraint } from './Constraint';
 import { DomainedCell } from './DomainedCell';
 

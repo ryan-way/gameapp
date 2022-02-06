@@ -1,18 +1,18 @@
 <script lang="ts">
   import { getContext } from 'svelte';
   import Board from '../common/Board.svelte';
-  import type { ICell } from '../ipc/Cell';
-  import type { ITestEntity } from '../ipc/entity/ITestEntity';
-  import { IDatabase, key as dbKey } from "../ipc/service/database";
+  import type { Cell } from '../entity/Cell';
+  import type { ITestEntity } from '../entity/ITestEntity';
+  import { IDatabase, key as dbKey } from "../service/database";
 
   export let id: number;
-
+  
   const db: IDatabase = getContext(dbKey);
   let game: Promise<ITestEntity> = db.getTestEntity(id);
 
   let turn: 'X' | 'O' = 'X';
   
-  function onClick(cell: ICell) {
+  function onClick(cell: Cell) {
     console.log('Test Game', cell)
     game = game.then(entity => {
       if (cell.Value != ' ') return entity;

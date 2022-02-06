@@ -1,5 +1,5 @@
 import { contextBridge, ipcRenderer } from 'electron';
-import type { ILogger } from '../ipc/service/logger';
+import type { ILogger } from '../service/logger';
 
 export class Logger implements ILogger {
   public static logger: ILogger;

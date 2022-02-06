@@ -3,7 +3,7 @@ import type {
   ITestEntity,
   TestBoard,
   TBValue,
-} from '../../ipc/entity/ITestEntity';
+} from '../../entity/ITestEntity';
 
 /**
  * Converts data from databse to TestBoard

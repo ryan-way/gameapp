@@ -1,7 +1,7 @@
 import { Connection, createConnection, EntityTarget } from 'typeorm';
 import { ipcMain } from 'electron';
 import { TestEntity } from './entity/TestEntity';
-import type { TBValue } from '../ipc/entity/ITestEntity';
+import type { TBValue } from '../entity/ITestEntity';
 import { Db } from './entity/SudokuEntity';
 
 export class DatabaseConnection {

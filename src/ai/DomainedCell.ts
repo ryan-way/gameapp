@@ -1,4 +1,4 @@
-import type { Cell } from '../ipc/Cell';
+import type { Cell } from '../entity/Cell';
 
 export class DomainedCell {
   public get Value(): any {

@@ -4,7 +4,7 @@
 
 import { render } from '@testing-library/svelte';
 import App from '../App.svelte';
-import type { ITestEntity } from '../ipc/entity/ITestEntity';
+import type { ITestEntity } from '../entity/ITestEntity';
 
 test('should render', () => {
   const results = render(App, {

@@ -1,5 +1,5 @@
-import type { IDatabase } from '../ipc/service/database';
-import type { ILogger } from '../ipc/service/logger';
+import type { IDatabase } from '../service/database';
+import type { ILogger } from '../service/logger';
 
 export interface Window {
   db: IDatabase;

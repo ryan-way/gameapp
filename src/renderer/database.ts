@@ -1,7 +1,7 @@
 import { ipcRenderer, contextBridge } from 'electron';
-import type { ISudokuEntity } from '../ipc/entity/ISudokuEntity';
-import type { ITestEntity } from '../ipc/entity/ITestEntity';
-import type { IDatabase } from '../ipc/service/database';
+import type { ISudokuEntity } from '../entity/ISudokuEntity';
+import type { ITestEntity } from '../entity/ITestEntity';
+import type { IDatabase } from '../service/database';
 
 export class Database implements IDatabase {
   public static db: IDatabase;

@@ -2,14 +2,13 @@
   import { getContext } from 'svelte';
   import { SudokuSolver } from '../ai/SudokuSolver';
   import Board from '../common/Board.svelte';
-  import type { ISudokuEntity } from '../ipc/entity/ISudokuEntity';
-  import { IDatabase, key as dbKey } from "../ipc/service/database";
+  import type { ISudokuEntity } from '../entity/ISudokuEntity';
+  import { IDatabase, key as dbKey } from "../service/database";
 
   export let id: number;
 
   const db: IDatabase = getContext(dbKey);
   let game: Promise<ISudokuEntity> = db.getSudokuEntity(id);
-  
 
   let solver: SudokuSolver;
   game.then(entity => {

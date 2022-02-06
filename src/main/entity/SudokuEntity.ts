@@ -3,7 +3,7 @@ import type {
   ISudokuEntity,
   SudokuBoard,
   SValue,
-} from '../../ipc/entity/ISudokuEntity';
+} from '../../entity/ISudokuEntity';
 
 /**
  * Converts data from databse to TestBoard
