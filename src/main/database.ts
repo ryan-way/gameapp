@@ -1,4 +1,4 @@
-import { Connection, createConnection, EntityMetadata, EntityTarget } from 'typeorm';
+import { Connection, createConnection, EntityTarget } from 'typeorm';
 import { ipcMain } from 'electron';
 import { TestEntity } from './entity/TestEntity';
 import { Db } from './entity/SudokuEntity';
@@ -34,29 +34,30 @@ export class DatabaseConnection {
   }
 
   private InitializeTestData(): void {
-    this.connection.then(async connection => {
-      console.log('Initializing Test Data');
-      for (const entity of this.entities) {
-        console.log('Checking', entity.name, 'repo count');
-        const repo = connection.getRepository(entity);
-        const count = await repo.count();
-        if (count != 0) {
-          console.log('Continuing...');
-          continue;
+    this.connection
+      .then(async connection => {
+        console.log('Initializing Test Data');
+        for (const entity of this.entities) {
+          console.log('Checking', entity.name, 'repo count');
+          const repo = connection.getRepository(entity);
+          const count = await repo.count();
+          if (count != 0) {
+            console.log('Continuing...');
+            continue;
+          }
+          console.log('Checking for test data');
+          let num: number = 1;
+          for (const d of data.get(entity.name)) {
+            console.log(this.clones[entity.name]);
+            const instance = { ...this.clones[entity.name] };
+            instance['board'] = d;
+            await repo.save(instance);
+            console.log('Saved instance number:', num++);
+          }
         }
-        console.log('Checking for test data');
-        let num: number = 1;
-        for (const d of data.get(entity.name)) {
-          console.log(this.clones[entity.name]);
-          const instance = { ...this.clones[entity.name] };
-          instance['board'] = d;
-          await repo.save(instance);
-          console.log('Saved instance number:', num++);
-        }
-      }
-      console.log('Done Initializing Test Data');
-      return connection;
-    });
+        console.log('Done Initializing Test Data');
+      })
+      .catch(console.log);
   }
 
   private InitializeIpc(): void {

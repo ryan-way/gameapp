@@ -1,9 +1,5 @@
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
-import type {
-  ITestEntity,
-  TestBoard,
-  TBValue,
-} from '../../entity/ITestEntity';
+import type { ITestEntity, TestBoard, TBValue } from '../../entity/ITestEntity';
 
 /**
  * Converts data from databse to TestBoard

@@ -22,7 +22,14 @@
     "object-curly-spacing": ["error", "always"],
     "arrow-parens": ["error", "as-needed"],
     "prettier/prettier": "error",
-    "require-jsdoc": ["off"]
+    "require-jsdoc": ["off"],
+    "comma-dangle": ["error", {
+      "arrays": "always-multiline",
+      "objects": "always-multiline",
+      "imports": "never",
+      "exports": "never",
+      "functions": "never"
+      }]
   },
   "settings": {
     "svelte3/typescript": true

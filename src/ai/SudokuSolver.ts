@@ -34,8 +34,8 @@ export class SudokuSolver {
       const row: number = Math.floor(i / 3) * 3;
       const column: number = (i % 3) * 3;
       const subGrid: DomainedCell[] = this.board
-        .slice(row, row+3)
-        .map(row => row.slice(column, column+3))
+        .slice(row, row + 3)
+        .map(row => row.slice(column, column + 3))
         .flat();
 
       this.constraints.push(
