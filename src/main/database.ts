@@ -1,7 +1,7 @@
 import { Connection, createConnection, EntityTarget } from 'typeorm';
 import { ipcMain } from 'electron';
-import { Entities as Sudoku } from './entity/SudokuEntity';
-import { Entities as Test } from './entity/TestEntity';
+import { Entities as Sudoku } from './entity/sudoku';
+import { Entities as Test } from './entity/test';
 import data from './testdata';
 
 export namespace Main {

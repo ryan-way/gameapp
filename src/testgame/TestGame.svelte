@@ -1,8 +1,8 @@
 <script lang="ts">
   import { getContext } from 'svelte';
   import Board from '../common/Board.svelte';
-  import type { Cell } from '../entity/Cell';
-  import type { Test } from '../entity/Test';
+  import type { Cell } from '../data/cell';
+  import type { Test } from '../data/test';
   import { IDatabase, key as dbKey } from "../service/database";
 
   export let id: number;

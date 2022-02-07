@@ -1,7 +1,7 @@
 
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
-import type { Cell } from '../../entity/Cell';
-import type { Sudoku } from '../../entity/Sudoku';
+import type { Cell } from '../../data/cell';
+import type { Sudoku } from '../../data/sudoku';
 
 export namespace Entities {
   function defaultCell(): Cell<Sudoku.Value> {

@@ -1,6 +1,6 @@
 <script lang="ts">
   import { createEventDispatcher } from 'svelte';
-  import type { Cell } from '../entity/Cell';
+  import type { Cell } from '../data/cell';
 
   export let data: Cell<any>[][];
   export let fontSize: string;

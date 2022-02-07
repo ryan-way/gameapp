@@ -1,4 +1,4 @@
-import type { DomainedCell } from './DomainedCell';
+import type { DomainedCell } from './domainedcell';
 
 export class UniqueConstraint {
   range: DomainedCell[];

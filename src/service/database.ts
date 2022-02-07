@@ -1,5 +1,5 @@
-import type { Sudoku } from '../entity/Sudoku';
-import type { Test } from '../entity/Test';
+import type { Sudoku } from '../data/sudoku';
+import type { Test } from '../data/test';
 
 export interface IDatabase {
   getTestEntities(): Promise<Test.Test[]>;

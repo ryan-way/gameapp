@@ -1,6 +1,6 @@
 import { ipcRenderer, contextBridge } from 'electron';
-import type { Sudoku } from '../entity/Sudoku';
-import type { Test } from '../entity/Test';
+import type { Sudoku } from '../data/sudoku';
+import type { Test } from '../data/test';
 import type { IDatabase } from '../service/database';
 
 export class Database implements IDatabase {

@@ -1,8 +1,8 @@
 <script lang='ts'>
   import { getContext } from 'svelte';
-  import { SudokuSolver } from '../ai/SudokuSolver';
+  import { SudokuSolver } from '../ai/sudokusolver'
   import Board from '../common/Board.svelte';
-  import type { Sudoku } from '../entity/Sudoku';
+  import type { Sudoku } from '../data/sudoku';
   import { IDatabase, key as dbKey } from "../service/database";
 
   export let id: number;

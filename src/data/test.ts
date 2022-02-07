@@ -1,4 +1,4 @@
-import type { Cell } from './Cell';
+import type { Cell } from './cell';
 
 export namespace Test {
   export type Value = ' ' | 'X' | 'O';

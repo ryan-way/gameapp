@@ -1,4 +1,4 @@
-import type { Cell } from './Cell';
+import type { Cell } from './cell';
 
 export namespace Sudoku {
   export type Value = ' ' | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9;

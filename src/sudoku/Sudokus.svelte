@@ -1,6 +1,6 @@
 <script lang='ts'>
   import { getContext } from "svelte";
-  import type { Sudoku } from '../entity/Sudoku';
+  import type { Sudoku } from '../data/sudoku';
   import { Link } from "svelte-routing";
   import Board from "../common/Board.svelte";
   import { IDatabase, key as dbKey } from "../service/database";

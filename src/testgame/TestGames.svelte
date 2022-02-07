@@ -1,7 +1,7 @@
 <script lang="ts">
   import { getContext } from 'svelte';
   import { Link } from 'svelte-routing';
-  import type { Test } from '../entity/Test';
+  import type { Test } from '../data/test';
   import Board from '../common/Board.svelte';
   import { IDatabase, key as dbKey } from "../service/database";
   

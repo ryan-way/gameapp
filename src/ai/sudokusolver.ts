@@ -1,6 +1,6 @@
-import type { Cell } from '../entity/Cell';
-import { UniqueConstraint } from './Constraint';
-import { DomainedCell } from './DomainedCell';
+import type { Cell } from '../data/cell';
+import { UniqueConstraint } from './constraint';
+import { DomainedCell } from './domainedcell';
 
 export class SudokuSolver {
   board: DomainedCell[][];
