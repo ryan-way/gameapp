@@ -1,24 +1,24 @@
 import { ipcRenderer, contextBridge } from 'electron';
-import type { ISudokuEntity } from '../entity/ISudokuEntity';
-import type { ITestEntity } from '../entity/ITestEntity';
+import type { Sudoku } from '../entity/Sudoku';
+import type { Test } from '../entity/Test';
 import type { IDatabase } from '../service/database';
 
 export class Database implements IDatabase {
   public static db: IDatabase;
-  getTestEntities(): Promise<ITestEntity[]> {
-    return ipcRenderer.invoke('getAllTestEntity');
+  getTestEntities(): Promise<Test.Test[]> {
+    return ipcRenderer.invoke('getAllTest');
   }
 
-  getTestEntity(id: number): Promise<ITestEntity> {
-    return ipcRenderer.invoke('getOneTestEntity', id);
+  getTestEntity(id: number): Promise<Test.Test> {
+    return ipcRenderer.invoke('getOneTest', id);
   }
 
-  getSudokuEntities(): Promise<ISudokuEntity[]> {
-    return ipcRenderer.invoke('getAllSudokuEntity');
+  getSudokuEntities(): Promise<Sudoku.Sudoku[]> {
+    return ipcRenderer.invoke('getAllSudoku');
   }
 
-  getSudokuEntity(id: number): Promise<ISudokuEntity> {
-    return ipcRenderer.invoke('getOneSudokuEntity', id);
+  getSudokuEntity(id: number): Promise<Sudoku.Sudoku> {
+    return ipcRenderer.invoke('getOneSudoku', id);
   }
 }
 

@@ -1,6 +1,6 @@
 const data: Map<string, Array<any>> = new Map([
   [
-    'TestEntity',
+    'Test',
     [
       [
         [{ Value: 'X' }, { Value: 'O' }, { Value: ' ' }],
@@ -30,7 +30,7 @@ const data: Map<string, Array<any>> = new Map([
     ],
   ],
   [
-    'SudokuEntity',
+    'Sudoku',
     [
       [
         [

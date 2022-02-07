@@ -1,12 +1,12 @@
 <script lang='ts'>
   import { getContext } from "svelte";
-  import type { ISudokuEntity } from '../entity/ISudokuEntity';
+  import type { Sudoku } from '../entity/Sudoku';
   import { Link } from "svelte-routing";
   import Board from "../common/Board.svelte";
   import { IDatabase, key as dbKey } from "../service/database";
 
   const db: IDatabase = getContext(dbKey);
-  let games: Promise<ISudokuEntity[]> = db.getSudokuEntities();
+  let games: Promise<Sudoku.Sudoku[]> = db.getSudokuEntities();
   const gameLink: string = '/sudoku/';
 
   games.then(game => {

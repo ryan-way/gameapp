@@ -4,11 +4,11 @@
 
 import { render } from '@testing-library/svelte';
 import App from '../App.svelte';
-import type { ITestEntity } from '../entity/ITestEntity';
+import type { Test } from '../entity/Test';
 
 test('should render', () => {
   const results = render(App, {
-    promise: new Promise<ITestEntity[]>((resolve, reject) => {
+    promise: new Promise<Test.Test[]>((resolve, reject) => {
       return [];
     }),
   });

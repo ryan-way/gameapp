@@ -1,12 +1,12 @@
 <script lang="ts">
   import { getContext } from 'svelte';
   import { Link } from 'svelte-routing';
-  import type { ITestEntity } from '../entity/ITestEntity';
+  import type { Test } from '../entity/Test';
   import Board from '../common/Board.svelte';
   import { IDatabase, key as dbKey } from "../service/database";
   
   const db: IDatabase = getContext(dbKey);
-  let games: Promise<ITestEntity[]> = db.getTestEntities();
+  let games: Promise<Test.Test[]> = db.getTestEntities();
   
   const gameLink: string = '/testgame/';
 </script>
