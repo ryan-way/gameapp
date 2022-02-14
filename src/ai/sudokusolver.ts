@@ -24,7 +24,7 @@ export class SudokuSolver {
     }
 
     for (let i = 0; i < this.board[0].length; i++) {
-      const column: DomainedCell[] = this.board.map(row => row[0]);
+      const column: DomainedCell[] = this.board.map(row => row[i]);
       this.constraints.push(
         new UniqueConstraint(column, this.domain, this.blank)
       );
@@ -47,9 +47,11 @@ export class SudokuSolver {
   SolveOne(): boolean {
     for (const constraint of this.constraints) {
       if (constraint.SolveOne()) {
-        console.log(constraint.Range);
+        console.log(constraint);
         return true;
       }
     }
+    console.log(this.constraints);
+    return false;
   }
 }
