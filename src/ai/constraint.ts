@@ -24,6 +24,7 @@ export class UniqueConstraint {
   }
 
   SolveOne(): boolean {
+    this.Setup();
     for (const cell of this.range) {
       if (cell.Solved) continue;
 
@@ -57,6 +58,7 @@ export class UniqueConstraint {
       for (const value of cell.Domain) {
         if (unique.has(value)) {
           cell.coerceValue(value);
+          this.solvedValues.add(cell.Value);
           console.log('Solved: ', value);
           return true;
         }
