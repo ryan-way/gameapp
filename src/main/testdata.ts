@@ -133,6 +133,119 @@ const data: Map<string, Array<any>> = new Map([
           { Value: ' ' },
         ],
       ],
+      /* https://www.websudoku.com/?level=1&set_id=9025805614
+      Solution:
+      498156237
+      321798564
+      765243198
+      276431985
+      519827346
+      834569712
+      952614873
+      683975421
+      147382659
+      */
+      [
+        [
+          { Value: '4' },
+          { Value: '9' },
+          { Value: ' ' },
+          { Value: ' ' },
+          { Value: '5' },
+          { Value: '6' },
+          { Value: '2' },
+          { Value: ' ' },
+          { Value: ' ' },
+        ],
+        [
+          { Value: '3' },
+          { Value: '2' },
+          { Value: ' ' },
+          { Value: '7' },
+          { Value: ' ' },
+          { Value: '8' },
+          { Value: ' ' },
+          { Value: ' ' },
+          { Value: '4' },
+        ],
+        [
+          { Value: ' ' },
+          { Value: '6' },
+          { Value: '5' },
+          { Value: ' ' },
+          { Value: ' ' },
+          { Value: ' ' },
+          { Value: ' ' },
+          { Value: ' ' },
+          { Value: ' ' },
+        ],
+        [
+          { Value: '2' },
+          { Value: ' ' },
+          { Value: ' ' },
+          { Value: ' ' },
+          { Value: ' ' },
+          { Value: '1' },
+          { Value: '9' },
+          { Value: ' ' },
+          { Value: ' ' },
+        ],
+        [
+          { Value: ' ' },
+          { Value: ' ' },
+          { Value: ' ' },
+          { Value: '8' },
+          { Value: ' ' },
+          { Value: '7' },
+          { Value: ' ' },
+          { Value: ' ' },
+          { Value: ' ' },
+        ],
+        [
+          { Value: ' ' },
+          { Value: ' ' },
+          { Value: '4' },
+          { Value: '5' },
+          { Value: ' ' },
+          { Value: ' ' },
+          { Value: ' ' },
+          { Value: ' ' },
+          { Value: '2' },
+        ],
+        [
+          { Value: ' ' },
+          { Value: ' ' },
+          { Value: ' ' },
+          { Value: ' ' },
+          { Value: ' ' },
+          { Value: ' ' },
+          { Value: '8' },
+          { Value: '7' },
+          { Value: ' ' },
+        ],
+        [
+          { Value: '6' },
+          { Value: ' ' },
+          { Value: ' ' },
+          { Value: '9' },
+          { Value: ' ' },
+          { Value: '5' },
+          { Value: ' ' },
+          { Value: '2' },
+          { Value: '1' },
+        ],
+        [
+          { Value: ' ' },
+          { Value: ' ' },
+          { Value: '7' },
+          { Value: '3' },
+          { Value: '8' },
+          { Value: ' ' },
+          { Value: ' ' },
+          { Value: '5' },
+          { Value: '9' },
+        ],
+      ],
     ],
   ],
 ]);
