@@ -6,7 +6,7 @@
   import { IDatabase, IRepository, key } from "../service/database";
   
   const data = getContext(key) as IDatabase;
-  const repo: IRepository<Test.Test> = data.GetRepository<Test.Test>(new Test.Test());
+  const repo: IRepository<Test.Test> = data.GetRepository(new Test.Test());
 
   let games: Promise<Test.Test[]> = repo.GetAll();
   

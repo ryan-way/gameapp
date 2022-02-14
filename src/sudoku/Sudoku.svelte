@@ -8,7 +8,7 @@
   export let id: number;
 
   const data = getContext(key) as IDatabase;
-  const repo: IRepository<Sudoku.Sudoku> = data.GetRepository<Sudoku.Sudoku>(new Sudoku.Sudoku());
+  const repo: IRepository<Sudoku.Sudoku> = data.GetRepository(new Sudoku.Sudoku());
   let game: Promise<Sudoku.Sudoku> = repo.GetOne(id);
 
   let solver: SudokuSolver;

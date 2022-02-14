@@ -8,7 +8,7 @@
   export let id: number;
 
   const data = getContext(key) as IDatabase;
-  const repo: IRepository<Test.Test> = data.GetRepository<Test.Test>(new Test.Test());
+  const repo: IRepository<Test.Test> = data.GetRepository(new Test.Test());
   let game: Promise<Test.Test> = repo.GetOne(id);
 
   let turn: 'X' | 'O' = 'X';
