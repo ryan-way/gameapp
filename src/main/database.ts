@@ -42,7 +42,7 @@ export namespace Main {
             console.log('Checking', entity.name, 'repo count');
             const repo = connection.getRepository(entity);
             const count = await repo.count();
-            if (count != 0) {
+            if (count >= data.get(entity.name).length) {
               console.log('Continuing...');
               continue;
             }
