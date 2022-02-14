@@ -31,7 +31,7 @@ export class DomainedCell {
   eliminateValue(value: any) {
     this.domain.delete(value);
     if (this.domain.size == 1) {
-      this.cell.Value = this.domain.values[0];
+      this.cell.Value = [...this.domain][0];
       console.log('Value assigned: ', this.cell.Value);
     }
   }
