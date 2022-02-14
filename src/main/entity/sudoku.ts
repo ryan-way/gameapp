@@ -1,14 +1,14 @@
 
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 import type { Cell } from '../../data/cell';
-import type { Sudoku } from '../../data/sudoku';
+import { Sudoku as Base } from '../../data/sudoku';
 
 export namespace Entities {
-  function defaultCell(): Cell<Sudoku.Value> {
+  function defaultCell(): Cell<Base.Value> {
     return { Value: ' ' };
   }
 
-  function defaultRow(): Sudoku.Row {
+  function defaultRow(): Base.Row {
     return [
       defaultCell(),
       defaultCell(),
@@ -22,7 +22,7 @@ export namespace Entities {
     ];
   }
 
-  function defaultBoard(): Sudoku.Board {
+  function defaultBoard(): Base.Board {
     return [
       defaultRow(),
       defaultRow(),
@@ -41,12 +41,12 @@ export namespace Entities {
    * @param {string[]} data - data from databse
    * @return {TestBoard} - resulting test board object
    */
-  function from(data: string[]): Sudoku.Board {
-    const ret: Sudoku.Board = defaultBoard();
+  function from(data: string[]): Base.Board {
+    const ret: Base.Board = defaultBoard();
     data.forEach((item: string, index: number) => {
       ret[Math.floor(index / 9)][index % 9].Value = (
         item == ' ' ? item : +item
-      ) as Sudoku.Value;
+      ) as Base.Value;
     });
     return ret;
   }
@@ -58,12 +58,16 @@ export namespace Entities {
    * @return {TestBoard} - resulting test board object
    */
 
-  function to(data: Sudoku.Board): string[] {
+  function to(data: Base.Board): string[] {
     return data.flat().map(obj => obj.Value.toString());
   }
 
   @Entity()
-  export class Sudoku implements Sudoku.Sudoku {
+  export class Sudoku extends Base.Sudoku {
+    constructor() {
+      super();
+    }
+
     @PrimaryGeneratedColumn()
     public id: number;
 
@@ -74,6 +78,6 @@ export namespace Entities {
         to: to,
       },
     })
-    public board: Sudoku.Board;
+    public board: Base.Board;
   }
 }

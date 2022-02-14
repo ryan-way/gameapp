@@ -2,13 +2,14 @@
   import { getContext } from 'svelte';
   import Board from '../common/Board.svelte';
   import type { Cell } from '../data/cell';
-  import type { Test } from '../data/test';
-  import { IDatabase, key as dbKey } from "../service/database";
+  import { Test } from '../data/test';
+  import { IDatabase, IRepository, key } from "../service/database";
 
   export let id: number;
-  
-  const db: IDatabase = getContext(dbKey);
-  let game: Promise<Test.Test> = db.getTestEntity(id);
+
+  const data = getContext(key) as IDatabase;
+  const repo: IRepository<Test.Test> = data.GetRepository<Test.Test>(new Test.Test());
+  let game: Promise<Test.Test> = repo.GetOne(id);
 
   let turn: 'X' | 'O' = 'X';
   

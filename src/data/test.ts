@@ -1,4 +1,5 @@
 import type { Cell } from './cell';
+import { EntityBase } from './entitybase';
 
 export namespace Test {
   export type Value = ' ' | 'X' | 'O';
@@ -7,7 +8,11 @@ export namespace Test {
 
   export type Board = [Row, Row, Row];
 
-  export interface Test {
+  export class Test extends EntityBase {
+    constructor() {
+      super();
+    }
+
     id: number;
     board: Board;
   }

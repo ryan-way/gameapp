@@ -1,12 +1,14 @@
 <script lang="ts">
   import { getContext } from 'svelte';
   import { Link } from 'svelte-routing';
-  import type { Test } from '../data/test';
+  import { Test } from '../data/test';
   import Board from '../common/Board.svelte';
-  import { IDatabase, key as dbKey } from "../service/database";
+  import { IDatabase, IRepository, key } from "../service/database";
   
-  const db: IDatabase = getContext(dbKey);
-  let games: Promise<Test.Test[]> = db.getTestEntities();
+  const data = getContext(key) as IDatabase;
+  const repo: IRepository<Test.Test> = data.GetRepository<Test.Test>(new Test.Test());
+
+  let games: Promise<Test.Test[]> = repo.GetAll();
   
   const gameLink: string = '/testgame/';
 </script>

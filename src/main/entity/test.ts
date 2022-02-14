@@ -1,6 +1,6 @@
 // / <reference path="database.ts" />
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
-import type { Test } from '../../data/test';
+import { Test as Base } from '../../data/test';
 
 export namespace Entities {
   /**
@@ -8,14 +8,14 @@ export namespace Entities {
    * @param {string[]} data - data from databse
    * @return {Test.Board} - resulting test board object
    */
-  function from(data: string[]): Test.Board {
-    const ret: Test.Board = [
+  function from(data: string[]): Base.Board {
+    const ret: Base.Board = [
       [{ Value: ' ' }, { Value: ' ' }, { Value: ' ' }],
       [{ Value: ' ' }, { Value: ' ' }, { Value: ' ' }],
       [{ Value: ' ' }, { Value: ' ' }, { Value: ' ' }],
     ];
     data.forEach((item: string, index: number) => {
-      ret[Math.floor(index / 3)][index % 3].Value = item as Test.Value;
+      ret[Math.floor(index / 3)][index % 3].Value = item as Base.Value;
     });
     return ret;
   }
@@ -26,12 +26,12 @@ export namespace Entities {
    * @param {TestBoard} data - data from databse
    * @return {TestBoard} - resulting test board object
    */
-  function to(data: Test.Board): string[] {
+  function to(data: Base.Board): string[] {
     return data.flat().map(obj => obj.Value.toString());
   }
 
   @Entity()
-  export class Test implements Test.Test {
+  export class Test extends Base.Test {
     @PrimaryGeneratedColumn()
     public id: number;
 
@@ -42,6 +42,6 @@ export namespace Entities {
         to: to,
       },
     })
-    public board: Test.Board;
+    public board: Base.Board;
   }
 }

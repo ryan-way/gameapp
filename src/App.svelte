@@ -8,12 +8,12 @@
   import Sudokus from './sudoku/Sudokus.svelte';
   import Sudoku from './sudoku/Sudoku.svelte';
   import { key as logKey } from './service/logger';
-  import { key as dbKey } from './service/database';
+  import { key as dataKey } from './service/database';
 
   export let window: Window;
   export let url: string = '/';
 
-  setContext(dbKey, window.db);
+  setContext(dataKey, window.data);
   setContext(logKey, window.log);
 </script>
 
