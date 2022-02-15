@@ -85,10 +85,8 @@ export namespace Main {
       zoya.fatal(args);
     }
   }
-
-  export function InitializeLogger(): void {
-    Logger.InitializeLogger();
-  }
 }
 
-export default Main.Logger.logger;
+Main.Logger.InitializeLogger();
+const logger: Main.Logger = Main.Logger.logger;
+export default logger;
