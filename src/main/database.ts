@@ -3,6 +3,7 @@ import { ipcMain } from 'electron';
 import { Entities as Sudoku } from './entity/sudoku';
 import { Entities as Test } from './entity/test';
 import data from './testdata';
+import logger from './logging';
 
 export namespace Main {
   export class DatabaseConnection {
@@ -37,28 +38,28 @@ export namespace Main {
     private InitializeTestData(): void {
       this.connection
         .then(async connection => {
-          console.log('Initializing Test Data');
+          logger.Info('Initializing Test Data');
           for (const entity of this.entities) {
-            console.log('Checking', entity.name, 'repo count');
+            logger.Info(`Checking ${entity.name} repo count`);
             const repo = connection.getRepository(entity);
             const count = await repo.count();
             if (count >= data.get(entity.name).length) {
-              console.log('Continuing...');
+              logger.Info('Continuing...');
               continue;
             }
-            console.log('Checking for test data');
+            logger.Info('Checking for test data');
             let num: number = 1;
             for (const d of data.get(entity.name)) {
-              console.log(this.clones.get(entity.name));
+              logger.Info(this.clones.get(entity.name));
               const instance = { ...this.clones.get(entity.name) };
               instance['board'] = d;
               await repo.save(instance);
-              console.log('Saved instance number:', num++);
+              logger.Info(`Save instance number: ${num++}`);
             }
           }
-          console.log('Done Initializing Test Data');
+          logger.Info('Done Initializing Test Data');
         })
-        .catch(console.log);
+        .catch(logger.Error);
     }
 
     private InitializeIpc(): void {

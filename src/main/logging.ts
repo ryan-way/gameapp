@@ -29,40 +29,40 @@ export namespace Main {
       ipcMain.handle('logFatal', this._fatal.bind(this));
     }
 
-    private async _success(event: IpcMainEvent, ...args): Promise<void> {
-      this.Success(args);
+    private async _success(event: IpcMainEvent, message: any): Promise<void> {
+      this.Success(message);
     }
 
-    public async Success(...args): Promise<void> {
-      zoya.success(args);
+    public async Success(message: any): Promise<void> {
+      zoya.success(message);
     }
 
-    private async _debug(event: IpcMainEvent, ...args): Promise<void> {
-      this.Debug(args);
+    private async _debug(event: IpcMainEvent, message: any): Promise<void> {
+      this.Debug(message);
     }
 
-    public async Debug(...args): Promise<void> {
-      zoya.debug(args);
+    public async Debug(message: any): Promise<void> {
+      zoya.debug(message);
     }
 
-    private async _info(event: IpcMainEvent, ...args): Promise<void> {
-      this.Info(args);
+    private async _info(event: IpcMainEvent, message: any): Promise<void> {
+      this.Info(message);
     }
 
-    public async Info(...args): Promise<void> {
-      zoya.info(args);
+    public async Info(message: any): Promise<void> {
+      zoya.info(message);
     }
 
-    private async _warn(event: IpcMainEvent, ...args): Promise<void> {
-      this.Warn(args);
+    private async _warn(event: IpcMainEvent, message: any): Promise<void> {
+      this.Warn(message);
     }
 
-    public async Warn(...args): Promise<void> {
-      zoya.warn(args);
+    public async Warn(message: any): Promise<void> {
+      zoya.warn(message);
     }
 
-    private async _error(event: IpcMainEvent, ...args): Promise<void> {
-      this.Error(args);
+    private async _error(event: IpcMainEvent, message: any): Promise<void> {
+      this.Error(message);
     }
 
     public async Error(...args): Promise<void> {
