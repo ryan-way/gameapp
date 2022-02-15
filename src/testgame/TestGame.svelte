@@ -3,7 +3,7 @@
   import Board from '../common/Board.svelte';
   import type { Cell } from '../data/cell';
   import { Test } from '../data/test';
-  import { IDatabase, IRepository, key } from "../service/database";
+  import { IDatabase, IRepository, key } from '../service/database';
 
   export let id: number;
 
@@ -12,9 +12,9 @@
   let game: Promise<Test.Test> = repo.GetOne(id);
 
   let turn: 'X' | 'O' = 'X';
-  
+
   function onClick(cell: Cell<any>) {
-    console.log('Test Game', cell)
+    console.log('Test Game', cell);
     game = game.then(entity => {
       if (cell.Value != ' ') return entity;
 
@@ -28,9 +28,11 @@
 {#await game}
   <p>...loading game</p>
 {:then entity}
-  <Board 
-    on:cellClick={(event) => onClick(event.detail.cell)}
-    fontSize="120px" height="500px" width="500px"
+  <Board
+    on:cellClick={event => onClick(event.detail.cell)}
+    fontSize="120px"
+    height="500px"
+    width="500px"
     data={entity.board}
   />
 {/await}

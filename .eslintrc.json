@@ -23,13 +23,17 @@
     "arrow-parens": ["error", "as-needed"],
     "prettier/prettier": "error",
     "require-jsdoc": ["off"],
-    "comma-dangle": ["error", {
-      "arrays": "always-multiline",
-      "objects": "always-multiline",
-      "imports": "always-multiline",
-      "exports": "always-multiline",
-      "functions": "never"
-      }]
+    "comma-dangle": [
+      "error",
+      {
+        "arrays": "always-multiline",
+        "objects": "always-multiline",
+        "imports": "always-multiline",
+        "exports": "always-multiline",
+        "functions": "never"
+      }
+    ],
+    "eol-last": "off"
   },
   "settings": {
     "svelte3/typescript": true

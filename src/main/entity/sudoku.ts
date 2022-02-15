@@ -1,4 +1,3 @@
-
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 import type { Cell } from '../../data/cell';
 import { Sudoku as Base } from '../../data/sudoku';

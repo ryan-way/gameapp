@@ -7,7 +7,8 @@
 
   let games: IGame[] = [
     { name: 'Test Game', link: '/testgames' },
-    { name: 'Sudoku', link: '/sudokus'}];
+    { name: 'Sudoku', link: '/sudokus' },
+  ];
 </script>
 
 <ul>

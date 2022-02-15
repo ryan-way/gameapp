@@ -12,8 +12,8 @@
   function onCellClick(cell: Cell<any>) {
     console.log('Board', cell);
     dispatch('cellClick', {
-      cell: cell
-    })
+      cell: cell,
+    });
   }
 </script>
 
