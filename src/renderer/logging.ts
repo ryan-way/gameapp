@@ -4,31 +4,31 @@ import type { ILogger } from '../service/logger';
 export class Logger implements ILogger {
   public static logger: ILogger;
 
-  Success(): Promise<void> {
+  Success(message: any): Promise<void> {
     return ipcRenderer.invoke('logSuccess');
   }
 
-  Debug(): Promise<void> {
+  Debug(message: any): Promise<void> {
     return ipcRenderer.invoke('logDebug');
   }
 
-  Info(): Promise<void> {
+  Info(message: any): Promise<void> {
     return ipcRenderer.invoke('logInfo');
   }
 
-  Warn(): Promise<void> {
+  Warn(message: any): Promise<void> {
     return ipcRenderer.invoke('logWarn');
   }
 
-  Error(): Promise<void> {
+  Error(message: any): Promise<void> {
     return ipcRenderer.invoke('logError');
   }
 
-  Failed(): Promise<void> {
+  Failed(message: any): Promise<void> {
     return ipcRenderer.invoke('logFailed');
   }
 
-  Fatal(): Promise<void> {
+  Fatal(message: any): Promise<void> {
     return ipcRenderer.invoke('logFatal');
   }
 }
