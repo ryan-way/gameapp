@@ -3,7 +3,7 @@
   import { Link } from 'svelte-routing';
   import Board from '../common/Board.svelte';
   import type { IRepository } from '../service/database';
-  import { data } from '../store';
+  import { data } from '../service';
 
   const repo: IRepository<Sudoku.Sudoku> = $data.GetRepository(
     new Sudoku.Sudoku()
