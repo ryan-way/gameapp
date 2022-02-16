@@ -1,12 +1,11 @@
 <script lang="ts">
-  import { getContext } from 'svelte';
   import { Sudoku } from '../data/sudoku';
   import { Link } from 'svelte-routing';
   import Board from '../common/Board.svelte';
-  import { IDatabase, IRepository, key } from '../service/database';
+  import type { IRepository } from '../service/database';
+  import { data } from '../store';
 
-  const data = getContext(key) as IDatabase;
-  const repo: IRepository<Sudoku.Sudoku> = data.GetRepository(
+  const repo: IRepository<Sudoku.Sudoku> = $data.GetRepository(
     new Sudoku.Sudoku()
   );
   let games: Promise<Sudoku.Sudoku[]> = repo.GetAll();

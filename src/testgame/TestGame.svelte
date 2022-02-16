@@ -1,14 +1,13 @@
 <script lang="ts">
-  import { getContext } from 'svelte';
   import Board from '../common/Board.svelte';
   import type { Cell } from '../data/cell';
   import { Test } from '../data/test';
-  import { IDatabase, IRepository, key } from '../service/database';
+  import type { IRepository } from '../service/database';
+  import { data } from '../store';
 
   export let id: number;
 
-  const data = getContext(key) as IDatabase;
-  const repo: IRepository<Test.Test> = data.GetRepository(new Test.Test());
+  const repo: IRepository<Test.Test> = $data.GetRepository(new Test.Test());
   let game: Promise<Test.Test> = repo.GetOne(id);
 
   let turn: 'X' | 'O' = 'X';
