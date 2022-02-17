@@ -27,3 +27,5 @@ export namespace Sudoku {
     board: Board;
   }
 }
+
+export const instance: Sudoku.Sudoku = new Sudoku.Sudoku();

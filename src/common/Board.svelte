@@ -3,9 +3,9 @@
   import type { Cell } from '../data/cell';
 
   export let data: Cell<any>[][];
-  export let fontSize: string;
-  export let height: string;
-  export let width: string;
+  export let fontSize: string = '';
+  export let height: string = 'auto';
+  export let width: string = 'auto';
 
   const dispatch = createEventDispatcher();
 

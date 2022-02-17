@@ -1,6 +1,6 @@
 <script lang="ts">
   import { Router, Route, Link } from 'svelte-routing';
-  import { setContext } from 'svelte';
+  import { links } from 'svelte-routing';
   import GameMenu from './GameMenu.svelte';
   import TestGames from './testgame/TestGames.svelte';
   import TestGame from './testgame/TestGame.svelte';
@@ -14,7 +14,7 @@
 <main>
   <Router {url}>
     <Link to="/">Home</Link>
-    <div>
+    <div use:links>
       <Route path="/"><GameMenu /></Route>
       <Route path="/testgames"><TestGames /></Route>
       <Route path="/testgame/:id" let:params><TestGame {...params} /></Route>

@@ -1,5 +1,4 @@
 <script lang="ts">
-  import { Link } from 'svelte-routing';
   interface IGame {
     name: string;
     link: string;
@@ -13,7 +12,7 @@
 
 <ul>
   {#each games as { name, link }}
-    <li><Link to={link}>{name}</Link></li>
+    <li><a href={link}>{name}</a></li>
   {/each}
 </ul>
 
