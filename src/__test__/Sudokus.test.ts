@@ -10,24 +10,26 @@ import { mock, instance, when } from 'ts-mockito';
 import type { IDatabase, IRepository } from '../service/database';
 import { Sudoku, instance as inst } from '../data/sudoku';
 
-test('should render Game Menu', () => {
-  const promise = Promise.resolve(
-    testdata.get(Sudoku.Sudoku.name).map((board, idx) => {
-      return { id: idx, board: board } as unknown as Sudoku.Sudoku;
-    })
-  );
+const sudokus = testdata.get(Sudoku.Sudoku.name).map((board, idx) => {
+  return { id: idx, board: board } as unknown as Sudoku.Sudoku;
+});
 
-  const mockedRepo: IRepository<Sudoku.Sudoku> =
-    mock<IRepository<Sudoku.Sudoku>>();
-  when(mockedRepo.GetAll()).thenReturn(promise);
-  const repo: IRepository<Sudoku.Sudoku> = instance(mockedRepo);
+const promise = Promise.resolve(sudokus);
 
-  const mockedData: IDatabase = mock<IDatabase>();
-  when(mockedData.GetRepository<Sudoku.Sudoku>(inst)).thenReturn(repo);
-  const data: IDatabase = instance(mockedData);
-  overrides.data.set(data);
+const mockedRepo: IRepository<Sudoku.Sudoku> =
+  mock<IRepository<Sudoku.Sudoku>>();
+when(mockedRepo.GetAll()).thenReturn(promise);
+const repo: IRepository<Sudoku.Sudoku> = instance(mockedRepo);
 
-  const results = render(Sudokus);
+const mockedData: IDatabase = mock<IDatabase>();
+when(mockedData.GetRepository<Sudoku.Sudoku>(inst)).thenReturn(repo);
+const data: IDatabase = instance(mockedData);
+overrides.data.set(data);
 
-  expect(() => 1).not.toThrow();
+const results = render(Sudokus);
+
+test('should render Sudoku', () => {
+  for (let i = 1; i <= sudokus.length; i++) {
+    expect(() => results.findByText(1)).not.toThrow();
+  }
 });

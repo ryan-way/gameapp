@@ -1,11 +1,11 @@
 <script lang="ts">
   import { links } from 'svelte-routing';
-  import { Test } from '../data/test';
+  import { Test, instance } from '../data/test';
   import Board from '../common/Board.svelte';
   import type { IRepository } from '../service/database';
   import { data } from '../service';
 
-  const repo: IRepository<Test.Test> = $data.GetRepository(new Test.Test());
+  const repo: IRepository<Test.Test> = $data.GetRepository(instance);
 
   let games: Promise<Test.Test[]> = repo.GetAll();
 
