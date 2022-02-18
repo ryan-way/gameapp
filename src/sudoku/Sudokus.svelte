@@ -4,13 +4,10 @@
   import type { IRepository } from '../service/database';
   import { data } from '../service';
 
-  const repo: IRepository<Sudoku.Sudoku> = $data.GetRepository(
-    instance
-  );
+  const repo: IRepository<Sudoku.Sudoku> = $data.GetRepository(instance);
   let games: Promise<Sudoku.Sudoku[]> = repo.GetAll();
 
   const gameLink: string = '/sudoku/';
-
 </script>
 
 <div>

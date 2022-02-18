@@ -8,7 +8,6 @@
   import Sudoku from './sudoku/Sudoku.svelte';
 
   export let url: string = '/';
-
 </script>
 
 <main>
