@@ -3,12 +3,12 @@
  */
 
 import { render } from '@testing-library/svelte';
-import TestGames from '../testgame/TestGames.svelte';
-import testdata from '../main/testdata';
-import { overrides } from '../service';
+import TestGames from '../src/testgame/TestGames.svelte';
+import testdata from '../src/main/testdata';
+import { overrides } from '../src/service';
 import { mock, instance, when } from 'ts-mockito';
-import type { IDatabase, IRepository } from '../service/database';
-import { Test, instance as inst } from '../data/test';
+import type { IDatabase, IRepository } from '../src/service/database';
+import { Test, instance as inst } from '../src/data/test';
 
 const testgames = testdata.get(Test.Test.name).map((board, idx) => {
   return { id: idx, board: board } as unknown as Test.Test;

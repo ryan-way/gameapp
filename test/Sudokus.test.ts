@@ -3,12 +3,12 @@
  */
 
 import { render } from '@testing-library/svelte';
-import Sudokus from '../sudoku/Sudokus.svelte';
-import testdata from '../main/testdata';
-import { overrides } from '../service';
+import Sudokus from '../src/sudoku/Sudokus.svelte';
+import testdata from '../src/main/testdata';
+import { overrides } from '../src/service';
 import { mock, instance, when } from 'ts-mockito';
-import type { IDatabase, IRepository } from '../service/database';
-import { Sudoku, instance as inst } from '../data/sudoku';
+import type { IDatabase, IRepository } from '../src/service/database';
+import { Sudoku, instance as inst } from '../src/data/sudoku';
 
 const sudokus = testdata.get(Sudoku.Sudoku.name).map((board, idx) => {
   return { id: idx, board: board } as unknown as Sudoku.Sudoku;
