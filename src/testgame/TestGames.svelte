@@ -3,7 +3,7 @@
   import { Test, instance } from '../data/test';
   import Board from '../components/Board.svelte';
   import type { IRepository } from '../service/database';
-  import { data } from '../service';
+  import { data } from '../stores/service';
 
   const repo: IRepository<Test.Test> = $data.GetRepository(instance);
 

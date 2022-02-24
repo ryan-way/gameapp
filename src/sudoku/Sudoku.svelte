@@ -3,7 +3,7 @@
   import Board from '../components/Board.svelte';
   import { Sudoku } from '../data/sudoku';
   import type { IRepository } from '../service/database';
-  import { data } from '../service';
+  import { data } from '../stores/service';
 
   export let id: number;
 

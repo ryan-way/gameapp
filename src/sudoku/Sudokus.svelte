@@ -2,7 +2,7 @@
   import { Sudoku, instance } from '../data/sudoku';
   import Board from '../components/Board.svelte';
   import type { IRepository } from '../service/database';
-  import { data } from '../service';
+  import { data } from '../stores/service';
 
   const repo: IRepository<Sudoku.Sudoku> = $data.GetRepository(instance);
   let games: Promise<Sudoku.Sudoku[]> = repo.GetAll();

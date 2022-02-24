@@ -1,7 +1,7 @@
 import { derived, writable, readable } from 'svelte/store';
-import type { Window } from './renderer/window';
-import type { IDatabase } from './service/database';
-import type { ILogger } from './service/logger';
+import type { Window } from '../renderer/window';
+import type { IDatabase } from '../service/database';
+import type { ILogger } from '../service/logger';
 
 export const service = readable<Window>(window as unknown as Window);
 export const overrides = {

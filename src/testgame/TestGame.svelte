@@ -3,7 +3,7 @@
   import type { Cell } from '../data/cell';
   import { Test } from '../data/test';
   import type { IRepository } from '../service/database';
-  import { data } from '../service';
+  import { data } from '../stores/service';
 
   export let id: number;
 
