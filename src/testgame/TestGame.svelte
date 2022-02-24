@@ -1,5 +1,5 @@
 <script lang="ts">
-  import Board from '../common/Board.svelte';
+  import Board from '../components/Board.svelte';
   import type { Cell } from '../data/cell';
   import { Test } from '../data/test';
   import type { IRepository } from '../service/database';

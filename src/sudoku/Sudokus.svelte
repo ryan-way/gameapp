@@ -1,6 +1,6 @@
 <script lang="ts">
   import { Sudoku, instance } from '../data/sudoku';
-  import Board from '../common/Board.svelte';
+  import Board from '../components/Board.svelte';
   import type { IRepository } from '../service/database';
   import { data } from '../service';
 
