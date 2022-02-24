@@ -17,5 +17,3 @@ export namespace Test {
     board: Board;
   }
 }
-
-export const instance: Test.Test = new Test.Test();
