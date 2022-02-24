@@ -59,14 +59,17 @@ export namespace Main {
         .catch(log.Error);
     }
 
-    public handle(event: IpcMainEvent, request: IpcRequest) {
+    public async handle(event: IpcMainEvent, request: IpcRequest) {
       const [entity, op, args] = request.params;
+      let response;
       if (op == 'getAll') {
-        event.sender.send(request.responseChannel, this.GetAll(entity));
+        response = await this.GetAll(entity);
       } else if (op == 'getOne') {
         const [id] = args;
-        event.sender.send(request.responseChannel, this.GetOne(entity, +id));
+        response = await this.GetOne(entity, +id);
       } else event.sender.send(request.responseChannel, 'Error');
+
+      event.sender.send(request.responseChannel, response);
     }
 
     public getName(): string {

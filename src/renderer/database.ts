@@ -1,44 +1,32 @@
-import { ipcRenderer, contextBridge } from 'electron';
 import type { EntityBase } from '../data/entitybase';
-import { IDatabase, IRepository, key } from '../service/database';
+import { DataChannel, DataResponse } from '../ipc/Channels';
+import type { IpcRequest } from '../ipc/IpcRequest';
+import type { Window } from './window';
 
-export class Repository<T extends EntityBase> implements IRepository<T> {
-  constructor(private instance: T) {}
+const ipc = (window as unknown as Window).ipc;
+console.log(ipc);
+export abstract class BaseRepository<T extends EntityBase> {
+  private sendChannel: string = DataChannel;
+  private receiveChannel: string = DataResponse;
+  constructor(private entity: new () => T) {}
+
+  private send<Entity>(request: IpcRequest): Promise<Entity> {
+    return ipc.send(this.sendChannel, request);
+  }
 
   public GetOne(id: number): Promise<T> {
-    return ipcRenderer.invoke('getOne' + this.instance.name, id);
+    const request = {
+      responseChannel: this.receiveChannel,
+      params: [this.entity.name, 'getOne', id.toString()],
+    };
+    return this.send<T>(request);
   }
 
   public GetAll(): Promise<T[]> {
-    return ipcRenderer.invoke('getAll' + this.instance.name);
-  }
-}
-
-export class Database implements IDatabase {
-  public static db: IDatabase;
-  entities: Function[];
-
-  constructor() {
-    this.InitializeApi();
-  }
-
-  InitializeApi() {
-    contextBridge.exposeInMainWorld(key, {
-      GetRepository: <T extends EntityBase>(instance: T) => {
-        return this.GetRepository<T>(instance);
-      },
-    });
-  }
-
-  GetRepository<T extends EntityBase>(instance: T): IRepository<T> {
-    const repo = new Repository<T>(instance);
-    return {
-      GetOne: repo.GetOne.bind(repo),
-      GetAll: repo.GetAll.bind(repo),
+    const request = {
+      responseChannel: this.receiveChannel,
+      params: [this.entity.name, 'getAll'],
     };
+    return this.send<T[]>(request);
   }
-}
-
-export function InitializeDatabase() {
-  Database.db = new Database();
 }

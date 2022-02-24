@@ -1,16 +1,12 @@
 <script lang="ts">
   import { SudokuSolver } from '../ai/sudokusolver';
   import Board from '../components/Board.svelte';
-  import { Sudoku } from '../data/sudoku';
-  import type { IRepository } from '../service/database';
-  import { data } from '../stores/service';
-
+  import { SudokuRepository } from '../repository/sudoku';
+  
   export let id: number;
 
-  const repo: IRepository<Sudoku.Sudoku> = $data.GetRepository(
-    new Sudoku.Sudoku()
-  );
-  let game: Promise<Sudoku.Sudoku> = repo.GetOne(id);
+  const repo = new SudokuRepository();
+  let game = repo.GetOne(id);
 
   let solver: SudokuSolver;
   game.then(entity => {

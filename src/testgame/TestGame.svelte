@@ -1,15 +1,13 @@
 <script lang="ts">
   import Board from '../components/Board.svelte';
   import type { Cell } from '../data/cell';
-  import { Test } from '../data/test';
-  import type { IRepository } from '../service/database';
-  import { data } from '../stores/service';
+  import type { Test } from '../data/test';
+  import { TestGameRepository } from '../repository/testgame';
 
   export let id: number;
 
-  const repo: IRepository<Test.Test> = $data.GetRepository(new Test.Test());
+  const repo = new TestGameRepository();
   let game: Promise<Test.Test> = repo.GetOne(id);
-
   let turn: 'X' | 'O' = 'X';
 
   function onClick(cell: Cell<any>) {

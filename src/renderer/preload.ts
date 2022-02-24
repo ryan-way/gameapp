@@ -1,5 +1,6 @@
-import { InitializeDatabase } from './database';
-import { InitializeLogger } from './logging';
+import { contextBridge } from 'electron';
+import ipc from './IpcService';
 
-InitializeDatabase();
-InitializeLogger();
+contextBridge.exposeInMainWorld('ipc', {
+  send: ipc.send.bind(ipc),
+});

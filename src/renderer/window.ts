@@ -1,9 +1,5 @@
-import type { IDatabase } from '../service/database';
-import type { ILogger } from '../service/logger';
+import type { IIpcService } from '../ipc/IpcService';
 
 export interface Window {
-  data: IDatabase;
-  log: ILogger;
+  ipc: IIpcService;
 }
-
-export const key: string = 'window';

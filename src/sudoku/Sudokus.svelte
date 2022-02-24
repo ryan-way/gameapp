@@ -1,11 +1,9 @@
 <script lang="ts">
-  import { Sudoku, instance } from '../data/sudoku';
   import Board from '../components/Board.svelte';
-  import type { IRepository } from '../service/database';
-  import { data } from '../stores/service';
+  import { SudokuRepository } from '../repository/sudoku';
 
-  const repo: IRepository<Sudoku.Sudoku> = $data.GetRepository(instance);
-  let games: Promise<Sudoku.Sudoku[]> = repo.GetAll();
+  const repo = new SudokuRepository();
+  let games = repo.GetAll();
 
   const gameLink: string = '/sudoku/';
 </script>

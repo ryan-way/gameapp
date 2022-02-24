@@ -1,47 +1,72 @@
-import { contextBridge, ipcRenderer } from 'electron';
-import type { ILogger } from '../service/logger';
+import { LogChannel } from '../ipc/Channels';
+import type { IpcRequest } from '../ipc/IpcRequest';
+import type { Window } from './window';
 
-export class Logger implements ILogger {
-  public static logger: ILogger;
+const ipc = (window as unknown as Window).ipc;
 
-  Success(message: any): Promise<void> {
-    return ipcRenderer.invoke('logSuccess');
+export class Log {
+  private sendChannel: string = LogChannel;
+
+  private send(request: IpcRequest): void {
+    ipc.send(this.sendChannel, request);
   }
 
-  Debug(message: any): Promise<void> {
-    return ipcRenderer.invoke('logDebug');
+  Success(message: any): void {
+    const request = {
+      responseChannel: '',
+      params: ['success', message.toString()],
+    };
+    this.send(request);
   }
 
-  Info(message: any): Promise<void> {
-    return ipcRenderer.invoke('logInfo');
+  Debug(message: any): void {
+    const request = {
+      responseChannel: '',
+      params: ['debug', message.toString()],
+    };
+    this.send(request);
   }
 
-  Warn(message: any): Promise<void> {
-    return ipcRenderer.invoke('logWarn');
+  Info(message: any): void {
+    const request = {
+      responseChannel: '',
+      params: ['info', message.toString()],
+    };
+    this.send(request);
   }
 
-  Error(message: any): Promise<void> {
-    return ipcRenderer.invoke('logError');
+  Warn(message: any): void {
+    const request = {
+      responseChannel: '',
+      params: ['warn', message.toString()],
+    };
+    this.send(request);
   }
 
-  Failed(message: any): Promise<void> {
-    return ipcRenderer.invoke('logFailed');
+  Error(message: any): void {
+    const request = {
+      responseChannel: '',
+      params: ['error', message.toString()],
+    };
+    this.send(request);
   }
 
-  Fatal(message: any): Promise<void> {
-    return ipcRenderer.invoke('logFatal');
+  Failed(message: any): void {
+    const request = {
+      responseChannel: '',
+      params: ['failed', message.toString()],
+    };
+    this.send(request);
+  }
+
+  Fatal(message: any): void {
+    const request = {
+      responseChannel: '',
+      params: ['fatal', message.toString()],
+    };
+    this.send(request);
   }
 }
 
-export function InitializeLogger() {
-  Logger.logger = new Logger();
-  contextBridge.exposeInMainWorld('log', {
-    Success: Logger.logger.Success.bind(this),
-    Debug: Logger.logger.Debug.bind(this),
-    Info: Logger.logger.Info.bind(this),
-    Warn: Logger.logger.Warn.bind(this),
-    Error: Logger.logger.Error.bind(this),
-    Failed: Logger.logger.Failed.bind(this),
-    Fatal: Logger.logger.Fatal.bind(this),
-  });
-}
+const log = new Log();
+export default log;
