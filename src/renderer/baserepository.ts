@@ -4,7 +4,7 @@ import type { IpcRequest } from '../ipc/IpcRequest';
 import type { Window } from './window';
 
 const ipc = (window as unknown as Window).ipc;
-console.log(ipc);
+
 export abstract class BaseRepository<T extends EntityBase> {
   private sendChannel: string = DataChannel;
   private receiveChannel: string = DataResponse;
