@@ -1,16 +1,26 @@
-import { app, BrowserWindow } from 'electron';
+import { app, BrowserWindow, ipcMain } from 'electron';
 import path from 'path';
-import { InitializeDatabase } from './database';
-import logger from './logging';
+import type { IpcChannel } from '../ipc/IpcChannel';
+import database from './database';
+import log from './log';
 
-InitializeDatabase();
+function InitializeIpc() {
+  const ipcChannels: IpcChannel[] = [database, log];
+
+  for (const channel of ipcChannels) {
+    ipcMain.on(channel.getName(), (event, request) =>
+      channel.handle(event, request)
+    );
+  }
+}
+
+InitializeIpc();
 
 // This allows TypeScript to pick up the magic constant that's auto-generated
 // by Forge's Webpack plugin that tells the Electron app where to look for the
 // Webpack-bundled app code (depending on whether you're running in development
 // or production).
 declare const MAIN_WINDOW_WEBPACK_ENTRY: string;
-logger.Info(MAIN_WINDOW_WEBPACK_ENTRY);
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (require('electron-squirrel-startup')) {
   // eslint-disable-line global-require

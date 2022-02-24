@@ -1,20 +1,18 @@
 import { Connection, createConnection, EntityTarget } from 'typeorm';
-import { ipcMain } from 'electron';
+import type { IpcMainEvent } from 'electron';
 import { Entities as Sudoku } from './entity/sudoku';
 import { Entities as Test } from './entity/test';
 import data from './testdata';
-import logger from './logging';
+import log from './log';
+import type { IpcRequest } from '../ipc/IpcRequest';
+import type { IpcChannel } from '../ipc/IpcChannel';
+import { DataChannel } from '../ipc/Channels';
 
 export namespace Main {
-  export class DatabaseConnection {
+  export class Database implements IpcChannel {
     private connection: Promise<Connection>;
     private entities: Function[];
     private clones: Map<string, any>;
-
-    private static db: DatabaseConnection;
-    public static InitializeDatabase(): void {
-      DatabaseConnection.db = new DatabaseConnection();
-    }
 
     constructor() {
       this.entities = [Test.Test, Sudoku.Sudoku];
@@ -31,44 +29,48 @@ export namespace Main {
         migrations: [],
         subscribers: [],
       });
-      this.InitializeIpc();
       this.InitializeTestData();
     }
 
     private InitializeTestData(): void {
       this.connection
         .then(async connection => {
-          logger.Info('Initializing Test Data');
+          log.Info('Initializing Test Data');
           for (const entity of this.entities) {
-            logger.Info(`Checking ${entity.name} repo count`);
+            log.Info(`Checking ${entity.name} repo count`);
             const repo = connection.getRepository(entity);
             const count = await repo.count();
             if (count >= data.get(entity.name).length) {
-              logger.Info('Continuing...');
+              log.Info('Continuing...');
               continue;
             }
-            logger.Info('Checking for test data');
+            log.Info('Checking for test data');
             let num: number = 1;
             for (const d of data.get(entity.name)) {
-              logger.Info(this.clones.get(entity.name));
+              log.Info(this.clones.get(entity.name));
               const instance = { ...this.clones.get(entity.name) };
               instance['board'] = d;
               await repo.save(instance);
-              logger.Info(`Save instance number: ${num++}`);
+              log.Info(`Save instance number: ${num++}`);
             }
           }
-          logger.Info('Done Initializing Test Data');
+          log.Info('Done Initializing Test Data');
         })
-        .catch(logger.Error);
+        .catch(log.Error);
     }
 
-    private InitializeIpc(): void {
-      for (const entity of this.entities) {
-        ipcMain.handle('getAll' + entity.name, this.GetAll.bind(this, entity));
-        ipcMain.handle('getOne' + entity.name, (event, id) => {
-          return this.GetOne(entity, id);
-        });
-      }
+    public handle(event: IpcMainEvent, request: IpcRequest) {
+      const [entity, op, args] = request.params;
+      if (op == 'getAll') {
+        event.sender.send(request.responseChannel, this.GetAll(entity));
+      } else if (op == 'getOne') {
+        const [id] = args;
+        event.sender.send(request.responseChannel, this.GetOne(entity, +id));
+      } else event.sender.send(request.responseChannel, 'Error');
+    }
+
+    public getName(): string {
+      return DataChannel;
     }
 
     private async GetAll<T>(target: EntityTarget<T>): Promise<T[]> {
@@ -85,6 +87,5 @@ export namespace Main {
   }
 }
 
-export function InitializeDatabase(): void {
-  Main.DatabaseConnection.InitializeDatabase();
-}
+const database = new Main.Database();
+export default database;
