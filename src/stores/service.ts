@@ -3,7 +3,7 @@ import type { Window } from '../renderer/window';
 import type { IDatabase } from '../service/database';
 import type { ILogger } from '../service/logger';
 
-export const service = readable<Window>(window as unknown as Window);
+const service = readable<Window>(window as unknown as Window);
 export const overrides = {
   log: writable<ILogger>(null),
   data: writable<IDatabase>(null),

@@ -5,7 +5,7 @@
 import { render } from '@testing-library/svelte';
 import Sudokus from '../src/sudoku/Sudokus.svelte';
 import testdata from '../src/main/testdata';
-import { overrides } from '../src/service';
+import { overrides } from '../src/stores/service';
 import { mock, instance, when } from 'ts-mockito';
 import type { IDatabase, IRepository } from '../src/service/database';
 import { Sudoku, instance as inst } from '../src/data/sudoku';
@@ -28,7 +28,7 @@ overrides.data.set(data);
 
 const results = render(Sudokus);
 
-test('should render Sudoku', () => {
+test('should render Sudokus', () => {
   for (let i = 1; i <= sudokus.length; i++) {
     expect(() => results.findByText(1)).not.toThrow();
   }
