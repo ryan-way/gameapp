@@ -3,7 +3,7 @@
   "include": ["src/**/*", "src/node_modules/**/*"],
   "exclude": ["node_modules/*"],
   "compilerOptions": {
-    "types": ["jest"],
+    "types": ["jest", "node", "svelte"],
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true
   }
