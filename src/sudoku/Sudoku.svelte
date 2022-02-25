@@ -3,9 +3,9 @@
   import Board from '../components/Board.svelte';
   import { SudokuRepository } from '../repository/sudoku';
   
+  export let repo = new SudokuRepository();
   export let id: number;
 
-  const repo = new SudokuRepository();
   let game = repo.GetOne(id);
 
   let solver: SudokuSolver;

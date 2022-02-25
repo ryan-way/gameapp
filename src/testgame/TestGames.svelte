@@ -4,7 +4,7 @@
   import type { Test } from '../data/test';
   import { TestGameRepository } from '../repository/testgame';
 
-  const repo = new TestGameRepository();
+  export let repo = new TestGameRepository();
   let games: Promise<Test.Test[]> = repo.GetAll();
 
   const gameLink: string = '/testgame/';

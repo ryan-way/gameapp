@@ -2,7 +2,7 @@
   import Board from '../components/Board.svelte';
   import { SudokuRepository } from '../repository/sudoku';
 
-  const repo = new SudokuRepository();
+  export let repo = new SudokuRepository();
   let games = repo.GetAll();
 
   const gameLink: string = '/sudoku/';

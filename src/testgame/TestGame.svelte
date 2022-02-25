@@ -4,9 +4,9 @@
   import type { Test } from '../data/test';
   import { TestGameRepository } from '../repository/testgame';
 
+  export let repo = new TestGameRepository();
   export let id: number;
 
-  const repo = new TestGameRepository();
   let game: Promise<Test.Test> = repo.GetOne(id);
   let turn: 'X' | 'O' = 'X';
 
