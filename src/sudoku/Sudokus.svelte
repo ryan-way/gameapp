@@ -8,19 +8,17 @@
   const gameLink: string = '/sudoku/';
 </script>
 
-<div>
-  {#await games}
-    <p>...fetching games</p>
-  {:then entities}
-    {#each entities as entity}
-      <a href={gameLink + entity.id}>
-        <p style="text-align: center;">{entity.id}</p>
-        <Board data={entity.board} />
-      </a>
-    {/each}
-  {:catch error}
-    <p style="color:red">{error.message}</p>
-  {/await}
-</div>
+{#await games}
+  <p>...fetching games</p>
+{:then entities}
+  {#each entities as entity}
+    <a href={gameLink + entity.id}>
+      <p style="text-align: center;">{entity.id}</p>
+      <Board data={entity.board} />
+    </a>
+  {/each}
+{:catch error}
+  <p style="color:red">{error.message}</p>
+{/await}
 
 <style></style>

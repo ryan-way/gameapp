@@ -11,7 +11,6 @@
   let turn: 'X' | 'O' = 'X';
 
   function onClick(cell: Cell<any>) {
-    console.log('Test Game', cell);
     game = game.then(entity => {
       if (cell.Value != ' ') return entity;
 
@@ -32,6 +31,8 @@
     width="500px"
     data={entity.board}
   />
+{:catch error}
+  <p style="color:red">{error.message}</p>
 {/await}
 
 <style>

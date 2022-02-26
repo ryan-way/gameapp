@@ -2,16 +2,20 @@
   import { SudokuSolver } from '../ai/sudokusolver';
   import Board from '../components/Board.svelte';
   import { SudokuRepository } from '../repository/sudoku';
-  
+
   export let repo = new SudokuRepository();
   export let id: number;
 
   let game = repo.GetOne(id);
 
   let solver: SudokuSolver;
-  game.then(entity => {
-    solver = new SudokuSolver(entity.board);
-  });
+  game
+    .then(entity => {
+      solver = new SudokuSolver(entity.board);
+    })
+    .catch(() => {
+      console.log('Game not found');
+    });
 
   function SolveOne() {
     game = game.then(entity => {
@@ -30,6 +34,8 @@
   <Board fontSize="40px" height="500px" width="500px" data={entity.board} />
 
   <button on:click={SolveOne}>Solve</button>
+{:catch error}
+  <p style="color:red">{error.message}</p>
 {/await}
 
 <style>
