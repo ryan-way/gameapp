@@ -10,7 +10,6 @@
   const dispatch = createEventDispatcher();
 
   function onCellClick(cell: Cell<any>) {
-    console.log('Board', cell);
     dispatch('cellClick', {
       cell: cell,
     });
@@ -18,10 +17,11 @@
 </script>
 
 <table style="font-size: {fontSize}; height: {height}; width: {width};">
-  {#each data as row}
+  {#each data as row, y}
     <tr>
-      {#each row as cell}
-        <td on:click={() => onCellClick(cell)}>{cell.Value}</td>
+      {#each row as cell, x}
+        <td on:click={() => onCellClick(cell)}
+          data-testid={`Board${y}${x}`}>{cell.Value}</td>
       {/each}
     </tr>
   {/each}
