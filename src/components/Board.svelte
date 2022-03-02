@@ -20,8 +20,9 @@
   {#each data as row, y}
     <tr>
       {#each row as cell, x}
-        <td on:click={() => onCellClick(cell)}
-          data-testid={`Board${y}${x}`}>{cell.Value}</td>
+        <td on:click={() => onCellClick(cell)} data-testid={`Board${y}${x}`}
+          >{cell.Value}</td
+        >
       {/each}
     </tr>
   {/each}
