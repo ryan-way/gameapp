@@ -1,6 +1,6 @@
 <script lang="ts">
-import { onMount } from 'svelte';
-import { writable } from 'svelte/store';
+  import { onMount } from 'svelte';
+  import { writable } from 'svelte/store';
 
   import { SudokuSolver } from '../ai/sudokusolver';
   import Board from '../components/Board.svelte';
@@ -13,11 +13,10 @@ import { writable } from 'svelte/store';
   let game: Sudoku.Sudoku;
   let solver: SudokuSolver;
 
-
   onMount(async () => {
     game = await repo.GetOne(id);
     solver = new SudokuSolver(game.board);
-  })
+  });
 
   function SolveOne() {
     console.log('Solving One...');
