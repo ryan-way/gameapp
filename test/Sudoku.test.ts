@@ -2,7 +2,8 @@
  * @jest-environment jsdom
  */
 
-import { getByText, render } from '@testing-library/svelte';
+import '@testing-library/jest-dom';
+import { render } from '@testing-library/svelte';
 import { Sudoku as Entity } from '../src/data/sudoku';
 import testdata from '../src/main/testdata';
 import { mock, instance, when } from 'ts-mockito';
@@ -31,13 +32,6 @@ test('should render Sudoku', () => {
   }).not.toThrow();
 });
 
-test('should show error', () => {
-  const mockedRepo = mock(SudokuRepository);
-  when(mockedRepo.GetOne(1)).thenReject(new Error('Test Error'));
-  const results = render(Sudoku, { repo: instance(mockedRepo), id: 1 });
-  expect(() => results.findAllByText('Test Error')).not.toThrow();
-});
-
 test('should solve one', async () => {
   const sudoku = testdata
     .get(Entity.Sudoku.name)
@@ -47,14 +41,12 @@ test('should solve one', async () => {
     .at(0);
   const mockedRepo = mock(SudokuRepository);
   when(mockedRepo.GetOne(1)).thenResolve(sudoku);
-  const { findAllByText, getByText } = render(Sudoku, {
+  const { getByText, findByTestId } = render(Sudoku, {
     repo: instance(mockedRepo),
     id: 1,
   });
-  const { length } = await findAllByText('', { selector: 'td' });
+  const cell = await findByTestId('Board66');
   const button = getByText('Solve');
   await fireEvent.click(button);
-  const cells = await findAllByText('', { selector: 'td' });
-
-  expect(cells.length).toBe(length - 1);
+  expect(cell).toHaveTextContent('4');
 });

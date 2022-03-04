@@ -1,42 +1,40 @@
 <script lang="ts">
+import { onMount } from 'svelte';
+import { writable } from 'svelte/store';
+
   import { SudokuSolver } from '../ai/sudokusolver';
   import Board from '../components/Board.svelte';
+  import type { Sudoku } from '../data/sudoku';
   import { SudokuRepository } from '../repository/sudoku';
 
   export let repo = new SudokuRepository();
   export let id: number;
 
-  let game = repo.GetOne(id);
-
+  let game: Sudoku.Sudoku;
   let solver: SudokuSolver;
-  game
-    .then(entity => {
-      solver = new SudokuSolver(entity.board);
-    })
-    .catch(() => {
-      console.log('Game not found');
-    });
+
+
+  onMount(async () => {
+    game = await repo.GetOne(id);
+    solver = new SudokuSolver(game.board);
+  })
 
   function SolveOne() {
-    game = game.then(entity => {
-      console.log('Solving One...');
-      if (solver.SolveOne()) {
-        console.log('Solved one');
-      }
-      return entity;
-    });
+    console.log('Solving One...');
+    if (solver.SolveOne()) {
+      console.log('Solved one');
+      game = game;
+    }
   }
 </script>
 
-{#await game}
-  <p>...loading game</p>
-{:then entity}
-  <Board fontSize="40px" height="500px" width="500px" data={entity.board} />
+{#if game}
+  <Board fontSize="40px" height="500px" width="500px" data={game.board} />
 
   <button on:click={SolveOne}>Solve</button>
-{:catch error}
-  <p style="color:red">{error.message}</p>
-{/await}
+{:else}
+  <p>...loading</p>
+{/if}
 
 <style>
   button {
