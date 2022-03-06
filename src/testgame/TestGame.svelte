@@ -1,6 +1,5 @@
 <script lang="ts">
   import { onMount } from 'svelte';
-
   import Board from '../components/Board.svelte';
   import type { Cell } from '../data/cell';
   import type { Test } from '../data/test';
