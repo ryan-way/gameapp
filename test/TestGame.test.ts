@@ -32,13 +32,6 @@ test('should render Test Game', () => {
   }).not.toThrow();
 });
 
-test('should show error', () => {
-  const mockedRepo = mock(TestGameRepository);
-  when(mockedRepo.GetOne(1)).thenReject(new Error('Test Error'));
-  const results = render(TestGame, { repo: instance(mockedRepo), id: 1 });
-  expect(() => results.findAllByText('Test Error')).not.toThrow();
-});
-
 test('should take turn', async () => {
   const test = testdata
     .get(Test.Test.name)

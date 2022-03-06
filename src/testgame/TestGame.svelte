@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { onMount } from 'svelte';
+
   import Board from '../components/Board.svelte';
   import type { Cell } from '../data/cell';
   import type { Test } from '../data/test';
@@ -7,33 +9,31 @@
   export let repo = new TestGameRepository();
   export let id: number;
 
-  let game: Promise<Test.Test> = repo.GetOne(id);
+  let game: Test.Test;
   let turn: 'X' | 'O' = 'X';
 
-  function onClick(cell: Cell<any>) {
-    game = game.then(entity => {
-      if (cell.Value != ' ') return entity;
+  onMount(async () => {
+    game = await repo.GetOne(id);
+  });
 
-      cell.Value = turn;
-      turn = turn == 'X' ? 'O' : 'X';
-      return entity;
-    });
+  function onClick(cell: Cell<any>) {
+    cell.Value = turn;
+    turn = turn == 'X' ? 'O' : 'X';
+    game = game;
   }
 </script>
 
-{#await game}
-  <p>...loading game</p>
-{:then entity}
+{#if game}
   <Board
     on:cellClick={event => onClick(event.detail.cell)}
     fontSize="120px"
     height="500px"
     width="500px"
-    data={entity.board}
+    data={game.board}
   />
-{:catch error}
-  <p style="color:red">{error.message}</p>
-{/await}
+{:else}
+  <p>...loading game</p>
+{/if}
 
 <style>
 </style>
