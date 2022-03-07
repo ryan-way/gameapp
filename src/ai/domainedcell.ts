@@ -32,13 +32,11 @@ export class DomainedCell {
     this.domain.delete(value);
     if (this.domain.size == 1) {
       this.cell.Value = [...this.domain][0];
-      console.log('Value assigned: ', this.cell.Value);
     }
   }
 
   coerceValue(value: any) {
     this.domain = new Set([value]);
     this.cell.Value = value;
-    console.log('Value coerced: ', this.cell.Value);
   }
 }

@@ -17,9 +17,7 @@
   });
 
   function SolveOne() {
-    console.log('Solving One...');
     if (solver.SolveOne()) {
-      console.log('Solved one');
       game = game;
     }
   }

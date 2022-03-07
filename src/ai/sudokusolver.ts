@@ -47,11 +47,9 @@ export class SudokuSolver {
   SolveOne(): boolean {
     for (const constraint of this.constraints) {
       if (constraint.SolveOne()) {
-        console.log(constraint);
         return true;
       }
     }
-    console.log(this.constraints);
     return false;
   }
 }

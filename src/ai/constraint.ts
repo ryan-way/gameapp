@@ -59,7 +59,6 @@ export class UniqueConstraint {
         if (unique.has(value)) {
           cell.coerceValue(value);
           this.solvedValues.add(cell.Value);
-          console.log('Solved: ', value);
           return true;
         }
       }
