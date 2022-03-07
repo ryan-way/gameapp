@@ -68,5 +68,11 @@ export class Log {
   }
 }
 
-const log = new Log();
-export default log;
+let instance = new Log();
+export function setLogger(newLog: Log) {
+  instance = newLog;
+}
+
+export default function log() {
+  return instance;
+}
