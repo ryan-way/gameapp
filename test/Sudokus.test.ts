@@ -20,10 +20,3 @@ test('should render Sudokus', () => {
     expect(() => results.findByText(1)).not.toThrow();
   }
 });
-
-test('should render Error', () => {
-  const mockedRepo = mock(SudokuRepository);
-  when(mockedRepo.GetAll()).thenReject(new Error('Test Error'));
-  const results = render(Sudokus, { repo: instance(mockedRepo) });
-  expect(() => results.findByText('Test Error')).not.toThrow();
-});

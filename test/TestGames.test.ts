@@ -20,10 +20,3 @@ test('should render Tests', () => {
     expect(() => results.findByText(1)).not.toThrow();
   }
 });
-
-test('should render Error', () => {
-  const mockedRepo = mock(TestGameRepository);
-  when(mockedRepo.GetAll()).thenReject(new Error('Test Error'));
-  const results = render(TestGames, { repo: instance(mockedRepo) });
-  expect(() => results.findAllByText('Test Error')).not.toThrow();
-});

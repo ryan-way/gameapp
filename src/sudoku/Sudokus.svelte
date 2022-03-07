@@ -1,24 +1,29 @@
 <script lang="ts">
+  import { onMount } from 'svelte';
+
   import Board from '../components/Board.svelte';
+  import type { Sudoku } from '../data/sudoku';
   import { SudokuRepository } from '../repository/sudoku';
 
   export let repo = new SudokuRepository();
-  let games = repo.GetAll();
+  let games: Sudoku.Sudoku[];
 
   const gameLink: string = '/sudoku/';
+
+  onMount(async () => {
+    games = await repo.GetAll();
+  });
 </script>
 
-{#await games}
-  <p>...fetching games</p>
-{:then entities}
-  {#each entities as entity}
-    <a href={gameLink + entity.id}>
-      <p style="text-align: center;">{entity.id}</p>
-      <Board data={entity.board} />
+{#if games}
+  {#each games as game}
+    <a href={gameLink + game.id}>
+      <p style="text-align: center;">{game.id}</p>
+      <Board data={game.board} />
     </a>
   {/each}
-{:catch error}
-  <p style="color:red">{error.message}</p>
-{/await}
+{:else}
+  <p>...fetching games</p>
+{/if}
 
 <style></style>
