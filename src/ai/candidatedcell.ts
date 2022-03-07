@@ -44,12 +44,16 @@ export class CandidatedCell<T> {
     this.logState(`Committed: ${this.Value}`);
   }
 
-  public Remove(value: T) {
+  public Remove(value: T): boolean {
     if (this.IsSolved && this.candidates.has(value)) {
       throw new Error('Removing Last Candidate');
     }
     this.logState(`Removing Value: ${value}`);
-    this.candidates.delete(value);
+    if (this.candidates.has(value)) {
+      this.candidates.delete(value);
+      return true;
+    }
+    return false;
   }
 
   private logState(message: string = '') {

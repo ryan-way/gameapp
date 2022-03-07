@@ -64,9 +64,12 @@ describe('Testing State Changes', () => {
       expect(candidatedCell.IsSolved).toBeFalsy();
       const valuesToRemove: Sudoku.Value[] = [1, 2, 3, 4, 5, 6, 7, 8];
       valuesToRemove.forEach(value => {
-        candidatedCell.Remove(value);
+        expect(candidatedCell.Remove(value)).toBeTruthy();
       });
       expect(candidatedCell.IsSolved).toBeTruthy();
+    });
+    test('Already elminated value returns false', () => {
+      expect(candidatedCell.Remove(1)).toBeFalsy();
     });
     test('Last Value Should Throw', () => {
       expect(() => candidatedCell.Remove(9)).toThrow();
