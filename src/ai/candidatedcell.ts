@@ -1,4 +1,5 @@
 import type { Cell } from '../data/cell';
+import log from '../renderer/logging';
 
 export class CandidatedCell<T> {
   private candidates: Set<T>;
@@ -31,6 +32,7 @@ export class CandidatedCell<T> {
     if (!this.candidates.has(candidate)) {
       throw new Error('Assigning candidate not previously in candidate list');
     }
+    this.logState(`Assigning ${candidate}`);
     this.candidates = new Set([candidate]);
   }
 
@@ -39,12 +41,20 @@ export class CandidatedCell<T> {
       throw new Error('Committing value with more than one possible Candidate');
     }
     this.cell.Value = this.candidates.values().next().value;
+    this.logState(`Committed: ${this.Value}`);
   }
 
   public Remove(value: T) {
     if (this.IsSolved && this.candidates.has(value)) {
       throw new Error('Removing Last Candidate');
     }
+    this.logState(`Removing Value: ${value}`);
     this.candidates.delete(value);
+  }
+
+  private logState(message: string = '') {
+    if (message) log().Debug(message);
+    log().Debug(this.candidates);
+    log().Debug(this.Value);
   }
 }
