@@ -37,6 +37,7 @@ describe('Solving', () => {
         cell.Assign(cell.Value);
       });
     expect(constraint.Solve()).toBeTruthy();
+    expect(range[0].IsSolved).toBeTruthy();
   });
   test('With No Updates Returns False', () => {
     expect(constraint.Solve()).toBeFalsy();

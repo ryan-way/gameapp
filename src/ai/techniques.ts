@@ -5,7 +5,7 @@ export class UniqueRegion<T> {
     return [...this.range];
   }
 
-  constructor(private range: CandidatedCell<T>[]) { }
+  constructor(private range: CandidatedCell<T>[]) {}
 
   Solve(): boolean {
     const solvedValues = this.range
@@ -17,6 +17,48 @@ export class UniqueRegion<T> {
         status = cell.Remove(value) || status;
       }
     }
+    return status;
+  }
+}
+
+export class SinglePosition<T> {
+  public get Range(): CandidatedCell<T>[] {
+    return [...this.range];
+  }
+
+  constructor(private range: CandidatedCell<T>[]) {}
+
+  Solve(): boolean {
+    let status: boolean = false;
+    const candidates = this.range
+      .filter(cell => !cell.IsSolved)
+      .map(cell => cell.Candidates)
+      .flat();
+
+    const occurences = new Map<T, number>();
+    for (const candidate of candidates) {
+      occurences.set(
+        candidate,
+        occurences.has(candidate) ? occurences.get(candidate) + 1 : 1
+      );
+    }
+
+    const unique = new Set<T>(
+      [...occurences.entries()]
+        .filter(occurence => occurence[1] == 1)
+        .map(occurence => occurence[0])
+    );
+
+    for (const cell of this.range.filter(cell => !cell.IsSolved)) {
+      for (const candidate of cell.Candidates) {
+        if (unique.has(candidate)) {
+          cell.Assign(candidate);
+          status = true;
+          break;
+        }
+      }
+    }
+
     return status;
   }
 }
