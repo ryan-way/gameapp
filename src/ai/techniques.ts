@@ -1,6 +1,10 @@
 import type { CandidatedCell } from './candidatedcell';
 
-export class UniqueRegion<T> {
+export interface ITechnique {
+  Solve(): boolean;
+}
+
+export class UniqueRegion<T> implements ITechnique {
   public get Range(): CandidatedCell<T>[] {
     return [...this.range];
   }
@@ -21,7 +25,7 @@ export class UniqueRegion<T> {
   }
 }
 
-export class SinglePosition<T> {
+export class SinglePosition<T> implements ITechnique {
   public get Range(): CandidatedCell<T>[] {
     return [...this.range];
   }
