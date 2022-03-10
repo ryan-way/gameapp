@@ -16,7 +16,7 @@
   }
 </script>
 
-<table style="font-size: {fontSize}; height: {height}; width: {width};">
+<table style="font-size: {fontSize}; height: {height}; width: {width}; display:inline-table">
   {#each data as row, y}
     <tr>
       {#each row as cell, x}
