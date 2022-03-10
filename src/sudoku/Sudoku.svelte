@@ -35,7 +35,7 @@
 
 {#if game}
   <span>
-    <Board fontSize="40px" height="500px" width="500px" data={game.board}/>
+    <Board fontSize="40px" height="500px" width="500px" data={game.board} />
     {#if showCandidates}
       <table height="500px" width="500px" class="main">
         {#each solver.Board as row}
@@ -45,7 +45,7 @@
                 <p>
                   {#each cell.Candidates as candidate, idx}
                     {candidate}
-                    {#if (idx+1) % 3 == 0}<br>{/if}
+                    {#if (idx + 1) % 3 == 0}<br />{/if}
                   {/each}
                 </p>
               </td>
@@ -59,7 +59,7 @@
     <button on:click={Solve}>Solve</button>
     <button on:click={SolveOne}>Solve One</button>
     <button on:click={Update}>Update</button>
-    <input type=checkbox bind:checked={showCandidates} >
+    <input type="checkbox" bind:checked={showCandidates} />
     Show Ai Table
   </div>
 {:else}
