@@ -5,7 +5,9 @@ export class CandidatedCell<T> {
   private candidates: Set<T>;
 
   public get Value(): T {
-    return this.cell.Value;
+    return this.IsSolved ?
+      this.candidates.values().next().value :
+      this.cell.Value;
   }
 
   public get Candidates(): T[] {
@@ -58,7 +60,7 @@ export class CandidatedCell<T> {
 
   private logState(message: string = '') {
     if (message) log().Debug(message);
-    log().Debug(this.candidates);
+    log().Debug([...this.candidates.values()].join(','));
     log().Debug(this.Value);
   }
 }
