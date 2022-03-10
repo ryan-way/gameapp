@@ -88,3 +88,27 @@ describe('Solving', () => {
     expect(range[0].IsSolved).toBeFalsy();
   });
 });
+
+describe('Regression', () => {
+  test('Single position should not assign already is solved', () => {
+    const cells: Cell<Sudoku.Value>[] = [
+      { Value: ' ' },
+      { Value: ' ' },
+      { Value: 1 },
+      { Value: 2 },
+    ];
+    const candidates: Sudoku.Value[] = [1, 2, 3];
+    const range = cells.map(
+      cell => new CandidatedCell<Sudoku.Value>(cell, ' ', candidates)
+    );
+    range
+      .filter(cell => !cell.IsDefault)
+      .forEach(cell => {
+        cell.Assign(cell.Value);
+      });
+    range[1].Remove(1);
+    const technique = new SinglePosition(range);
+    expect(technique.Solve()).toBeFalsy();
+    expect(range[0].Value).not.toBe(1);
+  });
+});

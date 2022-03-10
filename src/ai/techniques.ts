@@ -52,6 +52,10 @@ export class SinglePosition<T> implements ITechnique {
       .map(cell => cell.Candidates)
       .flat();
 
+    const solved = new Set(
+      this.range.filter(cell => cell.IsSolved).map(cell => cell.Value)
+    );
+
     const occurences = new Map<T, number>();
     for (const candidate of candidates) {
       occurences.set(
@@ -68,7 +72,7 @@ export class SinglePosition<T> implements ITechnique {
 
     for (const cell of this.range.filter(cell => !cell.IsSolved)) {
       for (const candidate of cell.Candidates) {
-        if (unique.has(candidate)) {
+        if (unique.has(candidate) && !solved.has(candidate)) {
           cell.Assign(candidate);
           status = true;
           break;
