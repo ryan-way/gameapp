@@ -6,10 +6,18 @@ import '@testing-library/jest-dom';
 import { render } from '@testing-library/svelte';
 import { Sudoku as Entity } from '../src/data/sudoku';
 import testdata from '../src/main/testdata';
-import { mock, instance, when } from 'ts-mockito';
+import { mock, instance, when, anything } from 'ts-mockito';
 import { SudokuRepository } from '../src/repository/sudoku';
 import Sudoku from '../src/sudoku/Sudoku.svelte';
 import { fireEvent } from '@testing-library/dom';
+import { Log, setLogger } from '../src/renderer/logging';
+
+beforeAll(() => {
+  const mockedLog = mock(Log);
+  when(mockedLog.Debug(anything())).thenReturn();
+  const logger = instance(mockedLog);
+  setLogger(logger);
+});
 
 test('should render Sudoku', () => {
   const sudoku = testdata
@@ -46,7 +54,9 @@ test('should solve one', async () => {
     id: 1,
   });
   const cell = await findByTestId('Board66');
-  const button = getByText('Solve');
-  await fireEvent.click(button);
+  const solve = getByText('Solve');
+  await fireEvent.click(solve);
+  const update = getByText('Update');
+  await fireEvent.click(update);
   expect(cell).toHaveTextContent('4');
 });
