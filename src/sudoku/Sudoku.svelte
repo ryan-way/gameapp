@@ -35,13 +35,7 @@
 
 {#if game}
   <span>
-    <Board fontSize="40px" height="500px" width="500px" data={game.board}>
-      {#each game.board as row}
-        {#each row as cell}
-          <p>{cell.Value}</p>
-        {/each}
-      {/each}
-    </Board>
+    <Board fontSize="40px" height="500px" width="500px" data={game.board}/>
     {#if showCandidates}
       <table height="500px" width="500px" class="main">
         {#each solver.Board as row}
@@ -51,9 +45,7 @@
                 <p>
                   {#each cell.Candidates as candidate, idx}
                     {candidate}
-                    {#if (idx+1) % 3 == 0}
-                    <br>
-                    {/if}
+                    {#if (idx+1) % 3 == 0}<br>{/if}
                   {/each}
                 </p>
               </td>
