@@ -33,6 +33,7 @@
         "functions": "never"
       }
     ],
+    "operator-linebreak": ["error", "before"],
     "eol-last": "off"
   },
   "settings": {
