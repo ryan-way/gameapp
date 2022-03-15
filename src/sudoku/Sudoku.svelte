@@ -11,7 +11,7 @@
   let game: Sudoku.Sudoku;
   let solver: SudokuSolver;
   let showCandidates = true;
-  let boardStyle = "height: 100%; width: 49%; vertical-align: top;"
+  let boardStyle = 'height: 100%; width: 49%; vertical-align: top;';
 
   onMount(async () => {
     game = await repo.GetOne(id);
@@ -29,24 +29,23 @@
   }
 
   function Hint() {
-    for(let i = 0; i < game.board.length; i++) {
-      for(let j = 0; j < game.board[i].length; j++) {
-        if(game.board[i][j].Value != ' ') continue;
+    for (let i = 0; i < game.board.length; i++) {
+      for (let j = 0; j < game.board[i].length; j++) {
+        if (game.board[i][j].Value != ' ') continue;
         game.board[i][j].Value = solver.board[i][j].Value;
         return;
       }
     }
   }
 
-  function Check() {
-
-  }
+  function Check() {}
 </script>
+
 {#if game}
   <div>
     <Board style={boardStyle}>
       {#each game.board.flat() as cell, idx}
-        <td class="solved" data-testid="Board{Math.floor(idx/9)}{idx%9}">
+        <td class="solved" data-testid="Board{Math.floor(idx / 9)}{idx % 9}">
           {cell.Value}
         </td>
       {/each}
@@ -54,12 +53,12 @@
     {#if showCandidates}
       <Board style={boardStyle}>
         {#each solver.Board.flat() as cell}
-            <td class="candidate">
-              {#each cell.Candidates as candidate, idx}
-                {candidate}
-                {#if (idx + 1) % 3 == 0}<br />{/if}
-              {/each}
-            </td>
+          <td class="candidate">
+            {#each cell.Candidates as candidate, idx}
+              {candidate}
+              {#if (idx + 1) % 3 == 0}<br />{/if}
+            {/each}
+          </td>
         {/each}
       </Board>
     {/if}

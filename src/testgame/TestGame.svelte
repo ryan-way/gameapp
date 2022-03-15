@@ -10,7 +10,7 @@
 
   let game: Test.Test;
   let turn: 'X' | 'O' = 'X';
-  let boardStyle = "height: 100%; width: 49%; vertical-align: top;"
+  let boardStyle = 'height: 100%; width: 49%; vertical-align: top;';
 
   onMount(async () => {
     game = await repo.GetOne(id);
@@ -26,12 +26,15 @@
 {#if game}
   <Board style={boardStyle} rows={3} columns={3}>
     {#each game.board.flat() as cell, idx}
-      <td class="solved" on:click={() => onClick(cell)} 
-        data-testid="Board{Math.floor(idx/9)}{idx%9}">
+      <td
+        class="solved"
+        on:click={() => onClick(cell)}
+        data-testid="Board{Math.floor(idx / 9)}{idx % 9}"
+      >
         {cell.Value}
       </td>
     {/each}
-    </Board>
+  </Board>
 {:else}
   <p>...loading game</p>
 {/if}

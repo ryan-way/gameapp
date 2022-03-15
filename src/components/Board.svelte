@@ -8,7 +8,7 @@
 
   let internalStyle = `grid-template-columns: repeat(${columns}, 1fr);
                grid-template-rows: repeat(${rows}, 1fr);
-               border: 0.25px solid;`
+               border: 0.25px solid;`;
 
   const dispatch = createEventDispatcher();
 
@@ -18,9 +18,9 @@
     });
   }
 </script>
-<span style="{style + internalStyle}">
-  <slot>
-  </slot>
+
+<span style={style + internalStyle}>
+  <slot />
 </span>
 
 <style>
