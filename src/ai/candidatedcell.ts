@@ -1,5 +1,4 @@
 import type { Cell } from '../data/cell';
-import log from '../renderer/logging';
 
 export class CandidatedCell<T> {
   private candidates: Set<T>;
