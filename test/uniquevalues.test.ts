@@ -18,7 +18,7 @@ beforeAll(() => {
 });
 
 describe('UniqueValue', () => {
-  describe('should return false if invalid', () => {
+  test('should return false if invalid', () => {
     const cells: Cell<Sudoku.Value>[] = [
       { Value: 1 },
       { Value: 1 },
@@ -28,11 +28,16 @@ describe('UniqueValue', () => {
     const range = cells.map(
       cell => new CandidatedCell<Sudoku.Value>(cell, ' ', candidates)
     );
+    range
+      .filter(cell => !cell.IsDefault)
+      .forEach(cell => {
+        cell.Assign(cell.Value);
+      });
 
     const rule = new UniqueValues(range);
     expect(rule.Check()).toBeFalsy();
   });
-  describe('should return true if valid', () => {
+  test('should return true if valid', () => {
     const cells: Cell<Sudoku.Value>[] = [
       { Value: ' ' },
       { Value: 1 },
@@ -42,6 +47,12 @@ describe('UniqueValue', () => {
     const range = cells.map(
       cell => new CandidatedCell<Sudoku.Value>(cell, ' ', candidates)
     );
+
+    range
+      .filter(cell => !cell.IsDefault)
+      .forEach(cell => {
+        cell.Assign(cell.Value);
+      });
 
     const rule = new UniqueValues(range);
     expect(rule.Check()).toBeTruthy();
