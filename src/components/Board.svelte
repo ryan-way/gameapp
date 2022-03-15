@@ -2,10 +2,13 @@
   import { createEventDispatcher } from 'svelte';
   import type { Cell } from '../data/cell';
 
-  export let data: Cell<any>[][];
-  export let fontSize: string = '';
-  export let height: string = 'auto';
-  export let width: string = 'auto';
+  export let rows: number = 9;
+  export let columns: number = 9;
+  export let style: string;
+
+  let internalStyle = `grid-template-columns: repeat(${columns}, 1fr);
+               grid-template-rows: repeat(${rows}, 1fr);
+               border: 0.25px solid;`
 
   const dispatch = createEventDispatcher();
 
@@ -15,30 +18,13 @@
     });
   }
 </script>
-
-<table style="font-size: {fontSize}; height: {height}; width: {width};">
-  {#each data as row, y}
-    <tr>
-      {#each row as cell, x}
-        <td on:click={() => onCellClick(cell)} data-testid={`Board${y}${x}`}
-          >{cell.Value}</td
-        >
-      {/each}
-    </tr>
-  {/each}
-</table>
+<span style="{style + internalStyle}">
+  <slot>
+  </slot>
+</span>
 
 <style>
-  table {
-    margin-left: auto;
-    margin-right: auto;
-    text-align: center;
-    display: inline-table;
-  }
-
-  table,
-  td {
-    border: 1px solid;
-    border-collapse: collapse;
+  span {
+    display: inline-grid;
   }
 </style>

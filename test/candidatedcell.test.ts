@@ -32,10 +32,6 @@ describe('Testing Start State', () => {
       expect(candidatedCell.IsDefault).toBeTruthy();
     });
 
-    test('Should Be Not Committed', () => {
-      expect(candidatedCell.IsCommited).toBeFalsy();
-    });
-
     test('Should Be Not Solved', () => {
       expect(candidatedCell.IsSolved).toBeFalsy();
     });
@@ -45,10 +41,6 @@ describe('Testing Start State', () => {
     const candidatedCell = getCell(1);
     test('Should Be Not Default', () => {
       expect(candidatedCell.IsDefault).toBeFalsy();
-    });
-
-    test('Should Be Not Committed', () => {
-      expect(candidatedCell.IsCommited).toBeFalsy();
     });
 
     test('Should Be Not Solved', () => {
@@ -84,17 +76,6 @@ describe('Testing State Changes', () => {
     });
     test('Value Not In Candidate List Should Throw', () => {
       expect(() => candidatedCell.Assign(1)).toThrow();
-    });
-  });
-  describe('Committing', () => {
-    const candidatedCell = getCell();
-    test('Should Throw If Not Solved', () => {
-      expect(() => candidatedCell.Commit()).toThrow();
-    });
-    test('Value should Solve', () => {
-      candidatedCell.Assign(1);
-      candidatedCell.Commit();
-      expect(candidatedCell.Value).toBe(1);
     });
   });
 });

@@ -59,22 +59,13 @@ export class SudokuSolver {
       .concat(this.regions.map(region => new SinglePosition(region)));
   }
 
-  Solve() {
+  async Solve() {
     while (this.techniques.some(technique => technique.Solve())) {}
     this.Log();
   }
 
   SolveOne() {
     this.techniques.some(technique => technique.SolveOne());
-  }
-
-  Commit() {
-    this.board
-      .flat()
-      .filter(cell => cell.IsSolved)
-      .forEach(cell => {
-        cell.Commit();
-      });
   }
 
   Log() {

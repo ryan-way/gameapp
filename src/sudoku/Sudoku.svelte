@@ -10,55 +10,64 @@
 
   let game: Sudoku.Sudoku;
   let solver: SudokuSolver;
-  let showCandidates = false;
+  let showCandidates = true;
+  let boardStyle = "height: 100%; width: 49%; vertical-align: top;"
 
   onMount(async () => {
     game = await repo.GetOne(id);
     solver = new SudokuSolver(game.board);
+    solver.Solve();
   });
 
   function Solve() {
-    solver.Solve();
-    solver.board = solver.board;
+    for (let i = 0; i < game.board.length; i++) {
+      for (let j = 0; j < game.board[i].length; j++) {
+        if (game.board[i][j].Value != ' ') continue;
+        game.board[i][j].Value = solver.board[i][j].Value;
+      }
+    }
   }
 
-  function Update() {
-    solver.Commit();
-    game = game;
+  function Hint() {
+    for(let i = 0; i < game.board.length; i++) {
+      for(let j = 0; j < game.board[i].length; j++) {
+        if(game.board[i][j].Value != ' ') continue;
+        game.board[i][j].Value = solver.board[i][j].Value;
+        return;
+      }
+    }
   }
 
-  function SolveOne() {
-    solver.SolveOne();
-    solver.board = solver.board;
+  function Check() {
+
   }
 </script>
-
 {#if game}
-  <span>
-    <Board fontSize="40px" height="500px" width="500px" data={game.board} />
+  <div>
+    <Board style={boardStyle}>
+      {#each game.board.flat() as cell, idx}
+        <td class="solved" data-testid="Board{Math.floor(idx/9)}{idx%9}">
+          {cell.Value}
+        </td>
+      {/each}
+    </Board>
     {#if showCandidates}
-      <table height="500px" width="500px" class="main">
-        {#each solver.Board as row}
-          <tr>
-            {#each row as cell}
-              <td class="main">
-                <p>
-                  {#each cell.Candidates as candidate, idx}
-                    {candidate}
-                    {#if (idx + 1) % 3 == 0}<br />{/if}
-                  {/each}
-                </p>
-              </td>
-            {/each}
-          </tr>
+      <Board style={boardStyle}>
+        {#each solver.Board.flat() as cell}
+            <td class="candidate">
+              {#each cell.Candidates as candidate, idx}
+                {candidate}
+                {#if (idx + 1) % 3 == 0}<br />{/if}
+              {/each}
+            </td>
         {/each}
-      </table>
+      </Board>
     {/if}
-  </span>
+  </div>
   <div>
     <button on:click={Solve}>Solve</button>
-    <button on:click={SolveOne}>Solve One</button>
-    <button on:click={Update}>Update</button>
+    <button on:click={Hint}>Hint</button>
+    <button on:click={Check}>How Am I Doing?</button>
     <input type="checkbox" bind:checked={showCandidates} />
     Show Ai Table
   </div>
@@ -67,23 +76,22 @@
 {/if}
 
 <style>
+  div {
+    align-items: center;
+  }
   button {
     align-self: center;
   }
-  table.main {
-    margin-left: auto;
-    margin-right: auto;
-    text-align: center;
-    display: inline-table;
+  td {
+    display: flex;
+    border: 0.25px solid;
+    justify-content: center;
+    align-items: center;
   }
-  p {
-    margin: 0px;
+  td.solved {
+    font-size: 40px;
+  }
+  td.candidate {
     font-size: smaller;
-  }
-
-  table.main,
-  td.main {
-    border: 1px solid;
-    border-collapse: collapse;
   }
 </style>

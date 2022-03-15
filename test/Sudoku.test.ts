@@ -56,7 +56,5 @@ test('should solve one', async () => {
   const cell = await findByTestId('Board66');
   const solve = getByText('Solve');
   await fireEvent.click(solve);
-  const update = getByText('Update');
-  await fireEvent.click(update);
   expect(cell).toHaveTextContent('4');
 });
