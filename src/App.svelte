@@ -13,7 +13,7 @@
 <main>
   <Router {url}>
     <nav>
-    <Link to="/">Home</Link>
+      <Link to="/">Home</Link>
     </nav>
     <div use:links>
       <Route path="/"><GameMenu /></Route>

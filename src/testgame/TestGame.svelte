@@ -25,9 +25,11 @@
 {#if game}
   <Board rows={3} columns={3}>
     {#each game.board.flat() as cell, idx}
-      <td class="solved"
-          on:click={() => onClick(cell)}
-          data-testid="Board{Math.floor(idx / 9)}{idx % 9}">
+      <td
+        class="solved"
+        on:click={() => onClick(cell)}
+        data-testid="Board{Math.floor(idx / 9)}{idx % 9}"
+      >
         {cell.Value}
       </td>
     {/each}

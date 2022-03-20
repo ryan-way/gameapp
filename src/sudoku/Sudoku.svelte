@@ -21,10 +21,10 @@
     game = await repo.GetOne(id);
     board = [...game.board];
     for (var i = 0; i < 9; i++) {
-      board[i] = [...board[i]]
+      board[i] = [...board[i]];
     }
     for (var i = 0; i < 9; i++) {
-      for ( var j = 0; j < 9; j++) {
+      for (var j = 0; j < 9; j++) {
         board[i][j] = { Value: board[i][j].Value };
       }
     }
@@ -57,8 +57,7 @@
     setTimeout(() => {
       if (checker.Check()) {
         howAmIDoing = 'Great!';
-      }
-      else {
+      } else {
         howAmIDoing = 'Errors Found';
       }
       setTimeout(Clear, 1000);
@@ -73,10 +72,10 @@
     game.board = board;
     board = [...game.board];
     for (var i = 0; i < 9; i++) {
-      board[i] = [...board[i]]
+      board[i] = [...board[i]];
     }
     for (var i = 0; i < 9; i++) {
-      for ( var j = 0; j < 9; j++) {
+      for (var j = 0; j < 9; j++) {
         board[i][j] = { Value: board[i][j].Value };
       }
     }
@@ -91,9 +90,11 @@
   function onCellClick(idx) {
     let x = idx % 9;
     let y = Math.floor(idx / 9);
-    if (board[y][x].Value !== ' ' ) return;
-    game.board[y][x].Value = game.board[y][x].Value == selectedNum ? 
-      ' ' as Sudoku.Value : selectedNum;
+    if (board[y][x].Value !== ' ') return;
+    game.board[y][x].Value =
+      game.board[y][x].Value == selectedNum
+        ? (' ' as Sudoku.Value)
+        : selectedNum;
     game.board = game.board;
   }
 </script>
@@ -101,19 +102,22 @@
 <svelte:window on:keydown={UpdateSelectedNum} />
 
 <main>
-{#if game}
-  <div class="boards" class:oneCol={!showSolution}>
+  {#if game}
+    <div class="boards" class:oneCol={!showSolution}>
       <Board border>
-      {#each game.board.flat() as cell, idx}
-        <div class="solved" data-testid="Board{Math.floor(idx / 9)}{idx % 9}"
-             on:click={() => onCellClick(idx)}>
-          {cell.Value}
-        </div>
-      {/each}
-    </Board>
-    {#if showSolution}
+        {#each game.board.flat() as cell, idx}
+          <div
+            class="solved"
+            data-testid="Board{Math.floor(idx / 9)}{idx % 9}"
+            on:click={() => onCellClick(idx)}
+          >
+            {cell.Value}
+          </div>
+        {/each}
+      </Board>
+      {#if showSolution}
         <Board border>
-        {#each solver.Board.flat() as cell}
+          {#each solver.Board.flat() as cell}
             {#if cell.Candidates.length == 1}
               <div class="solved">{cell.Candidates}</div>
             {:else}
@@ -123,36 +127,39 @@
                 {/each}
               </Board>
             {/if}
-        {/each}
-      </Board>
-    {/if}
-  </div>
+          {/each}
+        </Board>
+      {/if}
+    </div>
     <div class="numpad">
       <Board rows={3} columns={3}>
-        {#each Array.from(Array(9).keys()).map(x => x+1) as num, idx}
-            <div class:selected={num == selectedNum} class="num" 
-                 on:click={() => UpdateSelectedNum({ key: `${num}`})}>
-              {num}
-            </div>
+        {#each Array.from(Array(9).keys()).map(x => x + 1) as num, idx}
+          <div
+            class:selected={num == selectedNum}
+            class="num"
+            on:click={() => UpdateSelectedNum({ key: `${num}` })}
+          >
+            {num}
+          </div>
         {/each}
       </Board>
     </div>
     <div class="features">
-    <button on:click={Solve}>Solve</button>
-    <button on:click={Hint}>Hint</button>
-    <button on:click={Reset}>Reset</button>
-    <button on:click={Check}>How Am I Doing?</button>
-    {#if howAmIDoing} {howAmIDoing} {/if}
+      <button on:click={Solve}>Solve</button>
+      <button on:click={Hint}>Hint</button>
+      <button on:click={Reset}>Reset</button>
+      <button on:click={Check}>How Am I Doing?</button>
+      {#if howAmIDoing} {howAmIDoing} {/if}
     </div>
     <div class="options">
       <span>
-        <input type="checkbox" bind:checked={showSolution}/>
+        <input type="checkbox" bind:checked={showSolution} />
         Show Solution
       </span>
-  </div>
-{:else}
-  <p>...loading</p>
-{/if}
+    </div>
+  {:else}
+    <p>...loading</p>
+  {/if}
 </main>
 
 <style>
