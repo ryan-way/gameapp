@@ -7,7 +7,7 @@ export class UniqueValues<T> {
     const values: Set<T> = new Set();
 
     return this.range
-      .filter(cell => cell.IsSolved)
+      .filter(cell => !cell.IsDefault)
       .every(cell => {
         if (values.has(cell.Value)) return false;
         values.add(cell.Value);

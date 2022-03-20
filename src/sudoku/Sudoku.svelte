@@ -12,7 +12,7 @@
   let game: Sudoku.Sudoku;
   let solver: SudokuSolver;
   let checker: SudokuChecker;
-  let showCandidates = true;
+  let showSolution = true;
   let howAmIDoing = '';
   let selectedNum = 1;
 
@@ -66,7 +66,7 @@
   }
 
   function onCellClick(cell) {
-    cell.Value = selectedNum;
+    cell.Value = cell.Value == selectedNum ? ' ' : selectedNum;
     game.board = game.board;
   }
 </script>
@@ -75,7 +75,7 @@
 
 <main>
 {#if game}
-  <div class="boards" class:oneCol={!showCandidates}>
+  <div class="boards" class:oneCol={!showSolution}>
       <Board border>
       {#each game.board.flat() as cell, idx}
         <div class="solved" data-testid="Board{Math.floor(idx / 9)}{idx % 9}"
@@ -84,7 +84,7 @@
         </div>
       {/each}
     </Board>
-    {#if showCandidates}
+    {#if showSolution}
         <Board border>
         {#each solver.Board.flat() as cell}
             {#if cell.Candidates.length == 1}
@@ -120,8 +120,8 @@
     <div class="options">
       <span>
         <input type="checkbox" 
-        bind:checked={showCandidates}/>
-    Show Ai Table
+        bind:checked={showSolution}/>
+        Show Solution
       </span>
   </div>
 {:else}
@@ -140,6 +140,7 @@
   div.features {
     display: flex;
     justify-content: center;
+    align-items: center;
     margin: 10px;
   }
   div.features button {
