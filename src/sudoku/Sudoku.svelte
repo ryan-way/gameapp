@@ -63,7 +63,6 @@
     if (isNaN(+key)) return;
     if (+key > 9 || +key < 1) return;
     selectedNum = +key;
-    console.log(typeof selectedNum);
   }
 
   function onCellClick(cell) {
@@ -74,9 +73,10 @@
 
 <svelte:window on:keydown={UpdateSelectedNum} />
 
+<main>
 {#if game}
   <div class="boards" class:oneCol={!showCandidates}>
-    <Board>
+      <Board border>
       {#each game.board.flat() as cell, idx}
         <div class="solved" data-testid="Board{Math.floor(idx / 9)}{idx % 9}"
         on:click={() => onCellClick(cell)}>
@@ -85,56 +85,88 @@
       {/each}
     </Board>
     {#if showCandidates}
-      <Board>
+        <Board border>
         {#each solver.Board.flat() as cell}
-          <div class="candidate">
-            {#each cell.Candidates as candidate, idx}
-              {candidate}
-              {#if (idx + 1) % 3 == 0}<br />{/if}
+            {#if cell.Candidates.length == 1}
+              <div class="solved">{cell.Candidates}</div>
+            {:else}
+              <Board border rows={3} columns={3}>
+                {#each cell.Candidates as candidate}
+                  <div class="candidate">{candidate}</div>
             {/each}
-          </div>
+              </Board>
+            {/if}
         {/each}
       </Board>
     {/if}
   </div>
-  <p style="font-size: 40px" >
+    <div class="numpad">
+      <Board rows={3} columns={3}>
     {#each Array.from(Array(9).keys()).map(x => x+1) as num, idx}
-      <span class:selected={num == selectedNum} 
-      class="numpad" 
+          <div class:selected={num == selectedNum} 
+              class="num" 
       on:click={() => UpdateSelectedNum({ key: `${num}`})}>
         {num}
-      </span>
-        {#if (idx + 1) % 3 == 0}<br />{/if}
+          </div>
     {/each}
-  </p>
-  <div>
+      </Board>
+    </div>
+    <div class="features">
     <button on:click={Solve}>Solve</button>
     <button on:click={Hint}>Hint</button>
     <button on:click={Check}>How Am I Doing?</button>
     {#if howAmIDoing} {howAmIDoing} {/if}
-    <input type="checkbox" bind:checked={showCandidates} />
+    </div>
+    <div class="options">
+      <span>
+        <input type="checkbox" 
+        bind:checked={showCandidates}/>
     Show Ai Table
+      </span>
   </div>
 {:else}
   <p>...loading</p>
 {/if}
+</main>
 
 <style>
-  span.selected {
+  div.options {
+    display: flex;
+    justify-content: center;
+  }
+  div.options span input {
+    margin-right: 5px;
+  }
+  div.features {
+    display: flex;
+    justify-content: center;
+    margin: 10px;
+  }
+  div.features button {
+    margin: 5px;
+  }
+  div.numpad {
+    margin: 20px;
+    display: flex;
+    justify-content: center;
+    font-size: 40px;
+  }
+  div.selected {
     color: black;
     background: orange;
   }
-  span.numpad {
+  div.num {
     padding-left: 10px;
     padding-right: 10px;
     border-radius: 50%;
-    border: 1px red;
+    display: flex;
+    justify-content: center;
   }
   div.boards {
-    height: 500px;
-    width: 1000px;
+    width: 900px;
     display: grid;
     grid-template-columns: 50% 50%;
+    justify-content: center;
   }
   div.oneCol {
     grid-template-columns: 50%;
@@ -151,8 +183,8 @@
   }
   div.candidate {
     display: flex;
-    border: 0.25px solid;
     justify-content: center;
     align-items: center;
+    font-size: small;
   }
 </style>

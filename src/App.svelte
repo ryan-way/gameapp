@@ -12,7 +12,9 @@
 
 <main>
   <Router {url}>
+    <nav>
     <Link to="/">Home</Link>
+    </nav>
     <div use:links>
       <Route path="/"><GameMenu /></Route>
       <Route path="/testgames"><TestGames /></Route>
@@ -24,9 +26,17 @@
 </main>
 
 <style>
+  div {
+    padding: 0px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+  }
   main {
     width: 100%;
     height: 100%;
+    padding: 0px;
+    display: block;
   }
   * {
     background-color: #282828;
