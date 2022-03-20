@@ -106,7 +106,7 @@
       <Board border>
       {#each game.board.flat() as cell, idx}
         <div class="solved" data-testid="Board{Math.floor(idx / 9)}{idx % 9}"
-        on:click={() => onCellClick(idx)}>
+             on:click={() => onCellClick(idx)}>
           {cell.Value}
         </div>
       {/each}
@@ -130,8 +130,7 @@
     <div class="numpad">
       <Board rows={3} columns={3}>
         {#each Array.from(Array(9).keys()).map(x => x+1) as num, idx}
-            <div class:selected={num == selectedNum} 
-                 class="num" 
+            <div class:selected={num == selectedNum} class="num" 
                  on:click={() => UpdateSelectedNum({ key: `${num}`})}>
               {num}
             </div>
@@ -147,8 +146,7 @@
     </div>
     <div class="options">
       <span>
-        <input type="checkbox" 
-        bind:checked={showSolution}/>
+        <input type="checkbox" bind:checked={showSolution}/>
         Show Solution
       </span>
   </div>

@@ -9,7 +9,6 @@
   let games: Sudoku.Sudoku[];
 
   const gameLink: string = '/sudoku/';
-  let boardStyle = 'height: 100%; width: 49%; vertical-align: top;';
 
   onMount(async () => {
     games = await repo.GetAll();
@@ -20,7 +19,7 @@
   {#each games as game}
     <a href={gameLink + game.id}>
       <p style="text-align: left;">{game.id}</p>
-      <Board style={boardStyle}>
+      <Board>
         {#each game.board.flat() as cell}
           <td>{cell.Value}</td>
         {/each}
