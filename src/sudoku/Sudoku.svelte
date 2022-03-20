@@ -101,7 +101,7 @@
 
 <svelte:window on:keydown={UpdateSelectedNum} />
 
-<main>
+<sudoku>
   {#if game}
     <div class="boards" class:oneCol={!showSolution}>
       <Board border>
@@ -160,7 +160,7 @@
   {:else}
     <p>...loading</p>
   {/if}
-</main>
+</sudoku>
 
 <style>
   div.options {
