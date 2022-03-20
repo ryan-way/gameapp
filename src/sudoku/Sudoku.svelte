@@ -12,12 +12,22 @@
   let game: Sudoku.Sudoku;
   let solver: SudokuSolver;
   let checker: SudokuChecker;
-  let showSolution = true;
+  let showSolution = false;
   let howAmIDoing = '';
-  let selectedNum = 1;
+  let selectedNum: Sudoku.Value = 1;
+  let board: Sudoku.Board;
 
   onMount(async () => {
     game = await repo.GetOne(id);
+    board = [...game.board];
+    for (var i = 0; i < 9; i++) {
+      board[i] = [...board[i]]
+    }
+    for (var i = 0; i < 9; i++) {
+      for ( var j = 0; j < 9; j++) {
+        board[i][j] = { Value: board[i][j].Value };
+      }
+    }
     checker = new SudokuChecker(game.board);
     solver = new SudokuSolver(game.board);
     solver.Solve();
@@ -59,14 +69,31 @@
     howAmIDoing = '';
   }
 
+  function Reset() {
+    game.board = board;
+    board = [...game.board];
+    for (var i = 0; i < 9; i++) {
+      board[i] = [...board[i]]
+    }
+    for (var i = 0; i < 9; i++) {
+      for ( var j = 0; j < 9; j++) {
+        board[i][j] = { Value: board[i][j].Value };
+      }
+    }
+  }
+
   function UpdateSelectedNum({ key }) {
     if (isNaN(+key)) return;
     if (+key > 9 || +key < 1) return;
-    selectedNum = +key;
+    selectedNum = +key as Sudoku.Value;
   }
 
-  function onCellClick(cell) {
-    cell.Value = cell.Value == selectedNum ? ' ' : selectedNum;
+  function onCellClick(idx) {
+    let x = idx % 9;
+    let y = Math.floor(idx / 9);
+    if (board[y][x].Value !== ' ' ) return;
+    game.board[y][x].Value = game.board[y][x].Value == selectedNum ? 
+      ' ' as Sudoku.Value : selectedNum;
     game.board = game.board;
   }
 </script>
@@ -79,7 +106,7 @@
       <Board border>
       {#each game.board.flat() as cell, idx}
         <div class="solved" data-testid="Board{Math.floor(idx / 9)}{idx % 9}"
-        on:click={() => onCellClick(cell)}>
+        on:click={() => onCellClick(idx)}>
           {cell.Value}
         </div>
       {/each}
@@ -93,7 +120,7 @@
               <Board border rows={3} columns={3}>
                 {#each cell.Candidates as candidate}
                   <div class="candidate">{candidate}</div>
-            {/each}
+                {/each}
               </Board>
             {/if}
         {/each}
@@ -102,18 +129,19 @@
   </div>
     <div class="numpad">
       <Board rows={3} columns={3}>
-    {#each Array.from(Array(9).keys()).map(x => x+1) as num, idx}
-          <div class:selected={num == selectedNum} 
-              class="num" 
-      on:click={() => UpdateSelectedNum({ key: `${num}`})}>
-        {num}
-          </div>
-    {/each}
+        {#each Array.from(Array(9).keys()).map(x => x+1) as num, idx}
+            <div class:selected={num == selectedNum} 
+                 class="num" 
+                 on:click={() => UpdateSelectedNum({ key: `${num}`})}>
+              {num}
+            </div>
+        {/each}
       </Board>
     </div>
     <div class="features">
     <button on:click={Solve}>Solve</button>
     <button on:click={Hint}>Hint</button>
+    <button on:click={Reset}>Reset</button>
     <button on:click={Check}>How Am I Doing?</button>
     {#if howAmIDoing} {howAmIDoing} {/if}
     </div>
