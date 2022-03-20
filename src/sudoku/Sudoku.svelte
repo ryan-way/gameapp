@@ -13,7 +13,6 @@
   let solver: SudokuSolver;
   let checker: SudokuChecker;
   let showCandidates = true;
-  let boardStyle = 'height: 100%; width: 49%; vertical-align: center;';
   let howAmIDoing = '';
   let selectedNum = 1;
 
@@ -76,40 +75,38 @@
 <svelte:window on:keydown={UpdateSelectedNum} />
 
 {#if game}
-  <div>
-    <div >
-      <Board style={boardStyle}>
-        {#each game.board.flat() as cell, idx}
-          <td class="solved" data-testid="Board{Math.floor(idx / 9)}{idx % 9}"
-          on:click={() => onCellClick(cell)}>
-            {cell.Value}
-          </td>
+  <div class="boards" class:oneCol={!showCandidates}>
+    <Board>
+      {#each game.board.flat() as cell, idx}
+        <div class="solved" data-testid="Board{Math.floor(idx / 9)}{idx % 9}"
+        on:click={() => onCellClick(cell)}>
+          {cell.Value}
+        </div>
+      {/each}
+    </Board>
+    {#if showCandidates}
+      <Board>
+        {#each solver.Board.flat() as cell}
+          <div class="candidate">
+            {#each cell.Candidates as candidate, idx}
+              {candidate}
+              {#if (idx + 1) % 3 == 0}<br />{/if}
+            {/each}
+          </div>
         {/each}
       </Board>
-      {#if showCandidates}
-        <Board style={boardStyle}>
-          {#each solver.Board.flat() as cell}
-            <td class="candidate">
-              {#each cell.Candidates as candidate, idx}
-                {candidate}
-                {#if (idx + 1) % 3 == 0}<br />{/if}
-              {/each}
-            </td>
-          {/each}
-        </Board>
-      {/if}
-    </div>
-    <p style="font-size: 40px" >
-      {#each Array.from(Array(9).keys()).map(x => x+1) as num, idx}
-        <span class:selected={num == selectedNum} 
-        class="numpad" 
-        on:click={() => UpdateSelectedNum({ key: `${num}`})}>
-          {num}
-        </span>
-          {#if (idx + 1) % 3 == 0}<br />{/if}
-      {/each}
-    </p>
+    {/if}
   </div>
+  <p style="font-size: 40px" >
+    {#each Array.from(Array(9).keys()).map(x => x+1) as num, idx}
+      <span class:selected={num == selectedNum} 
+      class="numpad" 
+      on:click={() => UpdateSelectedNum({ key: `${num}`})}>
+        {num}
+      </span>
+        {#if (idx + 1) % 3 == 0}<br />{/if}
+    {/each}
+  </p>
   <div>
     <button on:click={Solve}>Solve</button>
     <button on:click={Hint}>Hint</button>
@@ -133,24 +130,29 @@
     border-radius: 50%;
     border: 1px red;
   }
-  div {
-    display: inline;
-    align-content: center;
-    align-items: center;
+  div.boards {
+    height: 500px;
+    width: 1000px;
+    display: grid;
+    grid-template-columns: 50% 50%;
+  }
+  div.oneCol {
+    grid-template-columns: 50%;
   }
   button {
     align-self: center;
   }
-  td {
+  div.solved {
+    font-size: 40px;
     display: flex;
     border: 0.25px solid;
     justify-content: center;
     align-items: center;
   }
-  td.solved {
-    font-size: 40px;
-  }
-  td.candidate {
-    font-size: smaller;
+  div.candidate {
+    display: flex;
+    border: 0.25px solid;
+    justify-content: center;
+    align-items: center;
   }
 </style>
