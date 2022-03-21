@@ -6,8 +6,8 @@ import '@testing-library/jest-dom';
 import { CandidatedCell } from '../../src/ai/candidatedcell';
 import { UniqueRegion } from '../../src/ai/techniques';
 import { mock, instance, when, anything } from 'ts-mockito';
-import type { Cell } from '../../src/data/cell';
-import type { Sudoku } from '../../src/data/sudoku';
+import type { Cell } from '../../src/dto/cell';
+import type { Sudoku } from '../../src/dto/sudoku';
 import { Log, setLogger } from '../../src/service/logging';
 
 beforeAll(() => {

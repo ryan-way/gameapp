@@ -4,7 +4,7 @@
 
 import '@testing-library/jest-dom';
 import { render } from '@testing-library/svelte';
-import { Sudoku as Entity } from '../../src/data/sudoku';
+import { Sudoku as Entity } from '../../src/dto/sudoku';
 import testdata from '../../src/electron/main/testdata';
 import { mock, instance, when, anything } from 'ts-mockito';
 import { SudokuRepository } from '../../src/repository/sudoku';

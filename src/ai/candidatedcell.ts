@@ -1,4 +1,4 @@
-import type { Cell } from '../data/cell';
+import type { Cell } from '../dto/cell';
 
 export class CandidatedCell<T> {
   private candidates: Set<T>;

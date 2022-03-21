@@ -1,6 +1,6 @@
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
-import type { Cell } from '../../../data/cell';
-import { Sudoku as Base } from '../../../data/sudoku';
+import type { Cell } from '../../../dto/cell';
+import { Sudoku as Base } from '../../../dto/sudoku';
 
 export namespace Entities {
   function defaultCell(): Cell<Base.Value> {

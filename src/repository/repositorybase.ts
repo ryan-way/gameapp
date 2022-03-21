@@ -1,4 +1,4 @@
-import type { EntityBase } from '../data/entitybase';
+import type { EntityBase } from '../dto/entitybase';
 import { DataChannel, DataResponse } from '../electron/ipc/channels';
 import type { IpcRequest } from '../electron/ipc/ipcrequest';
 import { ipc } from '../electron/renderer/service';

@@ -1,4 +1,4 @@
-import { Test } from '../data/test';
+import { Test } from '../dto/test';
 import { RepositoryBase } from './repositorybase';
 
 export class TestGameRepository extends RepositoryBase<Test.Test> {

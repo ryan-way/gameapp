@@ -1,5 +1,5 @@
-import type { Cell } from '../data/cell';
-import type { Sudoku } from '../data/sudoku';
+import type { Cell } from '../dto/cell';
+import type { Sudoku } from '../dto/sudoku';
 import { CandidatedCell } from './candidatedcell';
 import type { ITechnique } from './techniques';
 import { SinglePosition, UniqueRegion } from './techniques';

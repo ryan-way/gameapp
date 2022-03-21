@@ -6,7 +6,7 @@ import { render } from '@testing-library/svelte';
 import TestGames from '../../src/components/TestGames.svelte';
 import testdata from '../../src/electron/main/testdata';
 import { mock, instance, when } from 'ts-mockito';
-import { Test } from '../../src/data/test';
+import { Test } from '../../src/dto/test';
 import { TestGameRepository } from '../../src/repository/testgame';
 
 test('should render Tests', () => {

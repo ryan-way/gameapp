@@ -1,6 +1,6 @@
 import { CandidatedCell } from '../ai/candidatedcell';
-import type { Cell } from '../data/cell';
-import type { Sudoku } from '../data/sudoku';
+import type { Cell } from '../dto/cell';
+import type { Sudoku } from '../dto/sudoku';
 import { UniqueValues } from './rules';
 
 export class SudokuChecker {

@@ -1,6 +1,6 @@
 // / <reference path="database.ts" />
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
-import { Test as Base } from '../../../data/test';
+import { Test as Base } from '../../../dto/test';
 
 export namespace Entities {
   /**
