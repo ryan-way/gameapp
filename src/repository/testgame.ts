@@ -1,7 +1,7 @@
 import { Test } from '../data/test';
-import { BaseRepository } from '../renderer/baserepository';
+import { RepositoryBase } from './repositorybase';
 
-export class TestGameRepository extends BaseRepository<Test.Test> {
+export class TestGameRepository extends RepositoryBase<Test.Test> {
   constructor() {
     super(Test.Test);
   }

@@ -1,9 +1,9 @@
 import type { EntityBase } from '../data/entitybase';
 import { DataChannel, DataResponse } from '../ipc/Channels';
 import type { IpcRequest } from '../ipc/IpcRequest';
-import { ipc } from './service';
+import { ipc } from '../renderer/service';
 
-export abstract class BaseRepository<T extends EntityBase> {
+export abstract class RepositoryBase<T extends EntityBase> {
   private sendChannel: string = DataChannel;
   private receiveChannel: string = DataResponse;
   constructor(private entity: new () => T) {}
