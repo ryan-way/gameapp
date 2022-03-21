@@ -4,7 +4,7 @@
 
 import { render } from '@testing-library/svelte';
 import Sudokus from '../../src/components/Sudokus.svelte';
-import testdata from '../../src/main/testdata';
+import testdata from '../../src/electron/main/testdata';
 import { mock, instance, when } from 'ts-mockito';
 import { Sudoku } from '../../src/data/sudoku';
 import { SudokuRepository } from '../../src/repository/sudoku';

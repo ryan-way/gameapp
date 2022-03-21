@@ -1,5 +1,5 @@
 import { contextBridge } from 'electron';
-import ipc from './IpcService';
+import ipc from './ipc';
 
 contextBridge.exposeInMainWorld('ipc', {
   send: ipc.send.bind(ipc),

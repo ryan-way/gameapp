@@ -1,8 +1,8 @@
 import type { IpcMainEvent } from 'electron';
 import zoya from 'zoya';
-import { LogChannel } from '../ipc/Channels';
-import type { IpcChannel } from '../ipc/IpcChannel';
-import type { IpcRequest } from '../ipc/IpcRequest';
+import { LogChannel } from '../ipc/channels';
+import type { IpcChannel } from '../ipc/ipcchannel';
+import type { IpcRequest } from '../ipc/ipcrequest';
 
 export namespace Main {
   export class Log implements IpcChannel {

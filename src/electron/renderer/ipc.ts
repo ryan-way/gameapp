@@ -1,6 +1,6 @@
 import { ipcRenderer } from 'electron';
-import type { IpcRequest } from '../ipc/IpcRequest';
-import type { IIpcService } from '../ipc/IpcService';
+import type { IpcRequest } from '../ipc/ipcrequest';
+import type { IIpcService } from '../ipc/ipcservice';
 
 export class IpcService implements IIpcService {
   send(channel: string, request: IpcRequest): Promise<any> {

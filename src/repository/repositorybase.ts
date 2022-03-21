@@ -1,7 +1,7 @@
 import type { EntityBase } from '../data/entitybase';
-import { DataChannel, DataResponse } from '../ipc/Channels';
-import type { IpcRequest } from '../ipc/IpcRequest';
-import { ipc } from '../renderer/service';
+import { DataChannel, DataResponse } from '../electron/ipc/channels';
+import type { IpcRequest } from '../electron/ipc/ipcrequest';
+import { ipc } from '../electron/renderer/service';
 
 export abstract class RepositoryBase<T extends EntityBase> {
   private sendChannel: string = DataChannel;

@@ -1,4 +1,4 @@
-import type { IIpcService } from '../ipc/IpcService';
+import type { IIpcService } from '../ipc/ipcservice';
 
 export interface Window {
   ipc: IIpcService;

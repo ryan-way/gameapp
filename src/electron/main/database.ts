@@ -4,9 +4,9 @@ import { Entities as Sudoku } from './entity/sudoku';
 import { Entities as Test } from './entity/test';
 import data from './testdata';
 import log from './log';
-import type { IpcRequest } from '../ipc/IpcRequest';
-import type { IpcChannel } from '../ipc/IpcChannel';
-import { DataChannel } from '../ipc/Channels';
+import type { IpcRequest } from '../ipc/ipcrequest';
+import type { IpcChannel } from '../ipc/ipcchannel';
+import { DataChannel } from '../ipc/channels';
 
 export namespace Main {
   export class Database implements IpcChannel {
