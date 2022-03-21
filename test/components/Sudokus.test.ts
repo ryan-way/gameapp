@@ -10,8 +10,8 @@ import { Sudoku } from '../../src/dto/sudoku';
 import { SudokuRepository } from '../../src/repository/sudoku';
 
 test('should render Sudokus', () => {
-  const sudokus = testdata.get(Sudoku.Sudoku.name).map((board, idx) => {
-    return { id: idx, board: board } as unknown as Sudoku.Sudoku;
+  const sudokus = testdata.get(Sudoku.name).map((board, idx) => {
+    return { id: idx, board: board } as unknown as Sudoku;
   });
   const mockedRepo = mock(SudokuRepository);
   when(mockedRepo.GetAll()).thenResolve(sudokus);

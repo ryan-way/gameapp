@@ -1,28 +1,28 @@
 import type { Cell } from '../dto/cell';
-import type { Sudoku } from '../dto/sudoku';
+import type { Value } from '../dto/sudoku';
 import { CandidatedCell } from './candidatedcell';
 import type { ITechnique } from './techniques';
 import { SinglePosition, UniqueRegion } from './techniques';
 import { log } from '../service/service';
 
 export class SudokuSolver {
-  board: CandidatedCell<Sudoku.Value>[][];
-  regions: CandidatedCell<Sudoku.Value>[][];
-  domain: Sudoku.Value[];
+  board: CandidatedCell<Value>[][];
+  regions: CandidatedCell<Value>[][];
+  domain: Value[];
   techniques: ITechnique[];
 
-  public get Board(): CandidatedCell<Sudoku.Value>[][] {
+  public get Board(): CandidatedCell<Value>[][] {
     return this.board;
   }
 
-  constructor(board: Cell<Sudoku.Value>[][]) {
+  constructor(board: Cell<Value>[][]) {
     this.SetupBoard(board);
     this.SetupRegions();
     this.SetupContraints();
     this.Log();
   }
 
-  SetupBoard(board: Cell<Sudoku.Value>[][]) {
+  SetupBoard(board: Cell<Value>[][]) {
     this.domain = [1, 2, 3, 4, 5, 6, 7, 8, 9];
     this.board = board.map(row =>
       row.map(cell => new CandidatedCell(cell, ' ', this.domain))

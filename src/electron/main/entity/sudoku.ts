@@ -1,13 +1,13 @@
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 import type { Cell } from '../../../dto/cell';
-import { Sudoku as Base } from '../../../dto/sudoku';
+import { Value, Row, Board, Sudoku as Base } from '../../../dto/sudoku';
 
 export namespace Entities {
-  function defaultCell(): Cell<Base.Value> {
+  function defaultCell(): Cell<Value> {
     return { Value: ' ' };
   }
 
-  function defaultRow(): Base.Row {
+  function defaultRow(): Row {
     return [
       defaultCell(),
       defaultCell(),
@@ -21,7 +21,7 @@ export namespace Entities {
     ];
   }
 
-  function defaultBoard(): Base.Board {
+  function defaultBoard(): Board {
     return [
       defaultRow(),
       defaultRow(),
@@ -40,12 +40,12 @@ export namespace Entities {
    * @param {string[]} data - data from databse
    * @return {TestBoard} - resulting test board object
    */
-  function from(data: string[]): Base.Board {
-    const ret: Base.Board = defaultBoard();
+  function from(data: string[]): Board {
+    const ret: Board = defaultBoard();
     data.forEach((item: string, index: number) => {
       ret[Math.floor(index / 9)][index % 9].Value = (
         item == ' ' ? item : +item
-      ) as Base.Value;
+      ) as Value;
     });
     return ret;
   }
@@ -57,12 +57,12 @@ export namespace Entities {
    * @return {TestBoard} - resulting test board object
    */
 
-  function to(data: Base.Board): string[] {
+  function to(data: Board): string[] {
     return data.flat().map(obj => obj.Value.toString());
   }
 
   @Entity()
-  export class Sudoku extends Base.Sudoku {
+  export class Sudoku extends Base {
     constructor() {
       super();
     }
@@ -77,6 +77,6 @@ export namespace Entities {
         to: to,
       },
     })
-    public board: Base.Board;
+    public board: Board;
   }
 }

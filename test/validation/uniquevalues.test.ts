@@ -7,7 +7,7 @@ import { CandidatedCell } from '../../src/ai/candidatedcell';
 import { UniqueValues } from '../../src/validation/rules';
 import { mock, instance, when, anything } from 'ts-mockito';
 import type { Cell } from '../../src/dto/cell';
-import type { Sudoku } from '../../src/dto/sudoku';
+import type { Value } from '../../src/dto/sudoku';
 import { Log, setLogger } from '../../src/service/logging';
 
 beforeAll(() => {
@@ -19,14 +19,10 @@ beforeAll(() => {
 
 describe('UniqueValue', () => {
   test('should return false if invalid', () => {
-    const cells: Cell<Sudoku.Value>[] = [
-      { Value: 1 },
-      { Value: 1 },
-      { Value: 2 },
-    ];
-    const candidates: Sudoku.Value[] = [1, 2, 3];
+    const cells: Cell<Value>[] = [{ Value: 1 }, { Value: 1 }, { Value: 2 }];
+    const candidates: Value[] = [1, 2, 3];
     const range = cells.map(
-      cell => new CandidatedCell<Sudoku.Value>(cell, ' ', candidates)
+      cell => new CandidatedCell<Value>(cell, ' ', candidates)
     );
     range
       .filter(cell => !cell.IsDefault)
@@ -38,14 +34,10 @@ describe('UniqueValue', () => {
     expect(rule.Check()).toBeFalsy();
   });
   test('should return true if valid', () => {
-    const cells: Cell<Sudoku.Value>[] = [
-      { Value: ' ' },
-      { Value: 1 },
-      { Value: 2 },
-    ];
-    const candidates: Sudoku.Value[] = [1, 2, 3];
+    const cells: Cell<Value>[] = [{ Value: ' ' }, { Value: 1 }, { Value: 2 }];
+    const candidates: Value[] = [1, 2, 3];
     const range = cells.map(
-      cell => new CandidatedCell<Sudoku.Value>(cell, ' ', candidates)
+      cell => new CandidatedCell<Value>(cell, ' ', candidates)
     );
 
     range

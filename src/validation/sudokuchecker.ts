@@ -1,20 +1,20 @@
 import { CandidatedCell } from '../ai/candidatedcell';
 import type { Cell } from '../dto/cell';
-import type { Sudoku } from '../dto/sudoku';
+import type { Value } from '../dto/sudoku';
 import { UniqueValues } from './rules';
 
 export class SudokuChecker {
-  private board: CandidatedCell<Sudoku.Value>[][];
-  private regions: CandidatedCell<Sudoku.Value>[][];
-  private validators: UniqueValues<Sudoku.Value>[];
-  constructor(board: Cell<Sudoku.Value>[][]) {
+  private board: CandidatedCell<Value>[][];
+  private regions: CandidatedCell<Value>[][];
+  private validators: UniqueValues<Value>[];
+  constructor(board: Cell<Value>[][]) {
     this.SetupBoard(board);
     this.SetupRegions();
     this.SetupValidators();
   }
 
-  SetupBoard(board: Cell<Sudoku.Value>[][]) {
-    const domain: Sudoku.Value[] = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+  SetupBoard(board: Cell<Value>[][]) {
+    const domain: Value[] = [1, 2, 3, 4, 5, 6, 7, 8, 9];
     this.board = board.map(row =>
       row.map(cell => new CandidatedCell(cell, ' ', domain))
     );

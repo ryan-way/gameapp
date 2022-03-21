@@ -10,8 +10,8 @@ import { Test } from '../../src/dto/test';
 import { TestGameRepository } from '../../src/repository/testgame';
 
 test('should render Tests', () => {
-  const tests = testdata.get(Test.Test.name).map((board, idx) => {
-    return { id: idx, board: board } as unknown as Test.Test;
+  const tests = testdata.get(Test.name).map((board, idx) => {
+    return { id: idx, board: board } as unknown as Test;
   });
   const mockedRepo = mock(TestGameRepository);
   when(mockedRepo.GetAll()).thenResolve(tests);

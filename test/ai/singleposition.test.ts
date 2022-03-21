@@ -7,7 +7,7 @@ import { CandidatedCell } from '../../src/ai/candidatedcell';
 import { SinglePosition } from '../../src/ai/techniques';
 import { mock, instance, when, anything } from 'ts-mockito';
 import type { Cell } from '../../src/dto/cell';
-import type { Sudoku } from '../../src/dto/sudoku';
+import type { Value } from '../../src/dto/sudoku';
 import { Log, setLogger } from '../../src/service/logging';
 
 beforeAll(() => {
@@ -19,14 +19,10 @@ beforeAll(() => {
 
 describe('Solving', () => {
   test('Should Return True With Updates', () => {
-    const cells: Cell<Sudoku.Value>[] = [
-      { Value: ' ' },
-      { Value: 1 },
-      { Value: 2 },
-    ];
-    const candidates: Sudoku.Value[] = [1, 2, 3];
+    const cells: Cell<Value>[] = [{ Value: ' ' }, { Value: 1 }, { Value: 2 }];
+    const candidates: Value[] = [1, 2, 3];
     const range = cells.map(
-      cell => new CandidatedCell<Sudoku.Value>(cell, ' ', candidates)
+      cell => new CandidatedCell<Value>(cell, ' ', candidates)
     );
     range
       .filter(cell => !cell.IsDefault)
@@ -37,14 +33,10 @@ describe('Solving', () => {
     expect(technique.Solve()).toBeTruthy();
   });
   test('Should Return False Without Updates', () => {
-    const cells: Cell<Sudoku.Value>[] = [
-      { Value: 3 },
-      { Value: 1 },
-      { Value: 2 },
-    ];
-    const candidates: Sudoku.Value[] = [1, 2, 3];
+    const cells: Cell<Value>[] = [{ Value: 3 }, { Value: 1 }, { Value: 2 }];
+    const candidates: Value[] = [1, 2, 3];
     const range = cells.map(
-      cell => new CandidatedCell<Sudoku.Value>(cell, ' ', candidates)
+      cell => new CandidatedCell<Value>(cell, ' ', candidates)
     );
     range
       .filter(cell => !cell.IsDefault)
@@ -55,14 +47,10 @@ describe('Solving', () => {
     expect(technique.Solve()).toBeFalsy();
   });
   test('Should Return True With Updates', () => {
-    const cells: Cell<Sudoku.Value>[] = [
-      { Value: ' ' },
-      { Value: 1 },
-      { Value: 2 },
-    ];
-    const candidates: Sudoku.Value[] = [1, 2, 3];
+    const cells: Cell<Value>[] = [{ Value: ' ' }, { Value: 1 }, { Value: 2 }];
+    const candidates: Value[] = [1, 2, 3];
     const range = cells.map(
-      cell => new CandidatedCell<Sudoku.Value>(cell, ' ', candidates)
+      cell => new CandidatedCell<Value>(cell, ' ', candidates)
     );
     range
       .filter(cell => !cell.IsDefault)
@@ -74,14 +62,14 @@ describe('Solving', () => {
     expect(range[0].IsSolved).toBeTruthy();
   });
   test('Should Return False Without Updates', () => {
-    const cells: Cell<Sudoku.Value>[] = [
+    const cells: Cell<Value>[] = [
       { Value: ' ' },
       { Value: ' ' },
       { Value: ' ' },
     ];
-    const candidates: Sudoku.Value[] = [1, 2, 3];
+    const candidates: Value[] = [1, 2, 3];
     const range = cells.map(
-      cell => new CandidatedCell<Sudoku.Value>(cell, ' ', candidates)
+      cell => new CandidatedCell<Value>(cell, ' ', candidates)
     );
     const technique = new SinglePosition(range);
     technique.Solve();
@@ -91,15 +79,15 @@ describe('Solving', () => {
 
 describe('Regression', () => {
   test('Single position should not assign already is solved', () => {
-    const cells: Cell<Sudoku.Value>[] = [
+    const cells: Cell<Value>[] = [
       { Value: ' ' },
       { Value: ' ' },
       { Value: 1 },
       { Value: 2 },
     ];
-    const candidates: Sudoku.Value[] = [1, 2, 3];
+    const candidates: Value[] = [1, 2, 3];
     const range = cells.map(
-      cell => new CandidatedCell<Sudoku.Value>(cell, ' ', candidates)
+      cell => new CandidatedCell<Value>(cell, ' ', candidates)
     );
     range
       .filter(cell => !cell.IsDefault)
