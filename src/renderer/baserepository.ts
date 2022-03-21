@@ -1,9 +1,7 @@
 import type { EntityBase } from '../data/entitybase';
 import { DataChannel, DataResponse } from '../ipc/Channels';
 import type { IpcRequest } from '../ipc/IpcRequest';
-import type { Window } from './window';
-
-const ipc = (window as unknown as Window).ipc;
+import { ipc } from './service';
 
 export abstract class BaseRepository<T extends EntityBase> {
   private sendChannel: string = DataChannel;
