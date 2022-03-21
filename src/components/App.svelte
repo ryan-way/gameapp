@@ -2,10 +2,10 @@
   import { Router, Route, Link } from 'svelte-routing';
   import { links } from 'svelte-routing';
   import GameMenu from './GameMenu.svelte';
-  import TestGames from './testgame/TestGames.svelte';
-  import TestGame from './testgame/TestGame.svelte';
-  import Sudokus from './sudoku/Sudokus.svelte';
-  import Sudoku from './sudoku/Sudoku.svelte';
+  import TestGames from './TestGames.svelte';
+  import TestGame from './TestGame.svelte';
+  import Sudokus from './Sudokus.svelte';
+  import Sudoku from './Sudoku.svelte';
 
   export let url: string = '/';
 </script>

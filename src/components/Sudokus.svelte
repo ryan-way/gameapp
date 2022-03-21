@@ -1,7 +1,7 @@
 <script lang="ts">
   import { onMount } from 'svelte';
 
-  import Board from '../components/Board.svelte';
+  import Board from './layout/Board.svelte';
   import type { Sudoku } from '../data/sudoku';
   import { SudokuRepository } from '../repository/sudoku';
 

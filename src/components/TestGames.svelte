@@ -1,7 +1,7 @@
 <script lang="ts">
   import { onMount } from 'svelte';
 
-  import Board from '../components/Board.svelte';
+  import Board from './layout/Board.svelte';
   import type { Test } from '../data/test';
   import { TestGameRepository } from '../repository/testgame';
 

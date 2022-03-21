@@ -3,7 +3,7 @@
  */
 
 import { render } from '@testing-library/svelte';
-import TestGames from '../src/testgame/TestGames.svelte';
+import TestGames from '../src/components/TestGames.svelte';
 import testdata from '../src/main/testdata';
 import { mock, instance, when } from 'ts-mockito';
 import { Test } from '../src/data/test';

@@ -8,7 +8,7 @@ import { Test } from '../src/data/test';
 import testdata from '../src/main/testdata';
 import { mock, instance, when } from 'ts-mockito';
 import { TestGameRepository } from '../src/repository/testgame';
-import TestGame from '../src/testgame/TestGame.svelte';
+import TestGame from '../src/components/TestGame.svelte';
 import { fireEvent } from '@testing-library/dom';
 
 test('should render Test Game', () => {
