@@ -3,12 +3,12 @@
  */
 
 import '@testing-library/jest-dom';
-import { CandidatedCell } from '../src/ai/candidatedcell';
-import { UniqueValues } from '../src/validation/rules';
+import { CandidatedCell } from '../../src/ai/candidatedcell';
+import { UniqueValues } from '../../src/validation/rules';
 import { mock, instance, when, anything } from 'ts-mockito';
-import type { Cell } from '../src/data/cell';
-import type { Sudoku } from '../src/data/sudoku';
-import { Log, setLogger } from '../src/service/logging';
+import type { Cell } from '../../src/data/cell';
+import type { Sudoku } from '../../src/data/sudoku';
+import { Log, setLogger } from '../../src/service/logging';
 
 beforeAll(() => {
   const mockedLog = mock(Log);

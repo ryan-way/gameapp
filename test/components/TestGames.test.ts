@@ -3,11 +3,11 @@
  */
 
 import { render } from '@testing-library/svelte';
-import TestGames from '../src/components/TestGames.svelte';
-import testdata from '../src/main/testdata';
+import TestGames from '../../src/components/TestGames.svelte';
+import testdata from '../../src/main/testdata';
 import { mock, instance, when } from 'ts-mockito';
-import { Test } from '../src/data/test';
-import { TestGameRepository } from '../src/repository/testgame';
+import { Test } from '../../src/data/test';
+import { TestGameRepository } from '../../src/repository/testgame';
 
 test('should render Tests', () => {
   const tests = testdata.get(Test.Test.name).map((board, idx) => {

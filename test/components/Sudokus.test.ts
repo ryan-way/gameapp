@@ -3,11 +3,11 @@
  */
 
 import { render } from '@testing-library/svelte';
-import Sudokus from '../src/components/Sudokus.svelte';
-import testdata from '../src/main/testdata';
+import Sudokus from '../../src/components/Sudokus.svelte';
+import testdata from '../../src/main/testdata';
 import { mock, instance, when } from 'ts-mockito';
-import { Sudoku } from '../src/data/sudoku';
-import { SudokuRepository } from '../src/repository/sudoku';
+import { Sudoku } from '../../src/data/sudoku';
+import { SudokuRepository } from '../../src/repository/sudoku';
 
 test('should render Sudokus', () => {
   const sudokus = testdata.get(Sudoku.Sudoku.name).map((board, idx) => {
