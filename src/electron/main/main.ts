@@ -1,8 +1,7 @@
 import { app, BrowserWindow, ipcMain } from 'electron';
 import path from 'path';
 import type { IpcChannel } from '../ipc/ipcchannel';
-import database from './database';
-import log from './log';
+import { database, log } from './channels';
 
 function InitializeIpc() {
   const ipcChannels: IpcChannel[] = [database, log];
