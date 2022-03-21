@@ -12,7 +12,7 @@
     "lint": "eslint --ext .ts,.tsx . && yarn prettier",
     "prettier": "prettier --check .",
     "fix": "eslint --ext .ts,.tsx --fix . && prettier --write .",
-    "test": "jest test/*.test.ts",
+    "test": "jest test/**/*.test.ts",
     "coverage": "jest --coverage test/*.test.ts",
     "test:watch": "yarn run test -- --watch"
   },
