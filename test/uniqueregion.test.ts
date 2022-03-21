@@ -8,7 +8,7 @@ import { UniqueRegion } from '../src/ai/techniques';
 import { mock, instance, when, anything } from 'ts-mockito';
 import type { Cell } from '../src/data/cell';
 import type { Sudoku } from '../src/data/sudoku';
-import { Log, setLogger } from '../src/renderer/logging';
+import { Log, setLogger } from '../src/service/logging';
 
 beforeAll(() => {
   const mockedLog = mock(Log);

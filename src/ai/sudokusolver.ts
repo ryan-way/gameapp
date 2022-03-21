@@ -3,7 +3,7 @@ import type { Sudoku } from '../data/sudoku';
 import { CandidatedCell } from './candidatedcell';
 import type { ITechnique } from './techniques';
 import { SinglePosition, UniqueRegion } from './techniques';
-import log from '../renderer/logging';
+import { log } from '../service/service';
 
 export class SudokuSolver {
   board: CandidatedCell<Sudoku.Value>[][];

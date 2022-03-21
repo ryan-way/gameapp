@@ -1,6 +1,6 @@
 import { LogChannel } from '../ipc/Channels';
 import type { IpcRequest } from '../ipc/IpcRequest';
-import { ipc } from './service';
+import { ipc } from '../renderer/service';
 
 export class Log {
   private sendChannel: string = LogChannel;
