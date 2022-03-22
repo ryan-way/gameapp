@@ -6,7 +6,7 @@ import data from './testdata';
 import log from './log';
 import type { IpcRequest } from '../ipc/ipcrequest';
 import type { IpcChannel } from '../ipc/ipcchannel';
-import { DataChannel } from '../ipc/channels';
+import { Channel } from '../ipc/channels';
 
 export namespace Main {
   export class Database implements IpcChannel {
@@ -72,8 +72,8 @@ export namespace Main {
       event.sender.send(request.responseChannel, response);
     }
 
-    public getName(): string {
-      return DataChannel;
+    public getName(): Channel {
+      return Channel.Data;
     }
 
     private async GetAll<T>(target: EntityTarget<T>): Promise<T[]> {

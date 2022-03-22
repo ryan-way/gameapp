@@ -34,13 +34,11 @@
       checker = new SudokuChecker(game.board);
       solver = new SudokuSolver(game.board);
       solver.Solve();
-    }
-    catch (e) {
+    } catch (e) {
       log().Error(e.stack);
       log().Error(e);
     }
   });
-
 
   function Solve() {
     for (let i = 0; i < game.board.length; i++) {

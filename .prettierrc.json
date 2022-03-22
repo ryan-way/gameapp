@@ -2,6 +2,5 @@
   "singleQuote": true,
   "useTabs": false,
   "tabWidth": 2,
-  "arrowParens": "avoid",
-  "svelteBracketNewLine": false
+  "arrowParens": "avoid"
 }

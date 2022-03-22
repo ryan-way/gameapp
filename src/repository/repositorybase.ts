@@ -1,11 +1,11 @@
 import type { EntityBase } from '../dto/entitybase';
-import { DataChannel, DataResponse } from '../electron/ipc/channels';
+import { Channel } from '../electron/ipc/channels';
 import type { IpcRequest } from '../electron/ipc/ipcrequest';
 import { ipc } from '../electron/renderer/service';
 
 export abstract class RepositoryBase<T extends EntityBase> {
-  private sendChannel: string = DataChannel;
-  private receiveChannel: string = DataResponse;
+  private sendChannel: Channel = Channel.Data;
+  private receiveChannel: Channel = Channel.DataResponse;
   constructor(private entity: new () => T) {}
 
   private send<Entity>(request: IpcRequest): Promise<Entity> {

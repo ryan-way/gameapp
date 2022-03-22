@@ -1,3 +1,6 @@
-export const DataChannel: string = 'data';
-export const DataResponse: string = DataChannel + 'resp';
-export const LogChannel: string = 'log';
+export enum Channel {
+  None = 'None',
+  Data = 'Data',
+  DataResponse = 'DataResponse',
+  Log = 'Log',
+}

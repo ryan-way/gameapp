@@ -1,9 +1,9 @@
-import { LogChannel } from '../electron/ipc/channels';
+import { Channel } from '../electron/ipc/channels';
 import type { IpcRequest } from '../electron/ipc/ipcrequest';
 import { ipc } from '../electron/renderer/service';
 
 export class Log {
-  private sendChannel: string = LogChannel;
+  private sendChannel: Channel = Channel.Log;
 
   private send(request: IpcRequest): void {
     ipc.send(this.sendChannel, request);
@@ -11,7 +11,7 @@ export class Log {
 
   Success(message: any): void {
     const request = {
-      responseChannel: '',
+      responseChannel: Channel.None,
       params: ['success', message.toString()],
     };
     this.send(request);
@@ -19,7 +19,7 @@ export class Log {
 
   Debug(message: any): void {
     const request = {
-      responseChannel: '',
+      responseChannel: Channel.None,
       params: ['debug', message.toString()],
     };
     this.send(request);
@@ -27,7 +27,7 @@ export class Log {
 
   Info(message: any): void {
     const request = {
-      responseChannel: '',
+      responseChannel: Channel.None,
       params: ['info', message.toString()],
     };
     this.send(request);
@@ -35,7 +35,7 @@ export class Log {
 
   Warn(message: any): void {
     const request = {
-      responseChannel: '',
+      responseChannel: Channel.None,
       params: ['warn', message.toString()],
     };
     this.send(request);
@@ -43,7 +43,7 @@ export class Log {
 
   Error(message: any): void {
     const request = {
-      responseChannel: '',
+      responseChannel: Channel.None,
       params: ['error', message.toString()],
     };
     this.send(request);
@@ -51,7 +51,7 @@ export class Log {
 
   Failed(message: any): void {
     const request = {
-      responseChannel: '',
+      responseChannel: Channel.None,
       params: ['failed', message.toString()],
     };
     this.send(request);
@@ -59,7 +59,7 @@ export class Log {
 
   Fatal(message: any): void {
     const request = {
-      responseChannel: '',
+      responseChannel: Channel.None,
       params: ['fatal', message.toString()],
     };
     this.send(request);

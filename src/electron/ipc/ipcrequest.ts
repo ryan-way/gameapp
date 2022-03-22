@@ -1,4 +1,6 @@
+import type { Channel } from './channels';
+
 export interface IpcRequest {
-  responseChannel: string;
+  responseChannel: Channel;
   params?: string[];
 }

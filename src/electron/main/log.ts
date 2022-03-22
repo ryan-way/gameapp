@@ -1,6 +1,6 @@
 import type { IpcMainEvent } from 'electron';
 import zoya from 'zoya';
-import { LogChannel } from '../ipc/channels';
+import { Channel } from '../ipc/channels';
 import type { IpcChannel } from '../ipc/ipcchannel';
 import type { IpcRequest } from '../ipc/ipcrequest';
 
@@ -8,8 +8,8 @@ export namespace Main {
   export class Log implements IpcChannel {
     constructor() {}
 
-    public getName(): string {
-      return LogChannel;
+    public getName(): Channel {
+      return Channel.Log;
     }
 
     public handle(event: IpcMainEvent, request: IpcRequest): void {
