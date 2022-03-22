@@ -6,16 +6,16 @@ import '@testing-library/jest-dom';
 import { CandidatedCell } from '../../src/ai/candidatedcell';
 import { mock, instance, when, anything } from 'ts-mockito';
 import type { Cell } from '../../src/dto/cell';
-import type { Value } from '../../src/dto/sudoku';
+import { Value } from '../../src/dto/sudoku';
 import { Log, setLogger } from '../../src/service/logging';
 
-function getCell(cellValue: Value = ' '): CandidatedCell<Value> {
+function getCell(cellValue: Value = Value.Empty): CandidatedCell<Value> {
   const candidates: Value[] = [1, 2, 3, 4, 5, 6, 7, 8, 9];
   const cell: Cell<Value> = {
     Value: cellValue,
   };
 
-  return new CandidatedCell(cell, ' ', candidates);
+  return new CandidatedCell(cell, Value.Empty, candidates);
 }
 
 beforeAll(() => {

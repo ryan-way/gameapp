@@ -27,7 +27,10 @@ export class CandidatedCell<T> {
 
   public Assign(candidate: T) {
     if (!this.candidates.has(candidate)) {
-      throw new Error('Assigning candidate not previously in candidate list');
+      throw new Error(
+        `Assigning candidate (${candidate} of type ${typeof candidate})` +
+          ` not previously in candidate list: ${[...this.candidates]}`
+      );
     }
     this.candidates = new Set([candidate]);
   }

@@ -4,7 +4,7 @@ import { Value, Row, Board, Sudoku as Base } from '../../../dto/sudoku';
 
 export namespace Entities {
   function defaultCell(): Cell<Value> {
-    return { Value: ' ' };
+    return { Value: Value.Empty };
   }
 
   function defaultRow(): Row {
@@ -35,6 +35,13 @@ export namespace Entities {
     ];
   }
 
+  function convert(item: string): Value {
+    if (item == ' ') return Value.Empty;
+    const num = +item;
+    if (num < 1 || num > 9) throw Error(`Sudoku Value (${num}) not in range`);
+    return num as Value;
+  }
+
   /**
    * Converts data from databse to TestBoard
    * @param {string[]} data - data from databse
@@ -43,9 +50,7 @@ export namespace Entities {
   function from(data: string[]): Board {
     const ret: Board = defaultBoard();
     data.forEach((item: string, index: number) => {
-      ret[Math.floor(index / 9)][index % 9].Value = (
-        item == ' ' ? item : +item
-      ) as Value;
+      ret[Math.floor(index / 9)][index % 9].Value = convert(item);
     });
     return ret;
   }

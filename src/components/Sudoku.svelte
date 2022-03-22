@@ -2,36 +2,45 @@
   import { onMount } from 'svelte';
   import { SudokuSolver } from '../ai/sudokusolver';
   import Board from './layout/Board.svelte';
-  import type { Sudoku } from '../data/sudoku';
+  import type { Sudoku } from '../dto/sudoku';
+  import { Board as Puzzle, Value } from '../dto/sudoku';
   import { SudokuRepository } from '../repository/sudoku';
   import { SudokuChecker } from '../validation/sudokuchecker';
+  import { log } from '../service/service';
 
   export let repo = new SudokuRepository();
   export let id: number;
 
-  let game: Sudoku.Sudoku;
+  let game: Sudoku;
   let solver: SudokuSolver;
   let checker: SudokuChecker;
   let showSolution = false;
   let howAmIDoing = '';
-  let selectedNum: Sudoku.Value = 1;
-  let board: Sudoku.Board;
+  let selectedNum: Value = Value.One;
+  let board: Puzzle;
 
   onMount(async () => {
-    game = await repo.GetOne(id);
-    board = [...game.board];
-    for (var i = 0; i < 9; i++) {
-      board[i] = [...board[i]];
-    }
-    for (var i = 0; i < 9; i++) {
-      for (var j = 0; j < 9; j++) {
-        board[i][j] = { Value: board[i][j].Value };
+    try {
+      game = await repo.GetOne(id);
+      board = [...game.board];
+      for (var i = 0; i < 9; i++) {
+        board[i] = [...board[i]];
       }
+      for (var i = 0; i < 9; i++) {
+        for (var j = 0; j < 9; j++) {
+          board[i][j] = { Value: board[i][j].Value };
+        }
+      }
+      checker = new SudokuChecker(game.board);
+      solver = new SudokuSolver(game.board);
+      solver.Solve();
     }
-    checker = new SudokuChecker(game.board);
-    solver = new SudokuSolver(game.board);
-    solver.Solve();
+    catch (e) {
+      log().Error(e.stack);
+      log().Error(e);
+    }
   });
+
 
   function Solve() {
     for (let i = 0; i < game.board.length; i++) {
@@ -82,9 +91,7 @@
   }
 
   function UpdateSelectedNum({ key }) {
-    if (isNaN(+key)) return;
-    if (+key > 9 || +key < 1) return;
-    selectedNum = +key as Sudoku.Value;
+    if (Value[key]) selectedNum = key;
   }
 
   function onCellClick(idx) {
@@ -92,9 +99,7 @@
     let y = Math.floor(idx / 9);
     if (board[y][x].Value !== ' ') return;
     game.board[y][x].Value =
-      game.board[y][x].Value == selectedNum
-        ? (' ' as Sudoku.Value)
-        : selectedNum;
+      game.board[y][x].Value == selectedNum ? Value.Empty : selectedNum;
     game.board = game.board;
   }
 </script>

@@ -1,14 +1,14 @@
 <script lang="ts">
   import { onMount } from 'svelte';
   import Board from './layout/Board.svelte';
-  import type { Cell } from '../data/cell';
-  import type { Test } from '../data/test';
+  import type { Cell } from '../dto/cell';
+  import type { Test } from '../dto/test';
   import { TestGameRepository } from '../repository/testgame';
 
   export let repo = new TestGameRepository();
   export let id: number;
 
-  let game: Test.Test;
+  let game: Test;
   let turn: 'X' | 'O' = 'X';
 
   onMount(async () => {

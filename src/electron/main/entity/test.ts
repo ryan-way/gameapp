@@ -10,9 +10,9 @@ export namespace Entities {
    */
   function from(data: string[]): Board {
     const ret: Board = [
-      [{ Value: ' ' }, { Value: ' ' }, { Value: ' ' }],
-      [{ Value: ' ' }, { Value: ' ' }, { Value: ' ' }],
-      [{ Value: ' ' }, { Value: ' ' }, { Value: ' ' }],
+      [{ Value: Value.Empty }, { Value: Value.Empty }, { Value: Value.Empty }],
+      [{ Value: Value.Empty }, { Value: Value.Empty }, { Value: Value.Empty }],
+      [{ Value: Value.Empty }, { Value: Value.Empty }, { Value: Value.Empty }],
     ];
     data.forEach((item: string, index: number) => {
       ret[Math.floor(index / 3)][index % 3].Value = item as Value;

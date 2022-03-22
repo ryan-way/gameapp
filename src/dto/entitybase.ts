@@ -1,1 +1,3 @@
-export class EntityBase {}
+export class EntityBase {
+  id: number;
+}

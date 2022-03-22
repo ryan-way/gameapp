@@ -1,5 +1,4 @@
-import type { Cell } from '../dto/cell';
-import type { Value } from '../dto/sudoku';
+import { Board, Value } from '../dto/sudoku';
 import { CandidatedCell } from './candidatedcell';
 import type { ITechnique } from './techniques';
 import { SinglePosition, UniqueRegion } from './techniques';
@@ -15,17 +14,19 @@ export class SudokuSolver {
     return this.board;
   }
 
-  constructor(board: Cell<Value>[][]) {
+  constructor(board: Board) {
     this.SetupBoard(board);
     this.SetupRegions();
     this.SetupContraints();
     this.Log();
   }
 
-  SetupBoard(board: Cell<Value>[][]) {
+  SetupBoard(board: Board) {
+    log().Info(typeof board[0][1].Value);
+    log().Info(board[0][1].Value);
     this.domain = [1, 2, 3, 4, 5, 6, 7, 8, 9];
     this.board = board.map(row =>
-      row.map(cell => new CandidatedCell(cell, ' ', this.domain))
+      row.map(cell => new CandidatedCell(cell, Value.Empty, this.domain))
     );
     this.board
       .flat()

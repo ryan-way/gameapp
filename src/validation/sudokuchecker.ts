@@ -1,22 +1,21 @@
 import { CandidatedCell } from '../ai/candidatedcell';
-import type { Cell } from '../dto/cell';
-import type { Value } from '../dto/sudoku';
+import { Board, Value } from '../dto/sudoku';
 import { UniqueValues } from './rules';
 
 export class SudokuChecker {
   private board: CandidatedCell<Value>[][];
   private regions: CandidatedCell<Value>[][];
   private validators: UniqueValues<Value>[];
-  constructor(board: Cell<Value>[][]) {
+  constructor(board: Board) {
     this.SetupBoard(board);
     this.SetupRegions();
     this.SetupValidators();
   }
 
-  SetupBoard(board: Cell<Value>[][]) {
+  SetupBoard(board: Board) {
     const domain: Value[] = [1, 2, 3, 4, 5, 6, 7, 8, 9];
     this.board = board.map(row =>
-      row.map(cell => new CandidatedCell(cell, ' ', domain))
+      row.map(cell => new CandidatedCell(cell, Value.Empty, domain))
     );
   }
 

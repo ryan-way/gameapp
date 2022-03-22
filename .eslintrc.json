@@ -33,8 +33,9 @@
         "functions": "never"
       }
     ],
-    "operator-linebreak": ["error", "before"],
-    "eol-last": "off"
+    "operator-linebreak": ["off"],
+    "eol-last": "off",
+    "no-unused-vars": ["off"]
   },
   "settings": {
     "svelte3/typescript": true

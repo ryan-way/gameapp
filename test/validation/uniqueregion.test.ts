@@ -7,7 +7,7 @@ import { CandidatedCell } from '../../src/ai/candidatedcell';
 import { UniqueRegion } from '../../src/ai/techniques';
 import { mock, instance, when, anything } from 'ts-mockito';
 import type { Cell } from '../../src/dto/cell';
-import type { Value } from '../../src/dto/sudoku';
+import { Value } from '../../src/dto/sudoku';
 import { Log, setLogger } from '../../src/service/logging';
 
 beforeAll(() => {
@@ -18,10 +18,14 @@ beforeAll(() => {
 });
 
 describe('Solving', () => {
-  const cells: Cell<Value>[] = [{ Value: ' ' }, { Value: 1 }, { Value: 2 }];
+  const cells: Cell<Value>[] = [
+    { Value: Value.Empty },
+    { Value: 1 },
+    { Value: 2 },
+  ];
   const candidates: Value[] = [1, 2, 3];
   const range = cells.map(
-    cell => new CandidatedCell<Value>(cell, ' ', candidates)
+    cell => new CandidatedCell<Value>(cell, Value.Empty, candidates)
   );
   const constraint: UniqueRegion<Value> = new UniqueRegion<Value>(range);
   test('With Updates Returns True', () => {
