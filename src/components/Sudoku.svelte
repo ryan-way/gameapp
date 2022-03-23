@@ -76,14 +76,9 @@
   }
 
   function Reset() {
-    game.board = board;
-    board = [...game.board];
-    for (var i = 0; i < 9; i++) {
-      board[i] = [...board[i]];
-    }
     for (var i = 0; i < 9; i++) {
       for (var j = 0; j < 9; j++) {
-        board[i][j] = { Value: board[i][j].Value };
+        game.board[i][j].Value = board[i][j].Value;
       }
     }
   }
