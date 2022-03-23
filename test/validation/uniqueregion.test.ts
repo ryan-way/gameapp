@@ -5,17 +5,8 @@
 import '@testing-library/jest-dom';
 import { CandidatedCell } from '../../src/ai/candidatedcell';
 import { UniqueRegion } from '../../src/ai/techniques';
-import { mock, instance, when, anything } from 'ts-mockito';
 import type { Cell } from '../../src/dto/cell';
 import { Value } from '../../src/dto/sudoku';
-import { Log, setLogger } from '../../src/service/logging';
-
-beforeAll(() => {
-  const mockedLog = mock(Log);
-  when(mockedLog.Debug(anything())).thenReturn();
-  const logger = instance(mockedLog);
-  setLogger(logger);
-});
 
 describe('Solving', () => {
   const cells: Cell<Value>[] = [

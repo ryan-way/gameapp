@@ -5,17 +5,8 @@
 import '@testing-library/jest-dom';
 import { CandidatedCell } from '../../src/ai/candidatedcell';
 import { UniqueValues } from '../../src/validation/rules';
-import { mock, instance, when, anything } from 'ts-mockito';
 import type { Cell } from '../../src/dto/cell';
 import { Value } from '../../src/dto/sudoku';
-import { Log, setLogger } from '../../src/service/logging';
-
-beforeAll(() => {
-  const mockedLog = mock(Log);
-  when(mockedLog.Debug(anything())).thenReturn();
-  const logger = instance(mockedLog);
-  setLogger(logger);
-});
 
 describe('UniqueValue', () => {
   test('should return false if invalid', () => {

@@ -23,6 +23,9 @@
   },
   "license": "MIT",
   "jest": {
+    "moduleNameMapper": {
+      ".*service/service.*": "<rootDir>/test/__mocks__/service.ts"
+    },
     "transformIgnorePatterns": [
       "node_modules/(?!svelte-routing)"
     ],

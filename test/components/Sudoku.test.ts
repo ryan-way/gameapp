@@ -10,14 +10,6 @@ import { mock, instance, when, anything } from 'ts-mockito';
 import { SudokuRepository } from '../../src/repository/sudoku';
 import Sudoku from '../../src/components/Sudoku.svelte';
 import { fireEvent } from '@testing-library/dom';
-import { Log, setLogger } from '../../src/service/logging';
-
-beforeAll(() => {
-  const mockedLog = mock(Log);
-  when(mockedLog.Debug(anything())).thenReturn();
-  const logger = instance(mockedLog);
-  setLogger(logger);
-});
 
 test('should render Sudoku', () => {
   const sudoku = testdata

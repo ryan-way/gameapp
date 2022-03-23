@@ -22,8 +22,8 @@ export class SudokuSolver {
   }
 
   SetupBoard(board: Board) {
-    log().Info(typeof board[0][1].Value);
-    log().Info(board[0][1].Value);
+    log.Info(typeof board[0][1].Value);
+    log.Info(board[0][1].Value);
     this.domain = [1, 2, 3, 4, 5, 6, 7, 8, 9];
     this.board = board.map(row =>
       row.map(cell => new CandidatedCell(cell, Value.Empty, this.domain))
@@ -70,9 +70,9 @@ export class SudokuSolver {
   }
 
   Log() {
-    log().Info('Sudoku Solver Board State');
+    log.Info('Sudoku Solver Board State');
     for (const row of this.board) {
-      log().Info(`[${row.map(cell => cell.Value).join(',')}]`);
+      log.Info(`[${row.map(cell => cell.Value).join(',')}]`);
     }
   }
 }

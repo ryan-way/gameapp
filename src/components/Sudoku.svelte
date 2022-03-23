@@ -35,8 +35,8 @@
       solver = new SudokuSolver(game.board);
       solver.Solve();
     } catch (e) {
-      log().Error(e.stack);
-      log().Error(e);
+      log.Error(e.stack);
+      log.Error(e);
     }
   });
 

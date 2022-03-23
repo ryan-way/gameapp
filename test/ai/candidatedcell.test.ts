@@ -4,10 +4,8 @@
 
 import '@testing-library/jest-dom';
 import { CandidatedCell } from '../../src/ai/candidatedcell';
-import { mock, instance, when, anything } from 'ts-mockito';
 import type { Cell } from '../../src/dto/cell';
 import { Value } from '../../src/dto/sudoku';
-import { Log, setLogger } from '../../src/service/logging';
 
 function getCell(cellValue: Value = Value.Empty): CandidatedCell<Value> {
   const candidates: Value[] = [1, 2, 3, 4, 5, 6, 7, 8, 9];
@@ -17,13 +15,6 @@ function getCell(cellValue: Value = Value.Empty): CandidatedCell<Value> {
 
   return new CandidatedCell(cell, Value.Empty, candidates);
 }
-
-beforeAll(() => {
-  const mockedLog = mock(Log);
-  when(mockedLog.Debug(anything())).thenReturn();
-  const logger = instance(mockedLog);
-  setLogger(logger);
-});
 
 describe('Testing Start State', () => {
   describe('Passing In Default Value', () => {
