@@ -17,8 +17,25 @@
     }
   ],
   "rules": {
+    "indent": ["error", 2, { "SwitchCase": 1 }],
+    "new-cap": ["off"],
     "object-curly-spacing": ["error", "always"],
-    "prettier/prettier": "error"
+    "arrow-parens": ["error", "as-needed"],
+    "prettier/prettier": "error",
+    "require-jsdoc": ["off"],
+    "comma-dangle": [
+      "error",
+      {
+        "arrays": "always-multiline",
+        "objects": "always-multiline",
+        "imports": "always-multiline",
+        "exports": "always-multiline",
+        "functions": "never"
+      }
+    ],
+    "operator-linebreak": ["off"],
+    "eol-last": "off",
+    "no-unused-vars": ["off"]
   },
   "settings": {
     "svelte3/typescript": true
